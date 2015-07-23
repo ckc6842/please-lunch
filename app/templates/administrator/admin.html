@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+ <script src="../../static/js/angular.min.js"></script>
+ <script src="../../static/js/admin.js"></script>
+<body ng-app="app" ng-controller="subCtrl">
+
+
+<form name="form" ng-submit="submitData(formData)">
+    <div class="form">
+        <input type="text" name="foodName" placeholder="text" ng-model="formData" />
+        <button type="submit">Submit!</button>
+    </div>
+</form>
+<!--{% for a in default %}-->
+
+<!--<p>{{a.foodName}}</p>-->
+
+<!--{% endfor %}-->
+<div>
+    {{ foodlist | angular}}
+</div>
+
+
+
+</body>
+</html>
