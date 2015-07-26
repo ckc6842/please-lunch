@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, request
 from app import app, db
 from app.models import Food
-from flask import jsonify
+
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_administrator = Blueprint('administrator', __name__)
@@ -17,10 +17,5 @@ def administrator():
         db.session.commit()
         return "GOOD"
 
-    # food = Food("apple")
-    # db.session.add(food)
-    # db.session.commit()
-
     food = Food.query.all()
-
     return render_template("administrator/admin.html", default=food)

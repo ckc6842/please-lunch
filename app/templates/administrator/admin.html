@@ -1,26 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
  <script src="../../static/js/angular.min.js"></script>
  <script src="../../static/js/admin.js"></script>
-<body ng-app="app" ng-controller="subCtrl">
-
+<body ng-controller="subCtrl">
 
 <form name="form" ng-submit="submitData(formData)">
     <div class="form">
-        <input type="text" name="foodName" placeholder="text" ng-model="formData" />
+        <input type="text" name="foodName"  ng-model="formData" />
         <button type="submit">Submit!</button>
     </div>
 </form>
-<!--{% for a in default %}-->
 
-<!--<p>{{a.foodName}}</p>-->
+{% for a in default %}
+    <p>{{a.foodName}}</p>
+{% endfor %}
 
-<!--{% endfor %}-->
-<div>
-    {{ foodlist | angular}}
-</div>
-
-
+<p ng-repeat="user in tempData.users">{{ user.name | angular }}</p>
 
 </body>
 </html>
