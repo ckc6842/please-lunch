@@ -1,0 +1,13 @@
+<!doctype html>
+<title>please-lunch sample</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/flaskr.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+<div class=page>
+<img src="../static/FOX.png" width="100" height="115">
+  <h1>please-lunch sample</h1>
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  {% block body %}{% endblock %}
+</div>
