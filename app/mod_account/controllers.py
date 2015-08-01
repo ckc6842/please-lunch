@@ -3,6 +3,7 @@ from flask import Blueprint, request, render_template, \
                   flash, session, redirect, url_for
 
 # Import password / encryption helper tools
+from werkzeug import check_password_hash
 
 # Import the database object from the main app module
 
@@ -12,20 +13,11 @@ from app.mod_account.forms import LoginForm
 # Import module models (i.e. User)
 from app.models import User
 
-# Import database
-from app import db, app
-
 # Import flask login dependencies
-from flask.ext.login import login_required, user_logged_in, LoginManager, UserMixin, current_user, login_user, logout_user
-from flask.ext.security import AnonymousUser
+from flask.ext.login import login_user
 
 # Define the blueprint: 'account', set its url prefix: app.url/account
 mod_account = Blueprint('account', __name__, url_prefix='/account')
-
-# flask-login setting
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.anonymous_user = AnonymousUser
 
 # Set the route and accepted methods
 @mod_account.route('/login/', methods=['GET', 'POST'])
@@ -39,7 +31,7 @@ def signin():
 
         user = User.query.filter_by(email=form.email.data).first()
 
-        if user and user.password == form.password.data:
+        if user and check_password_hash(user.password, form.password.data):
 
             session['user_id'] = user.id
 
