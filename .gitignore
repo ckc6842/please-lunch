@@ -1,4 +1,6 @@
 *.pyc
-ENV/
-.idea/
 WinENV/
+.idea/
+.swp
+migrations/
+README.md

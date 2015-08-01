@@ -8,16 +8,16 @@ from werkzeug import check_password_hash
 # Import the database object from the main app module
 
 # Import module forms
-from app.mod_auth.forms import LoginForm
+from app.mod_account.forms import LoginForm
 
 # Import module models (i.e. User)
 from app.models import User
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
-mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
+mod_auth = Blueprint('account', __name__, url_prefix='/account')
 
 # Set the route and accepted methods
-@mod_auth.route('/signin/', methods=['GET', 'POST'])
+@mod_auth.route('/login/', methods=['GET', 'POST'])
 def signin():
 
     # If sign in form is submitted
