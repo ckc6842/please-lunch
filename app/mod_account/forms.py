@@ -7,7 +7,6 @@ from wtforms import TextField, PasswordField # BooleanField
 # Import Form validators
 from wtforms.validators import Required, Email, EqualTo
 
-
 # Define the login form (WTForms)
 
 class LoginForm(Form):
