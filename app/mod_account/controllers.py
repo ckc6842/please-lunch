@@ -13,11 +13,14 @@ from app.mod_account.forms import LoginForm
 # Import module models (i.e. User)
 from app.models import User
 
-# Define the blueprint: 'auth', set its url prefix: app.url/auth
-mod_auth = Blueprint('account', __name__, url_prefix='/account')
+# Import flask login dependencies
+from flask.ext.login import login_user
+
+# Define the blueprint: 'account', set its url prefix: app.url/account
+mod_account = Blueprint('account', __name__, url_prefix='/account')
 
 # Set the route and accepted methods
-@mod_auth.route('/login/', methods=['GET', 'POST'])
+@mod_account.route('/login/', methods=['GET', 'POST'])
 def signin():
 
     # If sign in form is submitted
@@ -34,8 +37,10 @@ def signin():
 
             flash('Welcome %s' % user.name)
 
-            return redirect(url_for('auth.home'))
+            login_user(user)
+
+            return redirect(url_for('main'))
 
         flash('Wrong email or password', 'error-message')
 
-    return render_template("auth/signin.html", form=form)
+    return render_template("account/signin.html", form=form)
