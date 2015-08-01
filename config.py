@@ -10,6 +10,9 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:n61cde5173@localhost/please_lunch'
 DATABASE_CONNECT_OPTIONS = {}
 
+# UPLOAD_FOLDER
+UPLOAD_FOLDER = 'app/static/uploads/'
+
 # Application threads. A common general assumption is
 # using 2 per available processor cores - to handle
 # incoming requests using one and performing background
@@ -25,3 +28,11 @@ CSRF_SESSION_KEY = "secret"
 
 # Secret key for signing cookies
 SECRET_KEY = "secret"
+
+# for flask-social
+SOCIAL_FACEBOOK = {
+    'consumer_key': '352785444846303',
+    'consumer_secret': '2c7f62089ee65e73445366f7ce82f951'
+}
+
+SECURITY_POST_LOGIN = '/profile'
