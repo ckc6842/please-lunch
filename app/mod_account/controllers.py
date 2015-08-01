@@ -29,8 +29,7 @@ login_manager.anonymous_user = AnonymousUser
 
 # Set the route and accepted methods
 @mod_account.route('/login/', methods=['GET', 'POST'])
-def signin():
-
+def login():
     # If sign in form is submitted
     form = LoginForm(request.form)
 
@@ -51,4 +50,9 @@ def signin():
 
         flash('Wrong email or password', 'error-message')
 
-    return render_template("account/signin.html", form=form)
+    return render_template("account/login.html", form=form)
+
+
+@mod_account.route('/join', methods=['GET', 'POST'])
+def join():
+    return render_template("account/join.html", form=form)
