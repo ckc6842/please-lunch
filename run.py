@@ -1,3 +1,3 @@
 #Run a test server.
 from app import app
-app.run(debug=True)
+app.run(port=80, debug=True)
