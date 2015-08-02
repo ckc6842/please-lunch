@@ -7,7 +7,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Define the database - we are working with
 # SQLite for this example
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:n61cde5173@localhost/please_lunch'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:n61cde5173@localhost/please-lunch'
 DATABASE_CONNECT_OPTIONS = {}
 
 # UPLOAD_FOLDER
@@ -29,8 +29,8 @@ CSRF_SESSION_KEY = "secret"
 # Secret key for signing cookies
 SECRET_KEY = "super-secret"
 SECURITY_REGISTERABLE =  True
-SECURITY_CONFIRMABLE = True
-SECURITY_RECOVERABLE = True
+SECURITY_CONFIRMABLE = False
+SECURITY_RECOVERABLE = False
 
 
 # for flask-social
