@@ -35,8 +35,8 @@ SECURITY_RECOVERABLE = False
 
 # for flask-social
 SOCIAL_FACEBOOK = {
-    'consumer_key': '352785444846303',
-    'consumer_secret': '2c7f62089ee65e73445366f7ce82f951'
+    'consumer_key': '686899584776463',
+    'consumer_secret': '7d6b8e7257203c6e58c563718b30dfd0'
 }
 
 SECURITY_POST_LOGIN = '/profile'
