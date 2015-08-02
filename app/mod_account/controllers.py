@@ -14,16 +14,18 @@ from werkzeug import check_password_hash
 from app.mod_account.forms import LoginForm, JoinForm
 
 # Import module models (i.e. User)
-from app.models import User
+from app.models import User, security
 
 # Import flask login dependencies
-from flask.ext.login import login_user
+from flask.ext.login import login_user, logout_user
+from flask.ext.security import login_required
 
 # Define the blueprint: 'account', set its url prefix: app.url/account
 mod_account = Blueprint('account', __name__, url_prefix='/account')
 
+"""
 # Set the route and accepted methods
-@mod_account.route('/login/', methods=['GET', 'POST'])
+@mod_account.route('/login', methods=['GET', 'POST'])
 def login():
     # If sign in form is submitted
     form = LoginForm(request.form)
@@ -41,13 +43,18 @@ def login():
 
             login_user(user)
 
-            return redirect(url_for('main'))
+            return redirect(url_for('main.index'))
 
         flash('Wrong email or password', 'error-message')
 
     return render_template("account/login.html", form=form)
 
+@mod_account.route('/logout', methods=['GET', 'POST'])
+def logout():
+    logout_user()
+    return redirect(url_for('main.index'))
 
+@security.register_context_processor
 @mod_account.route('/join', methods=['GET', 'POST'])
 def join():
     form = JoinForm(request.form)
@@ -62,3 +69,4 @@ def join():
         return redirect(url_for('main.index'))
     print "Not Post!!"
     return render_template('account/join.html', form=form)
+"""

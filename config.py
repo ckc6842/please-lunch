@@ -27,7 +27,11 @@ CSRF_ENABLED     = True
 CSRF_SESSION_KEY = "secret"
 
 # Secret key for signing cookies
-SECRET_KEY = "secret"
+SECRET_KEY = "super-secret"
+SECURITY_REGISTERABLE =  True
+SECURITY_CONFIRMABLE = True
+SECURITY_RECOVERABLE = True
+
 
 # for flask-social
 SOCIAL_FACEBOOK = {
