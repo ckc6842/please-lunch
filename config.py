@@ -1,6 +1,6 @@
 # Statement for enabling the development environment
 DEBUG = True
-
+WTF_CSRF_ENABLED = True
 # Define the application directory
 import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))

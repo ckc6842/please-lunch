@@ -1,3 +1,6 @@
+# Import db
+from app import db
+
 # Import flask dependencies
 from flask import Blueprint, request, render_template, \
                   flash, session, redirect, url_for
@@ -8,7 +11,7 @@ from werkzeug import check_password_hash
 # Import the database object from the main app module
 
 # Import module forms
-from app.mod_account.forms import LoginForm
+from app.mod_account.forms import LoginForm, JoinForm
 
 # Import module models (i.e. User)
 from app.models import User
@@ -30,7 +33,7 @@ def login():
 
         user = User.query.filter_by(email=form.email.data).first()
 
-        if user and check_password_hash(user.password, form.password.data):
+        if user and user.password == form.password.data:
 
             session['user_id'] = user.id
 
@@ -47,4 +50,15 @@ def login():
 
 @mod_account.route('/join', methods=['GET', 'POST'])
 def join():
-    return render_template("account/join.html", form=form)
+    form = JoinForm(request.form)
+
+    if form.validate_on_submit():
+        print "POST!!"
+        user = User(form.name.data, form.email.data,
+                    form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Thanks for registering')
+        return redirect(url_for('main.index'))
+    print "Not Post!!"
+    return render_template('account/join.html', form=form)
