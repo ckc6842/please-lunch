@@ -6,9 +6,8 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 from flask_mail import Mail
 
-from flask_social_blueprint.core import SocialBlueprint
-
-from flask.ext.security import Security, SQLAlchemyUserDatastore
+from flask.ext.login import LoginManager
+from flask.ext.security import Security, SQLAlchemyUserDatastore, AnonymousUser
 from flask.ext.social import Social
 from flask.ext.social.datastore import SQLAlchemyConnectionDatastore
 # Define the WSGI application object
@@ -36,9 +35,9 @@ user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 social = Social(app, SQLAlchemyConnectionDatastore(db, Connection))
 
-import importlib
-
-
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.anonymous_user = AnonymousUser
 
 # mail setting
 app.config['MAIL_SERVER'] = 'smtp.google.com'
