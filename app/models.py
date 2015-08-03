@@ -61,6 +61,7 @@ class Connection(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", foreign_keys=user_id, backref=db.backref('connections', order_by=id))
     provider = db.Column(db.String(255))
+    provider_id = db.Column(db.String(255))
     profile_id = db.Column(db.String(255))
     username = db.Column(db.String(255))
     email = db.Column(db.String(255))
