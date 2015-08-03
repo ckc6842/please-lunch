@@ -63,6 +63,7 @@ class Connection(db.Model):
     provider = db.Column(db.String(255))
     profile_id = db.Column(db.String(255))
     username = db.Column(db.String(255))
+    full_name = db.Column(db.String(255))
     email = db.Column(db.String(255))
     access_token = db.Column(db.String(255))
     secret = db.Column(db.String(255))
