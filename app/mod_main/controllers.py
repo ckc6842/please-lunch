@@ -1,9 +1,6 @@
 # Import flask dependencies
 from flask import Blueprint, render_template
-
-from flask.ext.login import login_required
-
-from app import social, app
+from app import app
 
 
 # Define the blueprint: 'main', set its url prefix: app.url/main
@@ -16,8 +13,7 @@ def index():
     return render_template("main/index.html")
 
 
-@app.route('/profile', methods=['POST', 'GET'])
-#@login_required
+@app.route('/profile', methods=['POST', 'GET')
 def profile():
     return render_template('main/profile.html')
 
