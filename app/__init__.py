@@ -6,6 +6,11 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 from flask_mail import Mail
 
+from flask_social_blueprint.core import SocialBlueprint
+
+from flask.ext.security import Security, SQLAlchemyUserDatastore
+from flask.ext.social import Social
+from flask.ext.social.datastore import SQLAlchemyConnectionDatastore
 # Define the WSGI application object
 app = Flask(__name__)
 
@@ -23,16 +28,25 @@ app.config['SECURITY_POST_LOGIN'] = '/profile'
 # Define the database object which is imported
 # by modules and controllers
 db = SQLAlchemy(app)
+from app.models import *
+
+# Setup Flask-Security
+
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+security = Security(app, user_datastore)
+social = Social(app, SQLAlchemyConnectionDatastore(db, Connection))
+
+import importlib
+
+
 
 # mail setting
-app.config['MAIL_SERVER'] = 'smtp.example.com'
+app.config['MAIL_SERVER'] = 'smtp.google.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'username'
+app.config['MAIL_USERNAME'] = 'maxtortime@gmail.com'
 app.config['MAIL_PASSWORD'] = 'password'
 mail = Mail(app)
-
-import models
 
 # Sample HTTP error handling
 @app.errorhandler(404)
