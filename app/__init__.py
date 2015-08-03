@@ -6,6 +6,10 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 from flask_mail import Mail
 
+from flask_social_blueprint import SocialBlueprint
+
+from app.models import Connection
+
 # Define the WSGI application object
 app = Flask(__name__)
 
@@ -25,10 +29,10 @@ app.config['SECURITY_POST_LOGIN'] = '/profile'
 db = SQLAlchemy(app)
 
 # mail setting
-app.config['MAIL_SERVER'] = 'smtp.example.com'
+app.config['MAIL_SERVER'] = 'smtp.google.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'username'
+app.config['MAIL_USERNAME'] = 'maxtortime@gmail.com'
 app.config['MAIL_PASSWORD'] = 'password'
 mail = Mail(app)
 
@@ -44,6 +48,7 @@ from app.mod_main.controllers import mod_main as main_module
 
 # Register blueprint(s)
 app.register_blueprint(main_module)
+SocialBlueprint.init_bp(app, Connection, url_prefix("/_social"))
 # app.register_blueprint(xyz_module)
 # ..
 
