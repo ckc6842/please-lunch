@@ -1,9 +1,6 @@
 from app import db, app
-from flask.ext.security import Security, SQLAlchemyUserDatastore, \
-    UserMixin, RoleMixin, login_required
-from flask.ext.social import Social
-from flask.ext.social.datastore import SQLAlchemyConnectionDatastore
 
+from flask.ext.security import UserMixin, RoleMixin
 
 roles_users = db.Table('roles_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
@@ -126,7 +123,3 @@ class Role(db.Model, RoleMixin):
     description = db.Column(db.String(255))
 
 
-# Setup Flask-Security
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
-social = Social(app, SQLAlchemyConnectionDatastore(db, Connection))

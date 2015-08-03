@@ -1,0 +1,6 @@
+{% extends "layout.html" %}
+{% from "_macros.html" import show_provider_button %}
+{% include "_messages.html" %}
+{% block body %}
+{{ show_provider_button('facebook', 'Facebook', facebook_conn) }}
+{% endblock %}
