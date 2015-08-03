@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
-{% from "_macros.html" import connect_social_button %}
+{% from "_macros.html" import show_provider_button %}
 {% include "_messages.html" %}
 {% block body %}
-{{ connect_social_button('facebook', 'Facebook') }}
+{{ show_provider_button('facebook', 'Facebook') }}
 {% endblock %}

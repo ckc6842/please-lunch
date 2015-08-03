@@ -10,9 +10,7 @@
   <h1>please-lunch sample</h1>
   <div class=metanav>
   {% if not current_user.is_authenticated() %}
-    <div style="float:left"><a href="{{ url_for('security.register') }}"><p>Join</p></a></div>
-
-    <div style="float:left"><a href="{{ url_for('profile') }}"><p>fb Connect</p></a></div>
+    <div style="float:left"><a href="{{ url_for('security.register') }}">Join</a></div>
     <a href="{{ url_for('security.login') }}">log in</a>
   {% else %}
       <a href="{{ url_for('security.logout') }}">log out</a>

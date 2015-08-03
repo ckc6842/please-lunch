@@ -32,9 +32,3 @@
     </form>
     {% endif %}
 {% endmacro %}
-
-{% macro connect_social_button(provider_id, display_name) %}
-<form action="{{ url_for('social.connect', provider_id=provider_id) }}" method="POST">
-      <input type="submit" value="Connect {{ display_name }}" />
-    </form>
-{% endmacro %}
