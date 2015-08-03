@@ -13,7 +13,7 @@ def index():
     return render_template("main/index.html")
 
 
-@app.route('/profile', methods=['POST', 'GET')
+@app.route('/profile', methods=['POST', 'GET'])
 def profile():
     return render_template('main/profile.html')
 
