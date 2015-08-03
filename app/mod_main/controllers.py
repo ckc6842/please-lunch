@@ -17,7 +17,7 @@ def index():
 
 
 @app.route('/profile', methods=['POST', 'GET'])
-#@login_required
+@login_required
 def profile():
-    return render_template('main/profile.html', facebook_conn=social.facebook.get_connection())
+    return render_template('main/profile.html')
 
