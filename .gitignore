@@ -1,5 +1,6 @@
 *.pyc
 WinEnv/
+ENV/
 .idea/
 .swp
 migrations/
