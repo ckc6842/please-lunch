@@ -1,0 +1,7 @@
+*.pyc
+WinEnv/
+ENV/
+.idea/
+.swp
+migrations/
+README.md
