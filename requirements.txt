@@ -1,7 +1,7 @@
 alembic==0.7.7
 Babel==2.0
 blinker==1.4
-facebook-sdk==1.0.0a0
+http://github.com/pythonforfacebook/facebook-sdk/tarball/master
 Flask==0.10.1
 Flask-Babel==0.9
 Flask-Login==0.2.11
@@ -14,11 +14,14 @@ Flask-Security==1.7.4
 Flask-Social==1.6.2
 flask-social-blueprint==0.7
 Flask-SQLAlchemy==2.0
+Flask-Triangle==0.5.4
 Flask-WTF==0.12
+functools32==3.2.3.post2
 google-api-python-client==1.4.1
 httplib2==0.9.1
 itsdangerous==0.24
 Jinja2==2.8
+jsonschema==2.5.1
 Mako==1.0.1
 MarkupSafe==0.23
 oauth2==1.5.211

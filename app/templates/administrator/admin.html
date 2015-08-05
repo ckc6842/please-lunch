@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <script src="../../static/js/angular.min.js"></script>
+    <script src="../../static/js/admin.js"></script>
+    <style type="text/css">
+        .divider{
+            float: left;
+            margin: 7px;
+            padding: 7px;
+            border-style: solid;
+            border-radius: 7px;
+            border-color: #e1e1e1;
+            text-align: center;
+        }
+
+        table{
+            border-collapse:collapse;
+            border:2px gray solid;
+            margin-top: 10px;
+            width: 100%;
+
+        }
+        td{
+            border:1px gray solid;
+        }
+
+    </style>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="container">
+
+        <div class="divider">
+            <h2>FOOD TABLE</h2>
+
+            <form name="food_form" ng-submit="submitFood(formData_food)">
+
+                <input type="text" name="foodName"  ng-model="formData_food" placeholder="FOOD TABLE"/>
+                <button type="submit">Submit!</button>
+
+            </form>
+
+            <table>
+                {% for a in default.food %}
+                    <tr>
+                        <td>{{a.id}}</td>
+                        <td>{{a.foodName}}</td>
+                    </tr>
+                {% endfor %}
+
+                <tr ng-repeat="a in tempData_food.food"><td>{{ a.id | angular }}</td><td>{{ a.foodName | angular }}</td></tr>
+            </table>
+
+
+
+        </div>
+
+
+
+        <div class="divider">
+            <h2>COOK TABLE</h2>
+            <form name="cook_form" ng-submit="submitCook(formData_cook)">
+                <div class="form">
+                    <input type="text" name="cookName"  ng-model="formData_cook" placeholder="COOK TABLE"/>
+                    <button type="submit">Submit!</button>
+                </div>
+            </form>
+            <table>
+
+                {% for a in default.cook %}
+                    <tr>
+                        <td>{{a.id}}</td>
+                        <td>{{a.cookName}}</td>
+                    </tr>
+
+                {% endfor %}
+                <tr ng-repeat="a in tempData_cook.cook"><td>{{ a.id | angular }}</td><td>{{ a.cookName | angular }}</td></tr>
+
+            </table>
+        </div>
+
+
+        <div class="divider">
+            <h2>TASTE TABLE</h2>
+            <form name="taste_form" ng-submit="submitTaste(formData_taste)">
+                <div class="form">
+                    <input type="text" name="tasteName"  ng-model="formData_taste" placeholder="TASTE TABLE"/>
+                    <button type="submit">Submit!</button>
+                </div>
+            </form>
+            <table>
+                {% for a in default.taste %}
+                <tr>
+                    <td>{{a.id}}</td>
+                    <td>{{a.tasteName}}</td>
+                </tr>
+                {% endfor %}
+                <tr ng-repeat="a in tempData_taste.taste"><td>{{ a.id | angular }}</td><td>{{ a.tasteName | angular }}</td></tr>
+            </table>
+        </div>
+
+        <div class="divider">
+            <h2>NATION TABLE</h2>
+            <form name="nation_form" ng-submit="submitNation(formData_nation)">
+                <div class="form">
+                    <input type="text" name="nationName"  ng-model="formData_nation" placeholder="NATION TABLE" />
+                    <button type="submit">Submit!</button>
+                </div>
+            </form>
+            <table>
+                {% for a in default.nation %}
+                <tr>
+                    <td>{{a.id}}</td>
+                    <td>{{a.nationName}}</td>
+                </tr>
+                {% endfor %}
+                <tr ng-repeat="a in tempData_nation.nation"><td>{{ a.id | angular }}</td><td>{{ a.nationName | angular }}</td></tr>
+            </table>
+
+        </div>
+    </div>
+</body>
+</html>
