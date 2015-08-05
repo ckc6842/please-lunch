@@ -1,5 +1,9 @@
-from app import db, app
+from app import db
 from flask.ext.security import UserMixin, RoleMixin
+from flask_babel import gettext as _
+from flask import current_app
+import logging, datetime
+
 
 roles_users = db.Table('roles_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
@@ -201,3 +205,13 @@ class FoodScore(db.Model):
 
     def __repr__(self):
         return '<score %r>' % self.score
+
+
+def load_user(user_id):
+    return User.query.get(user_id)
+
+
+def send_mail(msg):
+    logging.debug("msg: %s" % msg)
+    mail = current_app.extensions.get('mail')
+    mail.send(msg)

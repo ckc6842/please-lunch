@@ -37,9 +37,14 @@ user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 social = Social(app, SQLAlchemyConnectionDatastore(db, Connection))
 
+
+# Setup flask-login
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.user_loader(load_user)
 login_manager.anonymous_user = AnonymousUser
+login_manager.login_view = "/login"
+
 
 # mail setting
 app.config['MAIL_SERVER'] = 'smtp.google.com'
@@ -47,6 +52,7 @@ app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'maxtortime@gmail.com'
 app.config['MAIL_PASSWORD'] = 'password'
+security.send_mail_task(send_mail)
 mail = Mail(app)
 
 

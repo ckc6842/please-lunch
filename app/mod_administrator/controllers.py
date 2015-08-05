@@ -22,6 +22,7 @@ def addfood():
         db.session.commit()
     return 'seccess'
 
+
 @mod_administrator.route('/food/delete', methods=['GET', 'POST'])
 def deletefood():
     if request.method == 'POST':
@@ -30,6 +31,7 @@ def deletefood():
         Food.query.filter_by(foodName=temp.foodName).delete()
         db.session.commit()
     return 'seccess'
+
 
 @mod_administrator.route('/food/dataget', methods=['GET'])
 def dataget():
