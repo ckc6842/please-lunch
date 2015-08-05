@@ -5,11 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_triangle import Triangle
 
 from flask_mail import Mail
+from flask_babel import Babel
 
 from flask.ext.login import LoginManager
-from flask.ext.security import Security, SQLAlchemyUserDatastore, AnonymousUser
-from flask.ext.social import Social
-from flask.ext.social.datastore import SQLAlchemyConnectionDatastore
+from flask.ext.security import AnonymousUser
+
 
 # Define the WSGI application object
 app = Flask(__name__)
@@ -33,9 +33,6 @@ from app.models import *
 
 # Setup Flask-Security
 
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
-social = Social(app, SQLAlchemyConnectionDatastore(db, Connection))
 
 
 # Setup flask-login
@@ -47,13 +44,11 @@ login_manager.login_view = "/login"
 
 
 # mail setting
-app.config['MAIL_SERVER'] = 'smtp.google.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'maxtortime@gmail.com'
-app.config['MAIL_PASSWORD'] = 'password'
+
 security.send_mail_task(send_mail)
+
 mail = Mail(app)
+babel = Babel(app)
 
 
 # Sample HTTP error handling

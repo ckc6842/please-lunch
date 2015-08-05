@@ -6,4 +6,3 @@ from app import app
 
 # for Windows local testing.
 app.run(host='127.0.0.1', port=80, debug=True)
-

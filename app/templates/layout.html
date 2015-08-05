@@ -1,7 +1,10 @@
 <!doctype html>
 <title>please-lunch sample</title>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/flaskr.css') }}">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel= stylesheet type=text/css href="{{ url_for('static', filename='css/flaskr.css') }}">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 
 <div class=page>
 <a href="{{url_for('main.index')}}">
@@ -9,11 +12,22 @@
   width="100" height="115"> </a>
   <h1>please-lunch sample</h1>
   <div class=metanav>
+  <a href="{{ url_for('administrator.administrator') }}">
+      <p>ADMIN</p>
+  </a>
   {% if not current_user.is_authenticated() %}
-    <div style="float:left"><a href="{{ url_for('security.register') }}">Join</a></div>
-    <a href="{{ url_for('security.login') }}">log in</a>
+    <div style="float:left">
+        <a href="{{ url_for('security.register') }}">
+            REGISTER
+        </a>
+    </div>
+    <a href="{{ url_for('security.login') }}">LOGIN</a>
   {% else %}
-      <a href="{{ url_for('security.logout') }}">log out</a>
+      <a href="{{ url_for('main.profile') }}">
+      PROFILE
+      </a>
+      <a href="{{ url_for('test') }}">TEST</a>
+      <a href="{{ url_for('security.logout') }}">LOGOUT</a>
   {% endif %}
   </div>
   {% for message in get_flashed_messages() %}

@@ -1,8 +1,12 @@
-from app import db
+from app import db, app
 from flask.ext.security import UserMixin, RoleMixin
 from flask_babel import gettext as _
 from flask import current_app
-import logging, datetime
+from flask.ext.social import Social
+from flask.ext.social.datastore import SQLAlchemyConnectionDatastore
+from flask_security import Security, SQLAlchemyUserDatastore
+import logging
+import datetime
 
 
 roles_users = db.Table('roles_users',
@@ -215,3 +219,8 @@ def send_mail(msg):
     logging.debug("msg: %s" % msg)
     mail = current_app.extensions.get('mail')
     mail.send(msg)
+
+
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+security = Security(app, user_datastore)
+social = Social(app, SQLAlchemyConnectionDatastore(db, Connection))

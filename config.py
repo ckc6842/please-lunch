@@ -34,6 +34,12 @@ SECURITY_REGISTERABLE =  True
 SECURITY_CONFIRMABLE = False
 SECURITY_RECOVERABLE = False
 
+MAIL_SERVER = 'smtp.google.com'
+MAIL_PORT = 465
+MAIL_USE_SSL = True
+MAIL_USERNAME = 'pleaselunch8@gmail.com'
+MAIL_PASSWORD = 'foxvkdlxld'
+MAIL_USE_TLS = False
 
 # for flask-social
 SOCIAL_FACEBOOK = {
