@@ -215,10 +215,10 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
-def send_mail(msg):
-    logging.debug("msg: %s" % msg)
-    mail = current_app.extensions.get('mail')
-    mail.send(msg)
+#def send_mail(msg):
+#    logging.debug("msg: %s" % msg)
+#    mail = current_app.extensions.get('mail')
+#    mail.send(msg)
 
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)

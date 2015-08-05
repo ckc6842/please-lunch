@@ -6,7 +6,7 @@ from app import app
 
 from app.models import user_datastore
 
-
+# TODO: mod_main cannot route (.html 404)
 # Define the blueprint: 'main', set its url prefix: app.url/main
 mod_main = Blueprint('main', __name__, url_prefix='/', template_folder='templates/main')
 
