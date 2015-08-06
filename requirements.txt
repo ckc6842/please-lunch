@@ -1,7 +1,7 @@
 alembic==0.7.7
 Babel==2.0
 blinker==1.4
-http://github.com/pythonforfacebook/facebook-sdk/tarball/master
+facebook-sdk==1.0.0a0
 Flask==0.10.1
 Flask-Babel==0.9
 Flask-Login==0.2.11
