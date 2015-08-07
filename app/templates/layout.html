@@ -17,17 +17,16 @@
   </a>
   {% if not current_user.is_authenticated() %}
     <div style="float:left">
-        <a href="{{ url_for('security.register') }}">
+        <a href="{{ url_for('auth.register') }}">
             REGISTER
         </a>
     </div>
-    <a href="{{ url_for('security.login') }}">LOGIN</a>
+    <a href="{{ url_for('auth.login') }}">LOGIN</a>
   {% else %}
-      <a href="{{ url_for('main.profile') }}">
-      PROFILE
-      </a>
-      <a href="{{ url_for('test') }}">TEST</a>
-      <a href="{{ url_for('security.logout') }}">LOGOUT</a>
+      <a href="{{ url_for('main.recommend') }}">
+      RECOMMEND</a>
+      <a href="{{ url_for('main.evaluate') }}">EVALUATE</a>
+      <a href="{{ url_for('auth.logout') }}">LOGOUT</a>
   {% endif %}
   </div>
   {% for message in get_flashed_messages() %}

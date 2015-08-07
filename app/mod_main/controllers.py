@@ -6,9 +6,8 @@ from app import app
 
 from app.models import user_datastore
 
-# TODO: mod_main cannot route (.html 404)
 # Define the blueprint: 'main', set its url prefix: app.url/main
-mod_main = Blueprint('main', __name__, url_prefix='/', template_folder='templates/main')
+mod_main = Blueprint('main', __name__, url_prefix='')
 
 
 # Set the route and accepted methods
@@ -17,13 +16,13 @@ def index():
     return render_template("main/index.html")
 
 
-@mod_main.route('/profile', methods=['POST', 'GET'])
+@mod_main.route('/recommend', methods=['GET'])
 @login_required
-def profile():
-    return render_template('main/profile.html')
+def recommend():
+    return render_template('404.html')
 
 
-@app.route('/test', methods=['POST', 'GET'])
+@mod_main.route('/recommend/evaluate', methods=['POST', 'GET'])
 @login_required
-def test():
-    return render_template('main/test.html')
+def evaluate():
+    return render_template('404.html')
