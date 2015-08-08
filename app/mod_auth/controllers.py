@@ -13,9 +13,9 @@ import string
 
 @login_failed.connect_via(app)
 def on_login_failed(sender, provider, oauth_response):
-    print "good"
     connection_values = get_connection_values_from_oauth_response(provider, oauth_response)
     ds = security.datastore
+    print '_______'+connection_values+'__________'
     user = ds.create_user(email=''.join(random.choice(string.ascii_uppercase + string.digits)
                                         for _ in range(5))+'@fox.net',
                           password=encrypt_password('123456'))
