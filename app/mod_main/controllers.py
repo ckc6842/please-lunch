@@ -13,6 +13,9 @@ mod_main = Blueprint('main', __name__, url_prefix='')
 # Set the route and accepted methods
 @mod_main.route('/', methods=['POST', 'GET'])
 def index():
+    # print user_datastore.create_role(name='User', description='Generic user')
+    # user_datastore.add_role_to_user(current_user, 'admin')
+    # user_datastore.commit()
     return render_template("main/index.html")
 
 

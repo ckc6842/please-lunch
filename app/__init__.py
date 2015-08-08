@@ -47,6 +47,7 @@ login_manager.login_view = "/login"
 #security.send_mail_task(send_mail)
 
 mail = Mail(app)
+mail.init_app(app)
 babel = Babel(app)
 
 
