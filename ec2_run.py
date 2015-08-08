@@ -11,9 +11,9 @@ from app.models import security
 
 @login_failed.connect_via(app)
 def on_login_failed(sender, provider, oauth_response):
-    print "good"
     connection_values = get_connection_values_from_oauth_response(provider, oauth_response)
     ds = security.datastore
+    print 'value ', oauth_response
     user = ds.create_user(email='test999@fox.net', password='123456') #fill in relevant stuff here
     ds.commit()
     connection_values['user_id'] = user.id
