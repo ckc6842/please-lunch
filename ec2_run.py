@@ -14,6 +14,7 @@ import string
 # for ec2 instance testing.
 app.run(host='0.0.0.0', port=8080, debug=True)
 
+
 @login_failed.connect_via(app)
 def on_login_failed(sender, provider, oauth_response):
     connection_values = get_connection_values_from_oauth_response(provider, oauth_response)
