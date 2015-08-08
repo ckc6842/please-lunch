@@ -4,7 +4,7 @@ from flask_social import login_failed
 from flask_social.views import connect_handler
 from flask_social.utils import get_connection_values_from_oauth_response
 from app.models import security
-from app import db
+from app import db, app
 
 import random
 import string
