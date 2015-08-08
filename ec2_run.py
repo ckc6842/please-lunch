@@ -11,9 +11,6 @@ from app.models import security
 import random
 import string
 
-# for ec2 instance testing.
-app.run(host='0.0.0.0', port=8080, debug=True)
-
 
 @login_failed.connect_via(app)
 def on_login_failed(sender, provider, oauth_response):
@@ -29,3 +26,8 @@ def on_login_failed(sender, provider, oauth_response):
     login_user(user)
     db.session.commit()
     return render_template('main/index.html')
+
+# for ec2 instance testing.
+app.run(host='0.0.0.0', port=8080, debug=True)
+
+
