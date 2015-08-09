@@ -16,9 +16,10 @@ import string
 def on_login_failed(sender, provider, oauth_response):
     connection_values = get_connection_values_from_oauth_response(provider, oauth_response)
     ds = security.datastore
-    print '_______'+connection_values+'__________'
-    user = ds.create_user(email=''.join(random.choice(string.ascii_uppercase + string.digits)
-                                        for _ in range(5))+'@fox.net',
+    print '_______'
+    print connection_values
+    print '__________'
+    user = ds.create_user(email=connection_values['full_name']+'@fox.net',
                           password=encrypt_password('123456'))
     ds.commit()
     connection_values['user_id'] = user.id
