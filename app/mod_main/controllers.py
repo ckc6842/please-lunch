@@ -5,6 +5,8 @@ from flask.ext.login import login_required, current_user
 from app import app
 
 from app.models import user_datastore
+from flask_mail import Message
+
 
 # Define the blueprint: 'main', set its url prefix: app.url/main
 mod_main = Blueprint('main', __name__, url_prefix='')

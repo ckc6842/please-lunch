@@ -35,19 +35,15 @@ SECURITY_REGISTERABLE =  True
 SECURITY_CONFIRMABLE = False
 SECURITY_RECOVERABLE = False
 SECURITY_PASSWORD_HASH = 'bcrypt'
-SECURITY_PASSWORD_SALT = 'abc'
 
+import random
+import string
+
+SECURITY_PASSWORD_SALT = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32))
 SECURITY_BLUEPRINT_NAME = 'auth'
 SECURITY_URL_PREFIX ='/auth'
-SECURITY_SEND_REGISTER_EMAIL = False
+SECURITY_SEND_REGISTER_EMAIL = True
 SECURITY_POST_LOGIN = '/profile'
-
-MAIL_SERVER = 'smtp.google.com'
-MAIL_PORT = 465
-MAIL_USE_SSL = True
-MAIL_USERNAME = 'pleaselunch8@gmail.com'
-MAIL_PASSWORD = 'foxvkdlxld'
-MAIL_USE_TLS = False
 
 # for flask-social
 SOCIAL_FACEBOOK = {

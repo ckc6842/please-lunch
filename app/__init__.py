@@ -3,17 +3,27 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_triangle import Triangle
-
 from flask_mail import Mail
 from flask_babel import Babel
-
 from flask.ext.login import LoginManager
 from flask.ext.security import AnonymousUser
 
 
 # Define the WSGI application object
 app = Flask(__name__)
+app.config.update(dict(
+    DEBUG = True,
+    MAIL_SERVER = 'smtp.gmail.com',
+    MAIL_PORT = 587,
+    MAIL_USE_TLS = True,
+    MAIL_USE_SSL = False,
+    MAIL_USERNAME = 'pleaselunch8@gmail.com',
+    MAIL_PASSWORD = 'foxvkdlxld',
+))
+
 Triangle(app)
+
+mail = Mail(app)
 
 # Configurations
 app.config.from_object('config')
@@ -32,14 +42,7 @@ login_manager.user_loader(load_user)
 login_manager.anonymous_user = AnonymousUser
 login_manager.login_view = "/login"
 
-
-# mail setting
-#security.send_mail_task(send_mail)
-
-mail = Mail(app)
-mail.init_app(app)
 babel = Babel(app)
-
 
 # Sample HTTP error handling
 @app.errorhandler(404)
@@ -48,16 +51,13 @@ def not_found(error):
 
 
 # Import a module / component using its blueprint handler variable (mod_auth)
+
+# Register blueprint(s)
 from app.mod_main.controllers import mod_main as main_module
 from app.mod_administrator.controllers import mod_administrator as admin_module
 
-# Register blueprint(s)
-app.register_blueprint(main_module)
 app.register_blueprint(admin_module)
-
-# app.register_blueprint(auth_module)
-# app.register_blueprint(xyz_module)
-# ..
+app.register_blueprint(main_module)
 
 # Build the database:
 # This will create the database file using SQLAlchemy

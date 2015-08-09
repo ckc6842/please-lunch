@@ -1,3 +1,4 @@
+__author__ = 'maxto'
 # Run a test server.
 from app import app, db
 from flask import render_template
@@ -7,9 +8,6 @@ from flask_social import login_failed
 from flask_social.views import connect_handler
 from flask_social.utils import get_connection_values_from_oauth_response
 from app.models import security
-
-import random
-import string
 
 
 @login_failed.connect_via(app)
@@ -26,9 +24,17 @@ def on_login_failed(sender, provider, oauth_response):
     connect_handler(connection_values, provider)
     login_user(user)
     db.session.commit()
+
     return render_template('main/index.html')
 
-# for ec2 instance testing.
-app.run(host='0.0.0.0', port=8080, debug=True)
+# 'app.run' is different by os.
+import sys
+
+if sys.platform == 'win32':
+    app.run(host='127.0.0.1', port=80, debug=True)
+elif sys.platform == 'linux2':
+    app.run(host='0.0.0.0', port=8080, debug=True)
+else:
+    app.run(host='127.0.0.1', port=8080, debug=True)
 
 
