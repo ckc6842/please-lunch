@@ -22,6 +22,7 @@ def administrator():
 @login_required
 @roles_required('admin')
 def addfood():
+    print 'add'
     if request.method == 'POST':
         print request.get_data()
         temp = Food(request.json['foodName'])

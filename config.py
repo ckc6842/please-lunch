@@ -40,6 +40,7 @@ SECURITY_PASSWORD_SALT = 'abc'
 SECURITY_BLUEPRINT_NAME = 'auth'
 SECURITY_URL_PREFIX ='/auth'
 SECURITY_SEND_REGISTER_EMAIL = False
+SECURITY_POST_LOGIN = '/profile'
 
 MAIL_SERVER = 'smtp.google.com'
 MAIL_PORT = 465
@@ -54,4 +55,4 @@ SOCIAL_FACEBOOK = {
     'consumer_secret': '7d6b8e7257203c6e58c563718b30dfd0'
 }
 
-SECURITY_POST_LOGIN = '/profile'
+
