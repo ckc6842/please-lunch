@@ -26,9 +26,12 @@
           <a href="{{ url_for('main.recommend') }}">RECOMMEND</a>
           <a href="{{ url_for('main.evaluate') }}">EVALUATE</a>
           <a href="{{ url_for('main.profile') }}">PROFILE</a>
+
       </div>
       <a href="{{ url_for('auth.change_password') }}">PW CHANGE</a>
       <a href="{{ url_for('auth.logout') }}">LOGOUT</a>
+      <p><a href="{{ url_for('main.leave') }}">LEAVE</a></p>
+
   {% endif %}
   </div>
   {% for message in get_flashed_messages() %}
