@@ -44,8 +44,8 @@ SECURITY_POST_LOGIN = '/profile'
 
 # for flask-social
 SOCIAL_FACEBOOK = {
-    'consumer_key': '686899584776463',
-    'consumer_secret': '7d6b8e7257203c6e58c563718b30dfd0'
+    'consumer_key': '684002831732805',
+    'consumer_secret': '51d173f01a0290682be0af5db48550a6'
 }
 
 
