@@ -1,11 +1,6 @@
 # Import flask dependencies
 from flask import Blueprint, render_template
-from flask.ext.login import login_required, current_user
-
-from app import app
-
-from app.models import user_datastore
-from flask_mail import Message
+from flask.ext.login import login_required
 
 
 # Define the blueprint: 'main', set its url prefix: app.url/main
@@ -31,3 +26,9 @@ def recommend():
 @login_required
 def evaluate():
     return render_template('404.html')
+
+
+@mod_main.route('/profile', methods=['POST', 'GET'])
+@login_required
+def profile():
+    return render_template('main/profile.html')
