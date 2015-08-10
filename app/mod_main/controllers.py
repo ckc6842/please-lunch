@@ -1,6 +1,7 @@
 # Import flask dependencies
 from flask import Blueprint, render_template
 from flask.ext.login import login_required
+from app.models import social
 
 
 # Define the blueprint: 'main', set its url prefix: app.url/main
@@ -31,4 +32,4 @@ def evaluate():
 @mod_main.route('/profile', methods=['POST', 'GET'])
 @login_required
 def profile():
-    return render_template('main/profile.html')
+    return render_template('main/profile.html', content='Profile Page', facebook_conn=social.facebook.get_connection())
