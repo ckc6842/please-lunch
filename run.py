@@ -10,15 +10,18 @@ from flask_social.utils import get_connection_values_from_oauth_response
 from app.models import security
 import string
 import random
+import md5
 
 
 # When connection table hasn't user's facebook information.
 # Automatically login.
 @login_failed.connect_via(app)
 def on_login_failed(sender, provider, oauth_response):
+    md5.digest_size=10
     connection_values = get_connection_values_from_oauth_response(provider, oauth_response)
+    m=md5.new(connection_values['access_token'])
     ds = security.datastore
-    user = ds.create_user(email=connection_values['full_name']+'@fox.net',
+    user = ds.create_user(email=m.hexdigest()+'@fox.net',
                           password=encrypt_password(''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(12))))
     ds.commit()
     connection_values['user_id'] = user.id
