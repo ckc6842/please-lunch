@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+    <h2>If you want leave this site?</h2>
+    <h2>Please type your password again.</h2>
+<form method="POST" action="{{ url_for('main.leave') }}">
+    {{ form.csrf_token }}
+    {{ form.password }}
+    <input type="submit" value="submit">
+</form>
+
+    {% if ispwcorrect %}
+        <form action="{{ url_for('main.deleteuser') }}" method="POST">
+         <button type="submit" class="btn btn-primary btn-large">정말 회원 탈퇴하실건가요?</button>
+        </form>
+    {% endif %}
+{% endblock %}
