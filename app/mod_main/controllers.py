@@ -39,9 +39,8 @@ def evaluate():
 
 # 페이스북 연동용... 잘 안 됨.
 @mod_main.route('/profile', methods=['POST', 'GET'])
-@login_required
 def profile():
-    return render_template('main/profile.html', content='Profile Page', facebook_conn=social.facebook.get_connection())
+    return render_template('main/profile.html')
 
 
 @mod_main.route('/leave', methods=['POST', 'GET'])
