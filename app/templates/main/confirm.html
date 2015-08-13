@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+    <p> 계정의 이메일이 확인 되지 않았어요! </p>
+    <p> 서비스를 이용하시려면 받은 편지함을 찾아보세요.</p>
+    <p> 메일이 오지 않았나요? </p>
+    <p><a href="{{ url_for('auth.confirm') }}">
+       메일 다시 보내기</a> </p>
+
+{% endblock %}

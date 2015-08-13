@@ -16,10 +16,20 @@ mod_main = Blueprint('main', __name__, url_prefix='')
 # 메인 화면
 @mod_main.route('/', methods=['POST', 'GET'])
 def index():
-    # user_datastore.create_role(name='User', description='Generic user')
-    # user_datastore.add_role_to_user(current_user, 'admin')
-    # user_datastore.commit()
-    return render_template("main/index.html")
+    if not current_user.is_authenticated():
+        # 로그인을 아예 안 함.
+        return render_template("main/index.html")
+    elif current_user.is_authenticated() and not current_user.is_evaluate:
+        # 로그인은 했는데 평가를 안 함.
+        return redirect(url_for('start.index'))
+    elif current_user.is_authenticated() and current_user.is_evaluate:
+        # 로그인도 하고 평가도 함.
+        return redirect(url_for('main.recommend'))
+    elif not current_user.confirmed_at:
+        return render_template('main/confirm.html')
+    else:
+        # 아무것도 해당 안 됨.
+        return render_template("main/index.html")
 
 
 # 음식 추천 요청

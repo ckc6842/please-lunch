@@ -18,7 +18,7 @@ roles_users = db.Table('roles_users',
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer(), primary_key=True)
     date_created  = db.Column(db.DateTime,  default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime,  default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
@@ -33,15 +33,20 @@ class User(db.Model, UserMixin):
     # Auth Data: role & status
     active = db.Column(db.Boolean(), default=False)
     roles  = db.relationship('Role', secondary=roles_users, backref=db.backref('users', lazy='dynamic'))
-    login = db.Column(db.String(250), unique=True)
-    confirmed_at = db.Column(db.DateTime())
-    is_admin = db.Column(db.Boolean())
 
     # for checking user's food evaluation
     is_evaluate = db.Column(db.Boolean(), default=False)
 
     # for checking user want to leave the site
     is_want_leave = db.Column(db.Boolean(), default=False)
+
+    # for SECURITY_TRACKABLE and CONFIRMABLE
+    confirmed_at = db.Column(db.DateTime())
+    last_login_at = db.Column(db.DateTime())
+    current_login_at = db.Column(db.DateTime())
+    last_login_ip = db.Column(db.String(25))
+    current_login_ip = db.Column(db.String(25))
+    login_count = db.Column(db.Integer())
 
     @property
     def cn(self):
