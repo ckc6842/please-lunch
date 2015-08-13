@@ -40,6 +40,9 @@ class User(db.Model, UserMixin):
     # for checking user's food evaluation
     is_evaluate = db.Column(db.Boolean(), default=False)
 
+    # for checking user want to leave the site
+    is_want_leave = db.Column(db.Boolean(), default=False)
+
     @property
     def cn(self):
         if not self.first_name or not self.last_name:
@@ -216,12 +219,6 @@ class FoodScore(db.Model):
 
 def load_user(user_id):
     return User.query.get(user_id)
-
-
-#def send_mail(msg):
-#    logging.debug("msg: %s" % msg)
-#    mail = current_app.extensions.get('mail')
-#    mail.send(msg)
 
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)

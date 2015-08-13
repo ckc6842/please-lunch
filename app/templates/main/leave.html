@@ -8,7 +8,7 @@
     <input type="submit" value="submit">
 </form>
 
-    {% if ispwcorrect %}
+    {% if is_pw_correct %}
         <form action="{{ url_for('main.deleteuser') }}" method="POST">
          <button type="submit" class="btn btn-primary btn-large">정말 회원 탈퇴하실건가요?</button>
         </form>
