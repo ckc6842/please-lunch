@@ -21,7 +21,8 @@ import hashlib
 def on_login_failed(sender, provider, oauth_response):
     hashlib.digest_size = 10
     connection_values = get_connection_values_from_oauth_response(provider, oauth_response)
-    at = hashlib.new(connection_values['access_token'])
+    at = hashlib.md5()
+    at.update(connection_values['access_token'])
     email = at.hexdigest()+'@fox.net'
     password = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(12))
 
