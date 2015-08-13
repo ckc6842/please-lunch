@@ -3,17 +3,17 @@
 # Import flask dependencies
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask.ext.login import login_required, current_user, logout_user
-from app.models import social, user_datastore
+from app.models import social, user_datastore, security
 from forms import UserLeaveForm
 from flask_security import roles_required
 from flask_security.utils import verify_and_update_password
 
 
-# Define the blueprint: 'main', set its url prefix: app.url/main
+# Define the blueprint: 'main', set its url prefix: app.u   rl/main
 mod_main = Blueprint('main', __name__, url_prefix='')
 
 
-# Set the route and accepted methods
+# 메인 화면
 @mod_main.route('/', methods=['POST', 'GET'])
 def index():
     # user_datastore.create_role(name='User', description='Generic user')
@@ -22,18 +22,22 @@ def index():
     return render_template("main/index.html")
 
 
+# 음식 추천 요청
 @mod_main.route('/recommend', methods=['GET'])
 @login_required
 def recommend():
-    return render_template('404.html')
+    return render_template('main/recommend.html')
 
 
+# GET: 추천받은 음식에 대한 감상을 묻는 페이지
+# POST: 추천받은 음식 평가
 @mod_main.route('/recommend/evaluate', methods=['POST', 'GET'])
 @login_required
 def evaluate():
     return render_template('404.html')
 
 
+# 페이스북 연동용... 잘 안 됨.
 @mod_main.route('/profile', methods=['POST', 'GET'])
 @login_required
 def profile():

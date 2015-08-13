@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block body %}
+    <p> 평가하세요! </p>
+    <form action="{{ url_for('start.info') }}" method="POST">
+        <button type="submit" class="btn btn-primary btn-large">음식 평가하기</button>
+    </form>
+{% endblock %}

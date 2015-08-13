@@ -30,12 +30,15 @@ class User(db.Model, UserMixin):
     email    = db.Column(db.String(128), nullable=False, unique=True)
     password = db.Column(db.String(192), nullable=False)
 
-    # Authoridbtion Data: role & status
-    active = db.Column(db.Boolean())
+    # Auth Data: role & status
+    active = db.Column(db.Boolean(), default=False)
     roles  = db.relationship('Role', secondary=roles_users, backref=db.backref('users', lazy='dynamic'))
     login = db.Column(db.String(250), unique=True)
     confirmed_at = db.Column(db.DateTime())
-    is_admin = db.Column(db.Boolean)
+    is_admin = db.Column(db.Boolean())
+
+    # for checking user's food evaluation
+    is_evaluate = db.Column(db.Boolean(), default=False)
 
     @property
     def cn(self):
