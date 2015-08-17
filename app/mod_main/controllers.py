@@ -49,6 +49,7 @@ def evaluate():
 
 # 페이스북 연동용... 잘 안 됨.
 @mod_main.route('/profile', methods=['POST', 'GET'])
+@login_required
 def profile():
     return render_template('main/profile.html')
 

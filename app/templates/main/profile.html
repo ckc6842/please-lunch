@@ -1,3 +1,4 @@
+{% from "_macros.html" import social_login %}
 {% extends "base.html" %}
 {% block body %}
     <div class="container">
@@ -43,7 +44,7 @@
                 <h2 class="text-center">Connect another account</h2>
 
                 <div class="">
-                    <a href="{{ url_for('social.login', provider_id='Facebook') }}" class="social-facebook btn btn-primary btn-lg"><i class="fa fa-2x fa-facebook-square"></i></a>
+                    {{ social_login('facebook', 'Facebook' )}}
                 </div>
 
             </div>
