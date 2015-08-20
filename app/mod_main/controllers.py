@@ -3,7 +3,7 @@
 # Import flask dependencies
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask.ext.login import login_required, current_user, logout_user
-from app.models import social, user_datastore
+from app.models import user_datastore
 from forms import UserLeaveForm
 from app import db
 from flask_security.utils import verify_and_update_password
@@ -36,7 +36,6 @@ def index():
 @mod_main.route('/recommend', methods=['GET'])
 @login_required
 def recommend():
-
     return render_template('main/recommend.html')
 
 

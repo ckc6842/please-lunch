@@ -3,6 +3,11 @@ DEBUG = True
 WTF_CSRF_ENABLED = True
 # Define the application directory
 import os
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Define the database - we are working with
