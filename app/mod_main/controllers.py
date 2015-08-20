@@ -36,6 +36,8 @@ def index():
 @mod_main.route('/recommend', methods=['GET'])
 @login_required
 def recommend():
+    user_datastore,create_role(name='admin', description='admin user')
+
     return render_template('main/recommend.html')
 
 

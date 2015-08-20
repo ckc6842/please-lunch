@@ -89,14 +89,85 @@
 
         <div id="page-wrapper">
             <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Administrator page for PleaseLunch</h2>
+                <div class="col-lg-6">
+                    <h2 class="page-header">데이터 입출력</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            FOOD LIST TABLE
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
 
+                                <form name="food_form" ng-submit="submitFood(formData_add_food)">
+                                    <div class="col-lg-4">
+                                        <div class="form-group input-group">
+                                            <input type="text" class="form-control" name="foodName_add"  ng-model="formData_add_food" placeholder="ADD FOOD">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-floppy-save"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form name="food_form" ng-submit="deleteFood(formData_del_food)">
+                                    <div class="col-lg-4">
+                                        <div class="form-group input-group">
+                                            <input type="text" class="form-control" name="foodName_del"  ng-model="formData_del_food" placeholder="DEL FOOD">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-trash"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group input-group">
+                                        <input type="text" class="form-control" name="foodName_search"  ng-model="formData_search_food" placeholder="SEARCH FOOD">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th width="15%" >Food id</th>
+                                            <th>Food name</th>
+                                            <th width="5%"></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="data in food_tabledata | filter:formData_search_food">
+                                            <td>{{ data.id | angular }}</td>
+                                            <td>{{ data.foodName | angular }}</td>
+                                            <td><button class="btn btn-default" type="button" ng-click="open_foodscore(data.foodName)">
+                                                <i class="fa fa-navicon"></i></button></td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <!-- /.table-responsive -->
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
 
