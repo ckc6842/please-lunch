@@ -149,7 +149,7 @@ class Role(db.Model, RoleMixin):
 class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     foodName = db.Column(db.String(128))
-    foodscore = db.relationship('FoodScore', backref='food', lazy='dynamic')
+    foodscore = db.relationship("FoodScore", backref=db.backref('food'))
 
     def __init__(self, foodName):
         self.foodName = foodName
@@ -206,14 +206,14 @@ class Time(db.Model):
 
 class FoodScore(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    EnumSet = (EnumSet_Food, EnumSet_Cook, EnumSet_Taste, EnumSet_Nation) = ('Food', 'Cook', 'Taste', 'Nation')
-    targetEnum = db.Column(db.Enum(*EnumSet))
-    targetId = db.Integer
-    score = db.Integer
     food_id = db.Column(db.Integer, db.ForeignKey('food.id'))
+    EnumSet = ['Cook', 'Taste', 'Nation']
+    targetEnum = db.Column(db.Enum(*EnumSet))
+    targetId = db.Column(db.Integer)
+    score = db.Column(db.Integer)
 
-    def __init__(self, EnumSet, targetEnum, targetId, score):
-        self.EnumSet = EnumSet
+    def __init__(self, food, targetEnum, targetId, score):
+        self.food = food
         self.targetEnum = targetEnum
         self.targetId = targetId
         self.score = score
@@ -229,3 +229,4 @@ def load_user(user_id):
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 social = Social(app, SQLAlchemyConnectionDatastore(db, Connection))
+
