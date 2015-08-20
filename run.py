@@ -41,7 +41,7 @@ def on_login_failed(sender, provider, oauth_response):
 import sys
 
 if sys.platform == 'win32':
-    app.run(host='127.0.0.1', port=80, debug=True)
+    app.run(host='127.0.0.1', port=8080, debug=True)
 elif sys.platform == 'linux2':
     app.run(host='0.0.0.0', port=8080, debug=True)
 else:
