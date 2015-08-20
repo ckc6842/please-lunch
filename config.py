@@ -3,6 +3,11 @@ DEBUG = True
 WTF_CSRF_ENABLED = True
 # Define the application directory
 import os
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Define the database - we are working with
@@ -31,15 +36,15 @@ CSRF_SESSION_KEY = "secret"
 # Secret key for signing cookies
 SECRET_KEY = "super-secret"
 SECURITY_REGISTERABLE =  True
-SECURITY_CONFIRMABLE = True
+SECURITY_CONFIRMABLE = False
 SECURITY_TRACKABLE = True
-SECURITY_RECOVERABLE = True
+SECURITY_RECOVERABLE = False
 SECURITY_CHANGEABLE = True
 SECURITY_PASSWORD_HASH = 'bcrypt'
 SECURITY_PASSWORD_SALT = 'X2LGFS1AI39VRWYCYMXG3L5F4GS8EE35WUB0YSVPX7SUFWP70ETI1G2ZV2LLQGJ8'
 SECURITY_BLUEPRINT_NAME = 'auth'
 SECURITY_URL_PREFIX = '/auth'
-SECURITY_SEND_REGISTER_EMAIL = True
+SECURITY_SEND_REGISTER_EMAIL = False
 SECURITY_POST_LOGIN_VIEW = '/start/'
 SECURITY_POST_REGISTER_VIEW = '/start/'
 
