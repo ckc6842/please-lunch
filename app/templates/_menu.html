@@ -1,25 +1,30 @@
 {% if security.registerable or security.recoverable or security.confirmable %}
-<h2>Menu</h2>
-<ul>
-  {% if not current_user.is_authenticated() %}
-    {% if security.registerable %}
-    <li><a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">회원가입</a><br/></li>
-    {% endif %}
-    <li><a href="{{ url_for_security('login') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">로그인</a></li>
-  {% else %}
-    <li><a href="{{ url_for_security('logout') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">로그아웃</a></li>
-    <li><a href="{{ url_for('main.profile') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">프로필</a></li>
-    {% if current_user.has_role('admin') %}
-      <li><a href="{{ url_for('administrator.administrator') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">관리자</a></li>
-    {% endif %}
+    <h2>Menu</h2>
+    <ul>
+        {% if not current_user.is_authenticated() %}
+            {% if security.registerable %}
+                <li><a href="{{ url_for_security('register') }}
+                {% if 'next' in request.args %}
+                ?next={{ request.args.next|urlencode }}
+                {% endif %}">회원가입</a>
+                    <br/>
+                </li>
+            {% endif %}
+            <li><a href="{{ url_for_security('login') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">로그인</a></li>
+        {% else %}
+            <li><a href="{{ url_for_security('logout') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">로그아웃</a></li>
+            <li><a href="{{ url_for('main.profile') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">프로필</a></li>
+            {% if current_user.has_role('admin') %}
+                <li><a href="{{ url_for('administrator.index') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">관리자</a></li>
+            {% endif %}
 
-  {% endif %}
-  
-  {% if security.recoverable %}
-  <li><a href="{{ url_for_security('forgot_password') }}">비밀번호 찾기</a><br/></li>
-  {% endif %}
-  {% if security.confirmable %}
-  <li><a href="{{ url_for_security('send_confirmation') }}">이메일 다시 보내기</a></li>
-  {% endif %}
-</ul>
+        {% endif %}
+
+        {% if security.recoverable %}
+            <li><a href="{{ url_for_security('forgot_password') }}">비밀번호 찾기</a><br/></li>
+        {% endif %}
+        {% if security.confirmable %}
+            <li><a href="{{ url_for_security('send_confirmation') }}">이메일 다시 보내기</a></li>
+        {% endif %}
+    </ul>
 {% endif %}

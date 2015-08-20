@@ -13,7 +13,7 @@ from app.models import security
 import string
 import random
 import hashlib
-
+import re
 
 # When connection table hasn't user's facebook information.
 # Automatically login.
@@ -36,6 +36,13 @@ def on_login_failed(sender, provider, oauth_response):
 
     return render_template('main/index.html')
 
+
+@app.template_filter('quoted')
+def quoted(s):
+    l = re.findall('\'([^\']*)\'', str(s))
+    if l:
+        return l[0]
+    return None
 
 # 'app.run' is different by os.
 import sys

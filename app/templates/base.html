@@ -2,12 +2,12 @@
 <html>
 <head>
     <title>
-        {% block title %}{% endblock %} - 점심을 부탁해
+        {{ self | quoted }} - 점심을 부탁해
     </title>
 </head>
-
 <body>
 {% block body %}
 {% endblock %}
+{% include '_menu.html' %}
 </body>
 </html>
