@@ -4,7 +4,6 @@
 
 <div class="full-height ng-scope" ui-view=""><!-- uiView:  --><div class="full-height ng-scope" ui-view="">
     <div class="login-wrapper  ng-scope">
-
         <div class="bg-pic">
 
             <img src="{{ url_for('static', filename='assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg') }}"
@@ -12,7 +11,6 @@
                  ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg') }}" alt="" class="lazy">
 
         </div>
-
         <div class="login-container bg-white">
             <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
                 <img src="{{ url_for('static', filename='assets/img/logo.png') }}" alt="logo" data-src="{{ url_for('static', filename='assets/img/logo.png') }}" ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/logo_2x.png') }}" width="78" height="22">
@@ -27,8 +25,6 @@
                     {{ render_field(login_user_form.submit) }}
                 </form>
                 {{ social_login('facebook', 'Facebook' )}}
-
-
             </div>
         </div>
     </div>
