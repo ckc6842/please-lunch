@@ -7,8 +7,6 @@ angular.module('app')
     .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider',
 
         function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
-            $urlRouterProvider
-                .otherwise('/app/dashboard');
 
             $stateProvider
                 .state('app', {
