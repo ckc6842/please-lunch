@@ -15,6 +15,7 @@ import random
 import hashlib
 import re
 
+
 # When connection table hasn't user's facebook information.
 # Automatically login.
 @login_failed.connect_via(app)

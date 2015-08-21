@@ -3,11 +3,11 @@ from flask import Blueprint, render_template, request, jsonify
 from flask.ext.login import login_required
 from flask_security import roles_required
 
-from app import app, db
+from app import db
 from app.models import Food, Cook, Taste, Nation, FoodScore
 
 
-mod_administrator = Blueprint('administrator', __name__, url_prefix='/admin')
+mod_administrator = Blueprint('admin', __name__, url_prefix='/admin')
 
 
 @roles_required('admin')
