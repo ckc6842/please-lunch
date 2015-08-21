@@ -42,6 +42,14 @@
                         </button>
                         <div class="modal-dialog ">
                             <h1>회원가입 FORM</h1>
+                            {{ register_user_form.hidden_tag() }}
+                            {{ render_field_with_errors(register_user_form.email, placeholder="이메일", class="form-control") }}
+                            {{ render_field_with_errors(register_user_form.password, placeholder="Minimum of 6 Charactors", class="form-control") }}
+
+                            {% if register_user_form.password_confirm %}
+                                {{ render_field_with_errors(register_user_form.password_confirm, placeholder="Retype your password", class="form-control") }}
+                            {% endif %}
+                            {{ render_field(register_user_form.submit, class="btn btn-primary btn-cons m-t-10") }}
                             <!-- /.modal-content -->
                         </div>
                         <!-- /.modal-dialog -->
@@ -54,6 +62,14 @@
                         </button>
                         <div class="modal-dialog ">
                             <h1>로그인 FORM</h1>
+                            <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+                                {{ login_user_form.hidden_tag() }}
+                                {{ render_field_with_errors(login_user_form.email) }}
+                                {{ render_field_with_errors(login_user_form.password) }}
+                                {{ render_field_with_errors(login_user_form.remember) }}
+                                {{ render_field(login_user_form.next) }}
+                                {{ render_field(login_user_form.submit) }}
+                            </form>
                             <!-- /.modal-content -->
                         </div>
                         <!-- /.modal-dialog -->

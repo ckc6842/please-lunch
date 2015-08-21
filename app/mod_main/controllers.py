@@ -3,6 +3,7 @@
 # Import flask dependencies
 from flask import Blueprint, render_template, redirect, url_for
 from flask.ext.login import login_required, current_user
+from flask_security.forms import LoginForm, RegisterForm
 
 
 # Define the blueprint: 'main', set its url prefix: app.url/main
@@ -12,9 +13,12 @@ mod_main = Blueprint('main', __name__, url_prefix='')
 # 메인 화면
 @mod_main.route('/', methods=['POST', 'GET'])
 def index():
+    loginForm = LoginForm()
+    registerForm =  RegisterForm()
+
     if not current_user.is_authenticated():
         # 로그인을 아예 안 함.
-        return render_template("main/index.html")
+        return render_template("main/index.html", login_user_form = loginForm, register_user_form = registerForm)
     elif current_user.is_authenticated() and not current_user.is_evaluate:
         # 로그인은 했는데 평가를 안 함.
         return redirect(url_for('start.index'))
