@@ -1,0 +1,32 @@
+diff a/app/templates/base.html b/app/templates/base.html	(rejected hunks)
+@@ -48,29 +48,8 @@
+ 'menu-pin' : app.layout.menuPin,
+ 'menu-behind' : app.layout.menuBehind
+  }">
++{% if current_user.is_authenticated() %}
+ <div class="header  ng-scope" ng-class="{'transparent': is('app.maps.vector') || is('app.maps.google') }">
+-
+-
+-    <div class="pull-left full-height visible-sm visible-xs">
+-
+-        <div class="sm-action-bar">
+-            <a href="" class="btn-link toggle-sidebar" data-toggle="sidebar">
+-                <span class="icon-set menu-hambuger"></span>
+-            </a>
+-        </div>
+-
+-    </div>
+-
+-    <div class="pull-right full-height visible-sm visible-xs">
+-
+-        <div class="sm-action-bar">
+-            <a href="" class="btn-link" data-toggle="quickview" data-toggle-element="#quickview">
+-                <span class="icon-set menu-hambuger-plus"></span>
+-            </a>
+-        </div>
+-
+-    </div>
+-
+     <div class=" pull-left sm-table">
+         <div class="header-inner">
+             <div class="brand inline">

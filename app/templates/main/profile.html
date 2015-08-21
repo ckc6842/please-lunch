@@ -1,7 +1,11 @@
 {% from "_macros.html" import social_login %}
 {% extends "base.html" %}
 {% block body %}
-    <div class="container">
+<div class="page-container">
+    <div class="page-content-wrapper">
+        <div class="content">
+
+            <div class="container">
         <div class="row">
             <div class="page-header">
                 <h1 class="text-center">Hi {{ current_user.cn }}</h1>
@@ -50,4 +54,10 @@
             </div>
         </div>
     </div>
+
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}

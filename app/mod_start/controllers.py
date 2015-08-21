@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, jsonify
 from flask_security import login_required, current_user
 from app import db
 
@@ -33,3 +33,8 @@ def info():
 def evaluate():
     flash('Your information successfully evaluated!')
     return redirect(url_for('main.recommend'))
+
+@mod_start.route('/getfoodlist', methods=['POST', 'GET'])
+@login_required
+def getfoodlist():
+    return jsonify({'id': 1, 'foodName' : 'apple'}, {'id' : 2, 'foodName' : 'banana'})
