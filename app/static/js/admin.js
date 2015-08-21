@@ -36,6 +36,7 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
             $scope.cook_tabledata = response.cook;
             $scope.nation_tabledata = response.nation;
             $scope.taste_tabledata = response.taste;
+            $scope.user_tabledata = response.user;
         });
 
 
