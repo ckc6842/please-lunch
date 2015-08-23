@@ -10,16 +10,23 @@ from app.models import user_datastore
 from app.forms import UserLeaveForm
 from app import db
 
-
-class AuthView(FlaskView):
-    route_base = '/start'
+class AuthViewMin(FlaskView):
+    route_base = '/auth/'
     decorators = [login_required]
 
+
+class AuthView(AuthViewMin):
     def profile(self):
         return render_template('main/profile.html')
 
-    def leave(self):
+
+class LeaveView(AuthViewMin):
+    def get(self):
+        form = UserLeaveForm()
         is_pw_correct = False
+        return render_template('main/leave.html', form=form, is_pw_correct=is_pw_correct)
+
+    def post(self):
         form = UserLeaveForm()
         if form.validate_on_submit():
             if verify_and_update_password(form.password.data, current_user):
@@ -30,10 +37,13 @@ class AuthView(FlaskView):
                 return render_template('main/leave.html', form=form, is_pw_correct=is_pw_correct)
             else:
                 flash("Your input is not correct.")
-                return redirect(url_for('MainView:leave'))
-        return render_template('main/leave.html', form=form, is_pw_correct=is_pw_correct)
+                return redirect(url_for('AuthView:get'))
 
-    def deleteuser(self):
+
+class DeleteUserView(AuthViewMin):
+    route_prefix = '/delete'
+
+    def post(self):
         if current_user.is_want_leave:
             user_datastore.delete_user(current_user)
             logout_user()
@@ -43,4 +53,3 @@ class AuthView(FlaskView):
         else:
             flash('It is wrong approach!!!')
             return render_template('error/404.html')
-

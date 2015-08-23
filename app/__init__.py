@@ -55,13 +55,15 @@ def internal_error(error):
 # Import a module
 from app.views.main import MainView
 from app.views.start import StartView
-from app.views.auth import AuthView
+from app.views.auth import AuthView, LeaveView, DeleteUserView
 from app.views.admin import AdminView
 
 MainView.register(app)
 StartView.register(app)
 AuthView.register(app)
 AdminView.register(app)
+LeaveView.register(app)
+DeleteUserView.register(app)
 
 # Build the database:
 # This will create the database file using SQLAlchemy

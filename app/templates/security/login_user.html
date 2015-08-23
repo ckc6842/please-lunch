@@ -24,10 +24,11 @@
                         {{ render_field(login_user_form.submit, class="btn btn-primary btn-cons m-t-10") }}
                     </form>
                     {{ social_login('facebook', 'Facebook' )}}
+                    {% include 'module/_menu.html' %}
                 </div>
             </div>
-        </div>
-    </div>
-    </div>
 
+        </div>
+
+    </div>
 {% endblock %}

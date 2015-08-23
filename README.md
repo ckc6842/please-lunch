@@ -22,6 +22,10 @@ class FooView(FlaskView):
 2. init
 FooView.register(app)
 
-3. 자세한 사용법은 views 폴더에 있는 코드 참고.
+3. url_for(뷰클래스이름:메서드이름) 
+
+4. class의 get method 가 get요청 post method가 각각 post 요청.
+
+4. 자세한 사용법은 views 폴더에 있는 코드 참고.
 
    

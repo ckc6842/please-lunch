@@ -20,11 +20,7 @@
             </div>
         </div>
     </div>
-    <div class=" pull-right">
-        <div class="header-inner">
-            <a href="" class="btn-link icon-set menu-hambuger-plus m-l-20 sm-no-margin hidden-sm hidden-xs" data-toggle="quickview" data-toggle-element="#quickview"></a>
-        </div>
-    </div>
+
     <div class=" pull-right">
         <div class="visible-lg visible-md m-t-10">
             <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
@@ -37,6 +33,10 @@
                     </span>
                 </button>
                 <ul class="dropdown-menu profile-dropdown" role="menu">
+                        <li><a href="{{ url_for('MainView:index') }}
+                        {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
+                            메인페이지</a>
+                        </li>
                     {% if not current_user.is_authenticated() %}
                         {% if security.registerable %}
                             <li><a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">회원가입</a><br/></li>
@@ -45,6 +45,10 @@
                         <li><a href="{{ url_for('AuthView:profile') }}
                         {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
                             프로필</a>
+                        </li>
+                        <li><a href="{{ url_for('LeaveView:get') }}
+                        {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
+                            회원탈퇴</a>
                         </li>
                         <li><a href="{{ url_for_security('change_password') }}
                             {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">비밀번호 바꾸기</a></li>
@@ -56,8 +60,7 @@
                         <!-- 관리자 끝 -->
                         <li class="bg-master-lighter">
                             <a href="{{ url_for_security('logout') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}" class="clearfix">
-                                <span class="pull-left">로그아웃</span>
-                                <span class="pull-right"><i class="pg-power"></i></span>
+                                <i class="pg-power"></i> 로그아웃
                             </a>
                         </li>
                     {% endif %}

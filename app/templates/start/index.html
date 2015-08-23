@@ -1,9 +1,9 @@
 {% extends "base.html" %}
+{% include 'module/upper_bar.html' %}
 {% block body %}
 <div class="page-container">
     <div class="page-content-wrapper">
         <div class="content">
-
             <div ng-controller="RatingCtrl">
                 <div ng-repeat="i in testlist">
                     <div class="card share  col1" data-social="item" style="margin: 0 20px">
@@ -23,18 +23,12 @@
                 </div>
             </div>
 
-
-
-            <form action="{{ url_for('StartView:    info') }}" method="POST">
-                <button type="submit" class="btn btn-primary btn-large">음식 평가하기</button>
-            </form>
+            <a href="{{ url_for('StartView:info') }}">평가하기</a>
 
         </div>
     </div>
 
 </div>
-
-
 
 {% endblock %}
 

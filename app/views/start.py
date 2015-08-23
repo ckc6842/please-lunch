@@ -6,7 +6,7 @@ from app import db
 
 class StartView(FlaskView):
     decorators = [login_required]
-    route_base = '/start'
+    route_base = '/start/'
 
     def index(self):
         if current_user.is_evaluate:

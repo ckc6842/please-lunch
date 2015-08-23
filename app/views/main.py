@@ -19,7 +19,7 @@ class MainView(FlaskView):
             return render_template("main/index.html", login_user_form = loginform, register_user_form = registerform)
         elif current_user.is_authenticated() and not current_user.is_evaluate:
             # 로그인은 했는데 평가를 안 함.
-            return redirect(url_for('start.index'))
+            return redirect(url_for('StartView:index'))
         elif current_user.is_authenticated() and current_user.is_evaluate:
             # 로그인도 하고 평가도 함.
             return redirect(url_for('MainView:recommend'))
