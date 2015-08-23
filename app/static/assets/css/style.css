@@ -3,3 +3,27 @@
 * Override Pages default styles or create your own styles here
 
 */
+.rating{
+    color: #a9a9a9;
+    font-size: 30px;
+
+}
+
+ul.rating {
+    display: inline-block;
+    margin : 0 auto;
+}
+
+.rating li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 1px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.rating .filled {
+    color: #FDD01C;
+}
+

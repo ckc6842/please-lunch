@@ -32,16 +32,23 @@ angular.module('app')
                 show: true
             })
         }
+        $scope.testlist = [{'id': 1, 'foodName' : 'apple', 'image':'http://salubriousrd.com/wp-content/uploads/2015/05/apple.jpg'},
+                            {'id' : 2, 'foodName' : 'banana', 'image':'http://www.technoplastindustries.com/wp-content/uploads/2014/10/Banana-1.jpg'}];
+
+        $scope.rateFunction = function(temp) {
+            $scope.temp = temp;
+        }
+        var tooltips = document.querySelectorAll('.card-description span');
 
     }]);
 
 
 angular.module('app')
     /*
-        Use this directive together with ng-include to include a 
-        template file by replacing the placeholder element
-    */
-    
+     Use this directive together with ng-include to include a
+     template file by replacing the placeholder element
+     */
+
     .directive('includeReplace', function() {
         return {
             require: 'ngInclude',
