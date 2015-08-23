@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, jsonify
 from flask_classy import FlaskView
 from flask_security import login_required, current_user
 from app import db
@@ -27,3 +27,7 @@ class StartView(FlaskView):
     def evaluate(self):
         flash('Your information successfully evaluated!')
         return redirect(url_for('MainView:recommend'))
+
+
+    def getfoodlist(self):
+        return jsonify({'id': 1, 'foodName' : 'apple'}, {'id' : 2, 'foodName' : 'banana'})

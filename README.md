@@ -1,8 +1,23 @@
-# please-lunch.
-db의 'alembic_version' 테이블을 삭제하고
-db.bat 을 실행하면
-자동으로 db upgrade 가 가능함.
+# db 업그레이드.
+models.py 를 수정한 후
+데이터베이스의 'alembic_version' 테이블을 삭제하고
+db.bat 을 실행하면 자동으로 db 최신화가 가능하다.
 
-## 라이브러리 업데이트
-flask-classy 를 설치해야함.
+## 가상환경 유지
+pip install -r requirements.txt
+새로운 라이브러리 flask-classy가 추가됨.
 pip install flask-classy
+
+## flask-classy 사용법
+https://pythonhosted.org/Flask-Classy/
+1. view
+from flask_classy import FlaskView
+class FooView(FlaskView):
+    pass
+    
+2. init
+FooView.register(app)
+
+3. 자세한 사용법은 views 폴더에 있는 코드 참고.
+
+   
