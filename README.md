@@ -10,11 +10,12 @@ pip install flask-classy
 
 ## flask-classy 사용법
 https://pythonhosted.org/Flask-Classy/
-1. view
+
+1. View
 from flask_classy import FlaskView
 class FooView(FlaskView):
     pass
-    
+
 2. init
 FooView.register(app)
 
