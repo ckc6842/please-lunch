@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% include 'module/upper_bar.html' %}
 {% block body %}
     <h2>If you want leave this site?</h2>
     <h2>Please type your password again.</h2>
@@ -9,7 +10,7 @@
 </form>
 
     {% if is_pw_correct %}
-        <form action="{{ url_for('main.deleteuser') }}" method="POST">
+        <form action="{{ url_for('MainView:deleteuser') }}" method="POST">
          <button type="submit" class="btn btn-primary btn-large">정말 회원 탈퇴하실건가요?</button>
         </form>
     {% endif %}

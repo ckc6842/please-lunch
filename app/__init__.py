@@ -21,10 +21,6 @@ app.config.update(dict(
     MAIL_PASSWORD = 'foxvkdlxld',
 ))
 
-Triangle(app)
-
-mail = Mail(app)
-
 # Configurations
 app.config.from_object('config')
 
@@ -33,7 +29,10 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 from app.models import *
 
-# Setup Flask-Security
+# register flask ext
+Triangle(app)
+mail = Mail(app)
+babel = Babel(app)
 
 # Setup flask-login
 login_manager = LoginManager()
@@ -42,26 +41,28 @@ login_manager.user_loader(load_user)
 login_manager.anonymous_user = AnonymousUser
 login_manager.login_view = "/login"
 
-babel = Babel(app)
 
 # Sample HTTP error handling
 @app.errorhandler(404)
 def not_found(error):
-    return render_template('404.html'), 404
+    return render_template('error/404.html'), 404
 
 
-# Import a module / component using its blueprint handler variable (mod_auth)
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template('error/500.html'), 500
 
-# Register blueprint(s)
-from app.mod_main.controllers import mod_main as main_module
-from app.mod_admin.controllers import mod_administrator as admin_module
-from app.mod_start.controllers import mod_start as start_module
-from app.mod_auth.controllers import mod_auth as auth_module
+# Import a module
+from app.views.main import MainView
+from app.views.start import StartView
+from app.views.auth import AuthView
+from app.views.admin import AdminView
 
-app.register_blueprint(admin_module)
-app.register_blueprint(main_module)
-app.register_blueprint(start_module)
-app.register_blueprint(auth_module)
+MainView.register(app)
+StartView.register(app)
+AuthView.register(app)
+AdminView.register(app)
+
 # Build the database:
 # This will create the database file using SQLAlchemy
 db.create_all()

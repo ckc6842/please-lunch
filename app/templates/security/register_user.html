@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% from "_macros.html" import render_field_with_errors, render_field, social_register %}
+{% from "module/_macros.html" import render_field_with_errors, render_field, social_register %}
 {% block body %}
 
 <div class="full-height ng-scope" ui-view=""><!-- uiView:  --><div class="full-height ng-scope" ui-view="">
     <div class="login-wrapper  ng-scope">
-    {% include "_messages.html" %}
+    {% include "module/_messages.html" %}
         <div class="bg-pic">
 
             <img src="{{ url_for('static', filename='assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg') }}"
