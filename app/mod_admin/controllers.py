@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, request, jsonify
-from flask.ext.login import login_required
-from flask_security import roles_required
+from flask_security import roles_required, login_required
 
 from app import db
 from app.models import Food, Cook, Taste, Nation, FoodScore, User
@@ -10,15 +9,15 @@ from app.models import Food, Cook, Taste, Nation, FoodScore, User
 mod_administrator = Blueprint('admin', __name__, url_prefix='/admin')
 
 
-@roles_required('admin')
 @login_required
-@mod_administrator.route('/index/', methods=['GET'])
+@roles_required('admin')
+@mod_administrator.route('/index', methods=['GET'])
 def index():
     return render_template("administrator/sb-admin/pages/index.html")
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/getdata', methods=['GET'])
 def getdata():
     food_data = Food.query.all()
@@ -34,8 +33,8 @@ def getdata():
                     'user': [{'email': item.email, 'id': item.id} for item in user_data]})
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/foodscore/<foodName>', methods=['GET', 'POST'])
 def foodscore(foodName):
 
@@ -71,8 +70,8 @@ def foodscore(foodName):
 
 
 # foodscore
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/foodscore/', methods=['GET', 'POST'])
 def foodscore_index():
     if request.method == 'POST':
@@ -87,8 +86,8 @@ def foodscore_index():
     return render_template("administrator/sb-admin/pages/food-score-table.html")
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/foodscore/delete/', methods=['GET', 'POST'])
 def foodscore_delete():
     food_id = Food.query.filter_by(foodName = request.json['foodName'] ).one().id
@@ -97,8 +96,8 @@ def foodscore_delete():
     return 'good'
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/test/', methods=['GET', 'POST'])
 def test():
     p = FoodScore.query.filter(FoodScore.food_id == 1)
@@ -106,8 +105,8 @@ def test():
     return 'good'
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/foodscore/getdata/', methods=['GET'])
 def get_foodscore():
     foodscore_cook_table = db.session.query(FoodScore, Cook).outerjoin(Cook, FoodScore.targetId == Cook.id).filter(FoodScore.targetEnum == 'Cook')
@@ -124,16 +123,16 @@ def get_foodscore():
 
 
 # food
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/food', methods=['GET'])
 def food_index():
     print "food start"
     return render_template("administrator/sb-admin/pages/food.html")
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/food/add', methods=['GET', 'POST'])
 @login_required
 def addfood():
@@ -146,8 +145,8 @@ def addfood():
     return 'seccess'
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/food/delete', methods=['GET', 'POST'])
 @login_required
 def deletefood():
@@ -158,18 +157,17 @@ def deletefood():
         db.session.commit()
     return 'seccess'
 
-#
-
-@roles_required('admin')
+# cook
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/cook', methods=['GET'])
 def cook_index():
     print "cook start"
     return render_template("administrator/sb-admin/pages/cook.html")
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/cook/add', methods=['GET', 'POST'])
 def addcook():
     if request.method == 'POST':
@@ -180,8 +178,8 @@ def addcook():
     return 'seccess'
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/cook/delete', methods=['GET', 'POST'])
 def deletecook():
     if request.method == 'POST':
@@ -193,16 +191,16 @@ def deletecook():
 
 
 # nation
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/nation', methods=['GET'])
 def nation_index():
     print "nation start"
     return render_template("administrator/sb-admin/pages/nation.html")
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/nation/add', methods=['GET', 'POST'])
 def addnation():
     if request.method == 'POST':
@@ -213,8 +211,8 @@ def addnation():
     return 'seccess'
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/nation/delete', methods=['GET', 'POST'])
 def deletenation():
     if request.method == 'POST':
@@ -226,15 +224,15 @@ def deletenation():
 
 
 # taste
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/taste', methods=['GET'])
 def taste_index():
     return render_template("administrator/sb-admin/pages/taste.html")
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/taste/add', methods=['GET', 'POST'])
 def addtaste():
     if request.method == 'POST':
@@ -245,8 +243,8 @@ def addtaste():
     return 'seccess'
 
 
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/taste/delete', methods=['GET', 'POST'])
 def deletetaste():
     if request.method == 'POST':
@@ -258,8 +256,8 @@ def deletetaste():
 
 
 # user
-@roles_required('admin')
 @login_required
+@roles_required('admin')
 @mod_administrator.route('/user', methods=['GET'])
 def user_index():
     return render_template("administrator/sb-admin/pages/user.html")
