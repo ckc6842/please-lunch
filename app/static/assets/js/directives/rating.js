@@ -8,7 +8,7 @@ angular.module('app')
 		return {
 			restrict : 'A',
 			template : '<ul class="rating">'
-					 + '	<li ng-repeat="star in stars" ng-class="star" ng-mouseover="toggle($index)">'
+					 + '	<li ng-repeat="star in stars" ng-class="star" ng-mouseover="toggle($index)" >'
 					 + '\u2605'
 					 + '</li>'
 					 + '</ul>',
@@ -33,7 +33,7 @@ angular.module('app')
 						rating : index + 1
 					});
 				};
-				
+
 				scope.$watch('ratingValue',
 					function(oldVal, newVal) {
 						if (newVal) {
@@ -41,6 +41,8 @@ angular.module('app')
 						}
 					}
 				);
+
+
 			}
 		};
 	}

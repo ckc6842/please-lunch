@@ -3,11 +3,11 @@ from flask import Blueprint, render_template, request, jsonify
 from flask.ext.login import login_required
 from flask_security import roles_required
 
-from app import app, db
-from app.models import Food, Cook, Taste, Nation, FoodScore
+from app import db
+from app.models import Food, Cook, Taste, Nation, FoodScore, User
 
 
-mod_administrator = Blueprint('administrator', __name__, url_prefix='/admin')
+mod_administrator = Blueprint('admin', __name__, url_prefix='/admin')
 
 
 @roles_required('admin')
@@ -25,11 +25,13 @@ def getdata():
     cook_data = Cook.query.all()
     nation_data = Nation.query.all()
     taste_data = Taste.query.all()
+    user_data = User.query.all()
 
     return jsonify({'food': [{'foodName': item.foodName, 'id': item.id} for item in food_data],
                     'cook': [{'cookName': item.cookName, 'id': item.id} for item in cook_data],
                     'nation': [{'nationName': item.nationName, 'id': item.id} for item in nation_data],
-                    'taste': [{'tasteName': item.tasteName, 'id': item.id} for item in taste_data]})
+                    'taste': [{'tasteName': item.tasteName, 'id': item.id} for item in taste_data],
+                    'user': [{'email': item.email, 'id': item.id} for item in user_data]})
 
 
 @roles_required('admin')
@@ -228,7 +230,6 @@ def deletenation():
 @login_required
 @mod_administrator.route('/taste', methods=['GET'])
 def taste_index():
-    print "taste start"
     return render_template("administrator/sb-admin/pages/taste.html")
 
 
@@ -254,3 +255,12 @@ def deletetaste():
         Taste.query.filter_by(tasteName=temp.tasteName).delete()
         db.session.commit()
     return 'seccess'
+
+
+# user
+@roles_required('admin')
+@login_required
+@mod_administrator.route('/user', methods=['GET'])
+def user_index():
+    return render_template("administrator/sb-admin/pages/user.html")
+

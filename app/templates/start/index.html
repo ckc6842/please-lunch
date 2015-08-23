@@ -5,19 +5,21 @@
         <div class="content">
 
             <div ng-controller="RatingCtrl">
-                <div ng-repeat="i in testlist">
+                <div ng-repeat="i in foodlist">
                     <div class="card share  col1" data-social="item" style="margin: 0 20px">
-                        <div class="card-header clearfix">
-                            {{i.foodName | angular}}
-                        </div>
+
                         <div class="card-description">
                             <img src="{{i.image | angular}}" style="width:250px;height:250px"/>
 
-                                <div ng-init="rating = star.rating + 1; i.rating = rating"></div>
 
-                                <div class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="i.rating = rating"></div>
+
+                        </div>
+                        <div class="card-header clearfix">
+                            {{i.foodName | angular}}
+                            <div ng-init="rating = star.rating + 1; i.rating = rating"></div>
+
+                                <div class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="i.rating = rating" ng-click="sendrating(rating, i.foodName)"></div>
                                 {{ i.rating | angular}}
-
                         </div>
                     </div>
                 </div>
