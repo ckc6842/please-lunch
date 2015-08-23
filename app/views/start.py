@@ -28,6 +28,5 @@ class StartView(FlaskView):
         flash('Your information successfully evaluated!')
         return redirect(url_for('MainView:recommend'))
 
-
     def getfoodlist(self):
         return jsonify({'id': 1, 'foodName' : 'apple'}, {'id' : 2, 'foodName' : 'banana'})
