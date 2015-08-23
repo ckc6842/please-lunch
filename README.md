@@ -1,4 +1,7 @@
-# db 업그레이드.
+# 점심을 부탁해
+점심 메뉴를 추천해주는 Web Application.
+
+## db 업그레이드.
 models.py 를 수정한 후
 데이터베이스의 'alembic_version' 테이블을 삭제하고
 db.bat 을 실행하면 자동으로 db 최신화가 가능하다.
