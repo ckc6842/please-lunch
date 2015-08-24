@@ -13,7 +13,7 @@
             <li><a href="{{ url_for_security('login') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">로그인</a></li>
         {% else %}
             <li><a href="{{ url_for_security('logout') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">로그아웃</a></li>
-            <li><a href="{{ url_for('main.profile') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">프로필</a></li>
+            <li><a href="{{ url_for('AuthView:profile') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">프로필</a></li>
             {% if current_user.has_role('admin') %}
                 <li><a href="{{ url_for('administrator.index') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">관리자</a></li>
             {% endif %}
