@@ -5,18 +5,11 @@ from flask import render_template, redirect, url_for
 from flask_classy import FlaskView
 from flask.ext.login import login_required, current_user
 from flask_security.forms import LoginForm, RegisterForm
-from app.models import user_datastore
-
 
 class MainView(FlaskView):
     route_base = '/'
 
     # 현재 로그인 한 유저에게 role 추가하는 코드
-    if current_user.is_authenticated():
-        user_datastore.create_role(name='admin',description='Admin user')
-        user_datastore.add_role_to_user(current_user, 'admin')
-        db.session.commit()
-
     def index(self):
         loginform = LoginForm()
         registerform =  RegisterForm()

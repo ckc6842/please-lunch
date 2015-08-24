@@ -3,9 +3,9 @@ from flask import render_template, request, jsonify
 from flask_security import roles_required, login_required
 from flask_classy import FlaskView, route
 
-
 from app import db
 from app.models import Food, Cook, Taste, Nation, FoodScore, User
+
 
 class AdminView(FlaskView):
     route_base = '/admin/'
@@ -56,7 +56,7 @@ class AdminView(FlaskView):
             db.session.commit()
         return render_template("administrator/sb-admin/pages/food-score.html")
 
-
+    @route('/foodscore/index', methods=['POST', 'GET'])
     def foodscore_index(self):
         if request.method == 'POST':
             food_id = Food.query.filter_by(foodName = request.json['foodName'] ).one().id
@@ -68,18 +68,20 @@ class AdminView(FlaskView):
 
         return render_template("administrator/sb-admin/pages/food-score-table.html")
 
-
+    @route('/foodscore/delete', methods=['POST', 'GET'])
     def foodscore_delete(self):
         food_id = Food.query.filter_by(foodName = request.json['foodName'] ).one().id
         FoodScore.query.filter(FoodScore.food_id == food_id).filter(FoodScore.targetEnum == request.json['targetEnum']).filter(FoodScore.targetId == request.json['targetId']).delete()
         db.session.commit()
         return 'good'
 
+    @route('/foodscore/test', methods=['POST', 'GET'])
     def test(self):
         p = FoodScore.query.filter(FoodScore.food_id == 1)
         print p
         return 'good'
 
+    @route('/foodscore/getdata', methods=['GET'])
     def get_foodscore(self):
         foodscore_cook_table = db.session.query(FoodScore, Cook).outerjoin(Cook, FoodScore.targetId == Cook.id).filter(FoodScore.targetEnum == 'Cook')
         foodscore_taste_table = db.session.query(FoodScore, Taste).outerjoin(Taste, FoodScore.targetId == Taste.id).filter(FoodScore.targetEnum == 'Taste')
@@ -93,6 +95,7 @@ class AdminView(FlaskView):
                                        'targetName': item[1].nationName, 'targetId': item[0].targetId, 'targetEnum' : item[0].targetEnum, 'score' : item[0].score } for item in foodscore_nation_table]}
     )
 
+    @route('/food', methods=['GET'])
     def food_index(self):
         print "food start"
         return render_template("administrator/sb-admin/pages/food.html")
@@ -107,6 +110,7 @@ class AdminView(FlaskView):
             db.session.commit()
         return 'seccess'
 
+    @route('/food/delete', methods=['GET', 'POST'])
     def deletefood(self):
         if request.method == 'POST':
             print request.get_data()
@@ -115,9 +119,11 @@ class AdminView(FlaskView):
             db.session.commit()
         return 'seccess'
 
+    @route('/cook', methods=['GET'])
     def cook_index(self):
         return render_template("administrator/sb-admin/pages/cook.html")
 
+    @route('/cook/add', methods=['POST'])
     def addcook(self):
         if request.method == 'POST':
             print request.get_data()
@@ -126,6 +132,7 @@ class AdminView(FlaskView):
             db.session.commit()
         return 'seccess'
 
+    @route('/cook/delete', methods=['POST'])
     def deletecook(self):
         if request.method == 'POST':
             print request.get_data()
@@ -134,10 +141,12 @@ class AdminView(FlaskView):
             db.session.commit()
         return 'seccess'
 
+    @route('/nation', methods=['GET'])
     def nation_index(self):
         print "nation start"
         return render_template("administrator/sb-admin/pages/nation.html")
 
+    @route('/nation/add', methods=['POST'])
     def addnation(self):
         if request.method == 'POST':
             print request.get_data()
@@ -146,6 +155,7 @@ class AdminView(FlaskView):
             db.session.commit()
         return 'seccess'
 
+    @route('/nation/delete', methods=['POST'])
     def deletenation(self):
         if request.method == 'POST':
             print request.get_data()
@@ -154,9 +164,11 @@ class AdminView(FlaskView):
             db.session.commit()
         return 'seccess'
 
+    @route('/taste', methods=['GET'])
     def taste_index(self):
         return render_template("administrator/sb-admin/pages/taste.html")
 
+    @route('/taste/add', methods=['POST'])
     def addtaste(self):
         if request.method == 'POST':
             print request.get_data()
@@ -165,6 +177,7 @@ class AdminView(FlaskView):
             db.session.commit()
         return 'seccess'
 
+    @route('/taste/delete', methods=['POST'])
     def deletetaste(self):
         if request.method == 'POST':
             print request.get_data()
@@ -173,6 +186,6 @@ class AdminView(FlaskView):
             db.session.commit()
         return 'seccess'
 
+    @route('/user/', methods=['GET'])
     def user_index(self):
         return render_template("administrator/sb-admin/pages/user.html")
-
