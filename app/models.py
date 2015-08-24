@@ -38,8 +38,6 @@ def password_generator(length):
 
 # Define a User model
 class User(db.Model, UserMixin):
-    __tablename__ = 'user'
-
     id = db.Column(db.Integer(), primary_key=True)
     date_created  = db.Column(db.DateTime,  default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime,  default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
@@ -127,6 +125,7 @@ class Connection(db.Model):
 
     @classmethod
     def from_profile(cls, user, profile):
+	print profile.data
         if not user or user.is_anonymous():
             email = profile.data.get("email")
             if not email:
