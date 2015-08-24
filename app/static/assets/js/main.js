@@ -32,13 +32,12 @@ angular.module('app')
                 show: true
             })
         }
-        $scope.testlist = [{'id': 1, 'foodName' : 'apple', 'image':'http://salubriousrd.com/wp-content/uploads/2015/05/apple.jpg'},
+        $scope.foodlist = [{'id': 1, 'foodName' : 'apple', 'image':'http://salubriousrd.com/wp-content/uploads/2015/05/apple.jpg'},
                             {'id' : 2, 'foodName' : 'banana', 'image':'http://www.technoplastindustries.com/wp-content/uploads/2014/10/Banana-1.jpg'}];
 
-        $scope.rateFunction = function(temp) {
-            $scope.temp = temp;
+        $scope.sendrating = function(rating, foodName){
+            alert(foodName + " is " +rating +"점");
         }
-        var tooltips = document.querySelectorAll('.card-description span');
 
     }]);
 
