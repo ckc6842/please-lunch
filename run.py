@@ -10,6 +10,7 @@ from flask_social import login_failed
 from flask_social.views import connect_handler
 from flask_social.utils import get_connection_values_from_oauth_response
 from app.models import security
+from flask_security.forms import LoginForm, RegisterForm
 import string
 import random
 import hashlib
@@ -20,6 +21,8 @@ import re
 # Automatically login.
 @login_failed.connect_via(app)
 def on_login_failed(sender, provider, oauth_response):
+    loginform = LoginForm()
+    registerform =  RegisterForm()
     hashlib.digest_size = 10
     connection_values = get_connection_values_from_oauth_response(provider, oauth_response)
     at = hashlib.md5()
@@ -35,7 +38,7 @@ def on_login_failed(sender, provider, oauth_response):
     login_user(user)
     db.session.commit()
 
-    return render_template('main/index.html')
+    return render_template("main/index.html", login_user_form = loginform, register_user_form = registerform)
 
 
 @app.template_filter('quoted')
