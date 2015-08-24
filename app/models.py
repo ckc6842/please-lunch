@@ -11,6 +11,30 @@ roles_users = db.Table('roles_users',
         db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
 
+def password_generator(length):
+    import random
+
+    alphabet = "abcdefghijklmnopqrstuvwxyz~!@#$%^&*()-_|+=/.,<>'"
+    pw_length = length
+    mypw = ""
+
+    for i in range(pw_length):
+        next_index = random.randrange(len(alphabet))
+        mypw = mypw + alphabet[next_index]
+
+    # replace 1 or 2 characters with a number
+    for i in range(random.randrange(1,3)):
+        replace_index = random.randrange(len(mypw)//2)
+        mypw = mypw[0:replace_index] + str(random.randrange(10)) + mypw[replace_index+1:]
+
+    # replace 1 or 2 letters with an uppercase letter
+    for i in range(random.randrange(1,3)):
+        replace_index = random.randrange(len(mypw)//2,len(mypw))
+        mypw = mypw[0:replace_index] + mypw[replace_index].upper() + mypw[replace_index+1:]
+
+    return mypw
+
+
 # Define a User model
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
@@ -116,8 +140,10 @@ class Connection(db.Model):
                 raise Exception(msg)
 
             now = datetime.datetime.now()
+            password = password_generator(16)
             user = User(
                 email=email,
+                password=password,
                 first_name=profile.data.get("first_name"),
                 last_name=profile.data.get("last_name"),
                 confirmed_at=now,
