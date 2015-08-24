@@ -129,7 +129,7 @@ class Connection(db.Model):
         if not user or user.is_anonymous():
             email = profile.data.get("email")
             if not email:
-                msg = "Cannot create new user, authentication provider did not not provide email"
+                msg = "Cannot create new user, authentication provider did not provide email"
                 logging.warning(msg)
                 raise Exception(_(msg))
             conflict = User.query.filter(User.email == email).first()
