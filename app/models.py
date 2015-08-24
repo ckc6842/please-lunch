@@ -115,7 +115,7 @@ class Connection(db.Model):
                 logging.warning(msg)
                 raise Exception(msg)
 
-            now = datetime.now()
+            now = datetime.datetime.now()
             user = User(
                 email=email,
                 first_name=profile.data.get("first_name"),
