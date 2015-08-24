@@ -3,17 +3,16 @@ from flask import render_template, request, jsonify
 from flask_security import roles_required, login_required
 from flask_classy import FlaskView, route
 
+
 from app import db
 from app.models import Food, Cook, Taste, Nation, FoodScore, User
 
 class AdminView(FlaskView):
-    route_base = '/admin'
+    route_base = '/admin/'
     decorators = [login_required, roles_required('admin')]
-
 
     def index(self):
         return render_template("administrator/sb-admin/pages/index.html")
-
 
     def getdata(self):
         food_data = Food.query.all()
@@ -28,8 +27,7 @@ class AdminView(FlaskView):
                         'taste': [{'tasteName': item.tasteName, 'id': item.id} for item in taste_data],
                         'user': [{'email': item.email, 'id': item.id} for item in user_data]})
 
-
-    @route('/foodscore/<foodName>')
+    @route('/foodscore/<foodName>', methods=['POST'])
     def foodscore(self, foodName):
         if request.method == 'POST':
 
@@ -57,6 +55,7 @@ class AdminView(FlaskView):
 
             db.session.commit()
         return render_template("administrator/sb-admin/pages/food-score.html")
+
 
     def foodscore_index(self):
         if request.method == 'POST':
@@ -98,6 +97,7 @@ class AdminView(FlaskView):
         print "food start"
         return render_template("administrator/sb-admin/pages/food.html")
 
+    @route('/food/add', methods=['POST'])
     def addfood(self):
         print 'add'
         if request.method == 'POST':
