@@ -49,7 +49,10 @@
                 <h2 class="text-center">Connect another account</h2>
 
                 <div class="">
-                    {{ social_login('facebook', 'Facebook' )}}
+                    <a href="{{ url_for('social.login', provider='Facebook') }}" class="social-facebook btn btn-primary btn-lg"><i class="fa fa-2x fa-facebook-square"></i></a>
+                    <a href="{{ url_for('social.login', provider='Google') }}" class="social-google btn btn-primary btn-lg"><i class="fa fa-2x fa-google-plus"></i></a>
+                    <a href="{{ url_for('social.login', provider='Github') }}" class="social-github btn btn-primary btn-lg"><i class="fa fa-2x fa-github"></i></a>
+                    <a href="{{ url_for('social.login', provider='Twitter') }}" class="social-twitter btn btn-primary btn-lg"><i class="fa fa-2x fa-twitter"></i></a>
                 </div>
 
             </div>

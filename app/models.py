@@ -1,9 +1,6 @@
 from app import db, app
 from flask.ext.security import UserMixin, RoleMixin
 from flask_babel import gettext as _
-from flask import current_app
-from flask.ext.social import Social
-from flask.ext.social.datastore import SQLAlchemyConnectionDatastore
 from flask_security import Security, SQLAlchemyUserDatastore
 import logging
 import datetime
@@ -228,5 +225,6 @@ def load_user(user_id):
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
-social = Social(app, SQLAlchemyConnectionDatastore(db, Connection))
 
+from flask_social_blueprint.core import SocialBlueprint
+SocialBlueprint.init_bp(app, Connection, url_prefix="/_social")
