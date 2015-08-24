@@ -15,8 +15,8 @@
   <p>{{ field(**kwargs)|safe }}</p>
 {% endmacro %}
 
-{% macro social_login(provider_id, display_name) %}
-  <form action="{{ url_for('social.login', provider_id=provider_id) }}" method="POST">
+{% macro social_login(provider) %}
+  <form action="{{ url_for('social.login', provider=provider) }}" method="POST">
       <button class="btn btn-block btn-complete" type="submit">
                         <span class="pull-left"><i class="fa fa-facebook"></i>
                                     </span>
