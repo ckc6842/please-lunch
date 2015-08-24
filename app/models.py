@@ -2,6 +2,7 @@ from app import db, app
 from flask.ext.security import UserMixin, RoleMixin
 from flask_babel import gettext as _
 from flask_security import Security, SQLAlchemyUserDatastore
+from flask_security.utils import encrypt_password
 import logging
 import datetime
 
@@ -143,7 +144,7 @@ class Connection(db.Model):
             password = password_generator(16)
             user = User(
                 email=email,
-                password=password,
+                password=encrypt_password(password),
                 first_name=profile.data.get("first_name"),
                 last_name=profile.data.get("last_name"),
                 confirmed_at=now,
