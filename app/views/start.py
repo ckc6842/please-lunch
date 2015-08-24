@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, flash, jsonify
-from flask_classy import FlaskView
+from flask_classy import FlaskView, route
 from flask_security import login_required, current_user
 from app import db
 
@@ -14,7 +14,7 @@ class StartView(FlaskView):
         else:
             return render_template('start/index.html')
 
-    def info(self):
+    def post(self):
         if not current_user.is_evaluate:
             current_user.is_evaluate = True
             db.session.commit()

@@ -23,7 +23,9 @@
                 </div>
             </div>
 
-            <a href="{{ url_for('StartView:info') }}">평가하기</a>
+             <form action="{{ url_for('StartView:post') }}" method="POST">
+                <button type="submit" class="btn btn-primary btn-large">음식 평가하기</button>
+            </form>
 
         </div>
     </div>

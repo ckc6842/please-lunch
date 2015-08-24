@@ -32,7 +32,3 @@ class MainView(FlaskView):
     @login_required
     def recommend(self):
         return render_template('main/recommend.html')
-
-    @login_required
-    def evaluate(self):
-        return render_template('error/404.html')
