@@ -27,7 +27,7 @@ class AdminView(FlaskView):
                         'taste': [{'tasteName': item.tasteName, 'id': item.id} for item in taste_data],
                         'user': [{'email': item.email, 'id': item.id} for item in user_data]})
 
-    @route('/foodscore/<foodName>', methods=['POST'])
+    @route('/foodscore/<foodName>', methods=['POST', 'GET'])
     def foodscore(self, foodName):
         if request.method == 'POST':
 
@@ -115,9 +115,22 @@ class AdminView(FlaskView):
         if request.method == 'POST':
             print request.get_data()
             temp = Food(request.json['foodName'])
+            # food table에서 지우면 foodscore table에서도 지워지게
+            get_food = Food.query.filter(Food.foodName == temp.foodName).first()
+            if FoodScore.query.filter(FoodScore.food_id == get_food.id).count() > 0:
+                FoodScore.query.filter(FoodScore.food_id == get_food.id).delete()
+
             Food.query.filter_by(foodName=temp.foodName).delete()
             db.session.commit()
         return 'seccess'
+
+    @route('/test', methods=['GET', 'POST'])
+    def test(self):
+
+        temp = Food.query.filter(Food.foodName == '빵').count()
+
+        print temp
+        return "aa"
 
     @route('/cook', methods=['GET'])
     def cook_index(self):
@@ -137,6 +150,10 @@ class AdminView(FlaskView):
         if request.method == 'POST':
             print request.get_data()
             temp = Cook(request.json['cookName'])
+            # cook table에서 지우면 foodscore table에서도 지워지게
+            get_cook = Cook.query.filter(Cook.cookName == temp.cookName).first()
+            if FoodScore.query.filter(FoodScore.targetEnum == 'Cook').filter(FoodScore.targetId == get_cook.id).count() > 0:
+                FoodScore.query.filter(FoodScore.targetEnum == 'Cook').filter(FoodScore.targetId == get_cook.id).delete()
             Cook.query.filter_by(cookName=temp.cookName).delete()
             db.session.commit()
         return 'seccess'
@@ -160,6 +177,10 @@ class AdminView(FlaskView):
         if request.method == 'POST':
             print request.get_data()
             temp = Nation(request.json['nationName'])
+            # nation table에서 지우면 foodscore table에서도 지워지게
+            get_nation = Nation.query.filter(Nation.nationName == temp.nationName).first()
+            if FoodScore.query.filter(FoodScore.targetEnum == 'Nation').filter(FoodScore.targetId == get_nation.id).count() > 0:
+                FoodScore.query.filter(FoodScore.targetEnum == 'Nation').filter(FoodScore.targetId == get_nation.id).delete()
             Nation.query.filter_by(nationName=temp.nationName).delete()
             db.session.commit()
         return 'seccess'
@@ -182,6 +203,10 @@ class AdminView(FlaskView):
         if request.method == 'POST':
             print request.get_data()
             temp = Taste(request.json['tasteName'])
+            # taste table에서 지우면 foodscore table에서도 지워지게
+            get_taste = Taste.query.filter(Taste.tasteName == temp.tasteName).first()
+            if FoodScore.query.filter(FoodScore.targetEnum == 'Taste').filter(FoodScore.targetId == get_taste.id).count() > 0:
+                FoodScore.query.filter(FoodScore.targetEnum == 'Taste').filter(FoodScore.targetId == get_taste.id).delete()
             Taste.query.filter_by(tasteName=temp.tasteName).delete()
             db.session.commit()
         return 'seccess'
