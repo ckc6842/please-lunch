@@ -31,7 +31,7 @@ CSRF_ENABLED     = True
 
 # Use a secure, unique and absolutely secret key for
 # signing the data.
-CSRF_SESSION_KEY = "secret"
+CSRF_SESSION_KEY = "d41d8cd98f00b204e9800998ecf8427e"
 
 # Secret key for signing cookies
 SECRET_KEY = "super-secret"
@@ -54,4 +54,35 @@ SOCIAL_FACEBOOK = {
     'consumer_secret': '51d173f01a0290682be0af5db48550a6'
 }
 
-
+# Flask-SocialBlueprint
+# https://github.com/wooyek/flask-social-blueprint
+SOCIAL_BLUEPRINT = {
+    # https://developers.facebook.com/apps/
+    "flask_social_blueprint.providers.Facebook": {
+        # App ID
+        'consumer_key': '684002831732805',
+        # App Secret
+        'consumer_secret': '51d173f01a0290682be0af5db48550a6'
+    },
+    # https://apps.twitter.com/app/new
+    "flask_social_blueprint.providers.Twitter": {
+        # Your access token from API Keys tab
+        'consumer_key': 'Us0qHlRupn9cRr2LgLanZQsCt',
+        # access token secret
+        'consumer_secret': 'jAm1UZEp4ckJAD9yErbUi7EBk0ayUbMPGwNIb7904Dq8bgROui'
+    },
+    # https://console.developers.google.com/project
+    "flask_social_blueprint.providers.Google": {
+        # Client ID
+        'consumer_key': '435223545504-nrsq5hjmi8je22nfcskgq452kdil8dhb.apps.googleusercontent.com',
+        # Client secret
+        'consumer_secret': 'AIzaSyCqhqJfGCOHxWH5cnNm97y9IY-mPXMEU4U'
+    },
+    # https://github.com/settings/applications/new
+    "flask_social_blueprint.providers.Github": {
+        # Client ID
+        'consumer_key': 'c74d8b2d5b6448db33a5',
+        # Client Secret
+        'consumer_secret': '5e9e8e889dfe76a20e781a98eb0eb772c5f3ca30'
+    },
+}

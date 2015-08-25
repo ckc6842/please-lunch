@@ -2,43 +2,8 @@
 
 __author__ = 'maxto'
 # Run a test server.
-from app import app, db
-from flask import render_template
-from flask.ext.login import login_user
-from flask_security.utils import encrypt_password
-from flask_social import login_failed
-from flask_social.views import connect_handler
-from flask_social.utils import get_connection_values_from_oauth_response
-from app.models import security
-from flask_security.forms import LoginForm, RegisterForm
-import string
-import random
-import hashlib
+from app import app
 import re
-
-
-# When connection table hasn't user's facebook information.
-# Automatically login.
-@login_failed.connect_via(app)
-def on_login_failed(sender, provider, oauth_response):
-    loginform = LoginForm()
-    registerform =  RegisterForm()
-    hashlib.digest_size = 10
-    connection_values = get_connection_values_from_oauth_response(provider, oauth_response)
-    at = hashlib.md5()
-    at.update(connection_values['access_token'])
-    email = at.hexdigest()+'@fox.net'
-    password = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(12))
-
-    ds = security.datastore
-    user = ds.create_user(email=email, password=encrypt_password(password))
-    ds.commit()
-    connection_values['user_id'] = user.id
-    connect_handler(connection_values, provider)
-    login_user(user)
-    db.session.commit()
-
-    return render_template("main/index.html", login_user_form = loginform, register_user_form = registerform)
 
 
 @app.template_filter('quoted')

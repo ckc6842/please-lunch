@@ -1,10 +1,8 @@
 from app import db, app
 from flask.ext.security import UserMixin, RoleMixin
 from flask_babel import gettext as _
-from flask import current_app
-from flask.ext.social import Social
-from flask.ext.social.datastore import SQLAlchemyConnectionDatastore
 from flask_security import Security, SQLAlchemyUserDatastore
+from flask_security.utils import encrypt_password
 import logging
 import datetime
 
@@ -14,10 +12,32 @@ roles_users = db.Table('roles_users',
         db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
 
+def password_generator(length):
+    import random
+
+    alphabet = "abcdefghijklmnopqrstuvwxyz~!@#$%^&*()-_|+=/.,<>'"
+    pw_length = length
+    mypw = ""
+
+    for i in range(pw_length):
+        next_index = random.randrange(len(alphabet))
+        mypw = mypw + alphabet[next_index]
+
+    # replace 1 or 2 characters with a number
+    for i in range(random.randrange(1,3)):
+        replace_index = random.randrange(len(mypw)//2)
+        mypw = mypw[0:replace_index] + str(random.randrange(10)) + mypw[replace_index+1:]
+
+    # replace 1 or 2 letters with an uppercase letter
+    for i in range(random.randrange(1,3)):
+        replace_index = random.randrange(len(mypw)//2,len(mypw))
+        mypw = mypw[0:replace_index] + mypw[replace_index].upper() + mypw[replace_index+1:]
+
+    return mypw
+
+
 # Define a User model
 class User(db.Model, UserMixin):
-    __tablename__ = 'user'
-
     id = db.Column(db.Integer(), primary_key=True)
     date_created  = db.Column(db.DateTime,  default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime,  default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
@@ -105,10 +125,11 @@ class Connection(db.Model):
 
     @classmethod
     def from_profile(cls, user, profile):
+	print profile.data
         if not user or user.is_anonymous():
             email = profile.data.get("email")
             if not email:
-                msg = "Cannot create new user, authentication provider did not not provide email"
+                msg = "Cannot create new user, authentication provider did not provide email"
                 logging.warning(msg)
                 raise Exception(_(msg))
             conflict = User.query.filter(User.email == email).first()
@@ -118,9 +139,11 @@ class Connection(db.Model):
                 logging.warning(msg)
                 raise Exception(msg)
 
-            now = datetime.now()
+            now = datetime.datetime.now()
+            password = password_generator(16)
             user = User(
                 email=email,
+                password=encrypt_password(password),
                 first_name=profile.data.get("first_name"),
                 last_name=profile.data.get("last_name"),
                 confirmed_at=now,
@@ -228,5 +251,6 @@ def load_user(user_id):
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
-social = Social(app, SQLAlchemyConnectionDatastore(db, Connection))
 
+from flask_social_blueprint.core import SocialBlueprint
+SocialBlueprint.init_bp(app, Connection, url_prefix="/_social")
