@@ -8,8 +8,8 @@ import datetime
 
 
 roles_users = db.Table('roles_users',
-        db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
-        db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
+                       db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+                       db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
 
 def password_generator(length):
@@ -89,9 +89,9 @@ class User(db.Model, UserMixin):
 
     def social_connections(self):
         return Connection.query.filter(Connection.user_id == self.id).all()
-    
+
     def get_facebook_connections(self):
-	return Connection.query.filter(Connection.provider == 'Facebook', Connection.user_id == self.id).all()
+        return Connection.query.filter(Connection.provider == 'Facebook', Connection.user_id == self.id).all()
 
 
 class Connection(db.Model):
@@ -128,19 +128,24 @@ class Connection(db.Model):
 
     @classmethod
     def from_profile(cls, user, profile):
+        provider = profile.data["provider"]
+
         if not user or user.is_anonymous():
-            print profile
-            email = profile.data.get("email")
-            if not email:
-                msg = "Cannot create new user, authentication provider did not provide email"
-                logging.warning(msg)
-                raise Exception(_(msg))
-            conflict = User.query.filter(User.email == email).first()
-            if conflict:
-                msg = "Cannot create new user, email {} is already used. Login and then connect external profile."
-                msg = _(msg).format(email)
-                logging.warning(msg)
-                raise Exception(msg)
+            # twiiter does not provide email
+            if not provider == 'twitter':
+                email = profile.data.get("email")
+                if not email:
+                    msg = "Cannot create new user, authentication provider did not provide email"
+                    logging.warning(msg)
+                    raise Exception(_(msg))
+                conflict = User.query.filter(User.email == email).first()
+                if conflict:
+                    msg = "Cannot create new user, email {} is already used. Login and then connect external profile."
+                    msg = _(msg).format(email)
+                    logging.warning(msg)
+                    raise Exception(msg)
+            else:
+                print 'twitter data '+ profile.data
 
             now = datetime.datetime.now()
             password = password_generator(16)
