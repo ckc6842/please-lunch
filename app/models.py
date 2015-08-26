@@ -253,3 +253,7 @@ security = Security(app, user_datastore)
 
 from flask_social_blueprint.core import SocialBlueprint
 SocialBlueprint.init_bp(app, Connection, url_prefix="/_social")
+
+
+
+

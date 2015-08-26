@@ -1,94 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="app">
+{% extends 'administrator/sb-admin/AdminBase.html' %}
+{% block head %}
+{% endblock %}
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>{{ self | quoted }}</title>
-    {% include 'module/_images.html' %}
-
-    <!-- Bootstrap Core CSS -->
-    <link href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="{{ url_for('static', filename='bower_components/metisMenu/dist/metisMenu.min.css') }}" rel="stylesheet">
-
-    <!-- Timeline CSS -->
-    <link href="{{ url_for('static', filename='dist/css/timeline.css') }}" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="{{ url_for('static', filename='dist/css/sb-admin-2.css') }}" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="{{ url_for('static', filename='bower_components/morrisjs/morris.css') }}" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="{{ url_for('static', filename='bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-
-    <![endif]-->
-
-</head>
-
-<body ng-controller="mainCtrl">
-
-    <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ url_for('AdminView:index') }}">관리자</a>
-            </div>
-
-
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-
-                        <li>
-                            <a href="{{ url_for('AdminView:food_index') }}"><i class="fa fa-th-list fa-fw"></i>   Food</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('AdminView:cook_index') }}"><i class="fa fa-th-list fa-fw"></i>   Cook</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('AdminView:taste_index') }}"><i class="fa fa-th-list fa-fw"></i>   Taste</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('AdminView:nation_index') }}"><i class="fa fa-th-list fa-fw"></i>   Nation</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('AdminView:foodscore_index') }}"><i class="fa fa-th-list fa-fw"></i>   FoodScore</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('AdminView:user_index') }}"><i class="fa fa-user fa-fw"></i>   User</a>
-                        </li>
-
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-
-        <div id="page-wrapper">
+{% block body %}
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="page-header">점심을 부탁해: 관리자 </h2>
@@ -96,38 +10,4 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
-
-            </div>
-            <!-- /.row -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-    <script src="{{ url_for('static', filename='js/angular.min.js') }}"></script>
-
-    <!-- jQuery -->
-    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{ url_for('static', filename='bower_components/metisMenu/dist/metisMenu.min.js') }}"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="{{ url_for('static', filename='bower_components/raphael/raphael-min.js') }}"></script>
-    <script src="{{ url_for('static', filename='bower_components/morrisjs/morris.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/morris-data.js') }}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{{ url_for('static', filename='dist/js/sb-admin-2.js') }}"></script>
-
-
-    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
-
-</body>
-
-</html>
+{% endblock %}

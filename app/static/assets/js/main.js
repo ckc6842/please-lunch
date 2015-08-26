@@ -35,8 +35,8 @@ angular.module('app')
         $scope.foodlist = [{'id': 1, 'foodName' : 'apple', 'image':'http://salubriousrd.com/wp-content/uploads/2015/05/apple.jpg'},
                             {'id' : 2, 'foodName' : 'banana', 'image':'http://www.technoplastindustries.com/wp-content/uploads/2014/10/Banana-1.jpg'}];
 
-        $scope.sendrating = function(rating, foodName){
-            alert(foodName + " is " +rating +"점");
+        $scope.sendrating = function(rating, foodName, userId){
+            alert(foodName + " is " +rating +"점 " + userId);
         }
 
     }]);
