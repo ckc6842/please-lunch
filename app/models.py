@@ -129,10 +129,10 @@ class Connection(db.Model):
     @classmethod
     def from_profile(cls, user, profile):
         provider = profile.data["provider"]
-
+	
         if not user or user.is_anonymous():
             # twiiter does not provide email
-            if not provider == 'twitter':
+            if not provider == 'Twitter':
                 email = profile.data.get("email")
                 if not email:
                     msg = "Cannot create new user, authentication provider did not provide email"
@@ -145,7 +145,8 @@ class Connection(db.Model):
                     logging.warning(msg)
                     raise Exception(msg)
             else:
-                print 'twitter data '+ profile.data
+                username = profile.data.get("username")
+		email = username + "@" + "fox.net"
 
             now = datetime.datetime.now()
             password = password_generator(16)
