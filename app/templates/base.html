@@ -24,7 +24,6 @@
     window.fbAsyncInit = function() {
         FB.init({
             appId      : '684002831732805', // 앱 ID
-            version    : 'v2.3',
             status     : true,          // 로그인 상태를 확인
             cookie     : true,          // 쿠키허용
             xfbml      : true           // parse XFBML
@@ -33,14 +32,13 @@
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
 
-                FB.api('/me', function(user) {
+                FB.api('/me/?fields=email', function(user) {
                     if (user) {
                         var image = document.getElementById('image');
                         image.src = 'http://graph.facebook.com/' + user.id + '/picture';
-                        var name = document.getElementById('name');
-                        name.innerHTML = user.name
                         var email = document.getElementById('email');
-                        email.innerHTML = user.email
+			console.log(user);
+                        email.innerHTML = user.email;
                     }
                 });
 
@@ -49,7 +47,7 @@
             } else {
 
             }
-        }, {scope: 'email'});
+        });
 
         FB.Event.subscribe('auth.login', function(response) {
             document.location.reload();
