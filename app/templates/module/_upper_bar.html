@@ -16,7 +16,7 @@
     <div class=" pull-left sm-table">
         <div class="header-inner">
             <div class="brand inline">
-                <img src="{{ url_for('static', filename='assets/img/logo.png') }}" alt="logo" data-src="{{ url_for('static', filename='assets/img/logo.png') }}" ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/logo.png') }}" width="78" height="22">
+                <img src="{{ url_for('static', filename='assets/img/logo.png') }}" alt="logo" data-src="{{ url_for('static', filename='assets/img/logo.png') }}" ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/logo.png') }}" width="150" height="31">
             </div>
         </div>
     </div>
@@ -33,36 +33,37 @@
                     </span>
                 </button>
                 <ul class="dropdown-menu profile-dropdown" role="menu">
-                        <li><a href="{{ url_for('MainView:index') }}
+                    <li><a href="{{ url_for('MainView:index') }}
                         {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
-                            메인페이지</a>
-                        </li>
+                        메인페이지</a>
+                    </li>
                     {% if not current_user.is_authenticated() %}
-                        {% if security.registerable %}
-                            <li><a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">회원가입</a><br/></li>
-                        {% endif %}
+                    {% if security.registerable %}
+                    <li><a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">회원가입</a><br/></li>
+                    {% endif %}
                     {% else %} <!-- 로그인 중-->
-                        <li><a href="{{ url_for('AuthView:profile') }}
+                    <li><a href="{{ url_for('AuthView:profile') }}
                         {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
-                            프로필</a>
-                        </li>
-                        <li><a href="{{ url_for('LeaveView:get') }}
+                        프로필</a>
+                    </li>
+                    <li><a href="{{ url_for('LeaveView:get') }}
                         {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
-                            회원탈퇴</a>
-                        </li>
-                        <li><a href="{{ url_for_security('change_password') }}
-                            {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">비밀번호 바꾸기</a></li>
-                        <!-- 관리자일때 -->
-                        {% if current_user.has_role('admin') %}
-                            <li><a href="{{ url_for('AdminView:index') }}
+                        회원탈퇴</a>
+                    </li>
+                    <li><a href="{{ url_for_security('change_password') }}
+                        {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">비밀번호 바꾸기</a>
+                    </li>
+                    <!-- 관리자일때 -->
+                    {% if current_user.has_role('admin') %}
+                    <li><a href="{{ url_for('AdminView:index') }}
                             {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}"><i class="pg-settings_small"></i>관리자</a></li>
-                        {% endif %}
-                        <!-- 관리자 끝 -->
-                        <li class="bg-master-lighter">
-                            <a href="{{ url_for_security('logout') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}" class="clearfix">
-                                <i class="pg-power"></i> 로그아웃
-                            </a>
-                        </li>
+                    {% endif %}
+                    <!-- 관리자 끝 -->
+                    <li class="bg-master-lighter">
+                        <a href="{{ url_for_security('logout') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}" class="clearfix">
+                            <i class="pg-power"></i> 로그아웃
+                        </a>
+                    </li>
                     {% endif %}
                 </ul>
             </div>

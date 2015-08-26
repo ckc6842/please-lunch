@@ -18,52 +18,6 @@
 'menu-pin' : app.layout.menuPin,
 'menu-behind' : app.layout.menuBehind
  }">
-<div id="fb-root"></div>
-<div id="fb-root"></div>
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '684002831732805', // 앱 ID
-            status     : true,          // 로그인 상태를 확인
-            cookie     : true,          // 쿠키허용
-            xfbml      : true           // parse XFBML
-        });
-
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-
-                FB.api('/me/?fields=email', function(user) {
-                    if (user) {
-                        var image = document.getElementById('image');
-                        image.src = 'http://graph.facebook.com/' + user.id + '/picture';
-                        var email = document.getElementById('email');
-			console.log(user);
-                        email.innerHTML = user.email;
-                    }
-                });
-
-            } else if (response.status === 'not_authorized') {
-
-            } else {
-
-            }
-        });
-
-        FB.Event.subscribe('auth.login', function(response) {
-            document.location.reload();
-        });
-    };
-
-    // Load the SDK Asynchronously
-    (function(d){
-        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement('script'); js.id = id; js.async = true;
-        js.src = "//connect.facebook.net/ko_KR/all.js";
-        ref.parentNode.insertBefore(js, ref);
-    }(document));
-</script>
-
 
 {% block body %}
 {% endblock %}
