@@ -39,7 +39,7 @@
                         var name = document.getElementById('name');
                         name.innerHTML = user.name
                         var email = document.getElementById('email');
-                        id.innerHTML = user.email
+                        email.innerHTML = user.email
                     }
                 });
 
@@ -48,7 +48,7 @@
             } else {
 
             }
-        });
+        }, {scope: 'email'});
 
         FB.Event.subscribe('auth.login', function(response) {
             document.location.reload();
