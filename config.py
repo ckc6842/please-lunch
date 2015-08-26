@@ -74,9 +74,9 @@ SOCIAL_BLUEPRINT = {
     # https://console.developers.google.com/project
     "flask_social_blueprint.providers.Google": {
         # Client ID
-        'consumer_key': '435223545504-nrsq5hjmi8je22nfcskgq452kdil8dhb.apps.googleusercontent.com',
+        'consumer_key': '435223545504-bgbqpavf8q157l8u5v2otvfg4khaqgeg.apps.googleusercontent.com',
         # Client secret
-        'consumer_secret': 'AIzaSyCqhqJfGCOHxWH5cnNm97y9IY-mPXMEU4U'
+        'consumer_secret': '_GH1tElWK9tyk5KdppMZ5w3w'
     },
     # https://github.com/settings/applications/new
     "flask_social_blueprint.providers.Github": {
