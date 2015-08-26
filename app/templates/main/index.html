@@ -1,79 +1,86 @@
 {% extends "base.html" %}
 {% block body %}
-    {% from "module/_macros.html" import render_field_with_errors, render_field, social_login %}
-    <div class="full-height ng-scope" ui-view=""><!-- uiView:  --><div class="full-height ng-scope" ui-view="">
-        <div class="login-wrapper  ng-scope">
-            <div class="bg-pic">
-                <img src="{{ url_for('static', filename='assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg') }}"
-                     data-src="{{ url_for('static', filename='assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg') }}"
-                     ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg') }}" alt="" class="lazy">
-            </div>
+{% from "module/_macros.html" import render_field_with_errors, render_field, social_login %}
+<div class="full-height ng-scope" ui-view=""><!-- uiView:  --><div class="full-height ng-scope" ui-view="">
+    <div class="login-wrapper ng-scope">
+        <div class="bg-pic">
+            <img src="{{ url_for('static', filename='assets/img/demo/main.jpg') }}"
+                 data-src="{{ url_for('static', filename='assets/img/demo/main.jpg') }}"
+                 ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/demo/main.jpg') }}" alt="" class="lazy">
+        </div>
 
-            <div class="login-container bg-white">
-                <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
-                    <img src="{{ url_for('static', filename='assets/img/logo.png') }}" alt="logo" data-src="{{ url_for('static', filename='assets/img/logo.png') }}" ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/logo_2x.png') }}" width="78" height="22">
+        <div class="login-container bg-white">
+            <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
 
-                    <h1>점심을 부탁해</h1>
+                <h1 style="text-align: center; margin: 40px">점심을 부탁해</h1>
 
-                    {% include 'module/_menu.html'%}
-
-                    <button class="btn btn-block btn-primary" type="button" data-target="#modalFillIn1" data-toggle="modal" id="btnFillSizeToggler1">
+                <button class="btn btn-block btn-primary" type="button" data-target="#modalFillIn1" data-toggle="modal" id="btnFillSizeToggler1">
                         <span class="pull-left">
                                     </span>
-                        <span class="bold">회원가입</span>
-                    </button>
-                    <br>
-                    <button class="btn btn-block btn-danger" type="button" data-target="#modalFillIn2" data-toggle="modal" id="btnFillSizeToggler2">
+                    <span class="bold">회원가입</span>
+                </button>
+                <br>
+                <button class="btn btn-block btn-danger" type="button" data-target="#modalFillIn2" data-toggle="modal" id="btnFillSizeToggler2">
                         <span class="pull-left">
                                     </span>
-                        <span class="bold">로그인</span>
-                    </button>
-                    <br>
-                    <div class="modal fade fill-in ng-scope" id="modalFillIn1" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <i class="pg-close"></i>
-                        </button>
-                        <div class="modal-dialog ">
-                            <h1>Register</h1>
-                            {{ register_user_form.hidden_tag() }}
-                            {{ render_field_with_errors(register_user_form.email, placeholder="이메일", class="form-control") }}
-                            {{ render_field_with_errors(register_user_form.password, placeholder="Minimum of 6 Charactors", class="form-control") }}
+                    <span class="bold">로그인</span>
+                </button>
+                <br>
+                <div class="modal fade slide-up disable-scroll ng-scope in" id="modalFillIn1" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                        <div class="modal-content-wrapper">
+                            <div class="modal-content">
+                                <div class="modal-header clearfix text-left">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ register_user_form.hidden_tag() }}
+                                    {{ render_field_with_errors(register_user_form.email, placeholder="e-mail", class="form-control") }}
+                                    {{ render_field_with_errors(register_user_form.password, placeholder="Minimum of 6 Charactors", class="form-control") }}
 
-                            {% if register_user_form.password_confirm %}
-                                {{ render_field_with_errors(register_user_form.password_confirm, placeholder="Retype your password", class="form-control") }}
-                            {% endif %}
-                            {{ render_field(register_user_form.submit, class="btn btn-primary btn-cons m-t-10") }}
-                            <!-- /.modal-content -->
+                                    {% if register_user_form.password_confirm %}
+                                    {{ render_field_with_errors(register_user_form.password_confirm, placeholder="Retype your password", class="form-control") }}
+                                    {% endif %}
+                                    <div class="row">{{ render_field(register_user_form.submit, class="btn btn-primary btn-cons m-t-20 pull-right") }}</div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.modal-dialog -->
                     </div>
-                    <a href="{{ url_for('social.login', provider='Facebook') }}" class="social-facebook btn btn-primary btn-lg"><i class="fa fa-2x fa-facebook-square"></i></a>
-                    <a href="{{ url_for('social.login', provider='Google') }}" class="social-google btn btn-primary btn-lg"><i class="fa fa-2x fa-google-plus"></i></a>
-                    <a href="{{ url_for('social.login', provider='Github') }}" class="social-github btn btn-primary btn-lg"><i class="fa fa-2x fa-github"></i></a>
-                    <a href="{{ url_for('social.login', provider='Twitter') }}" class="social-twitter btn btn-primary btn-lg"><i class="fa fa-2x fa-twitter"></i></a>
 
-                    <div class="modal fade fill-in ng-scope" id="modalFillIn2" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <i class="pg-close"></i>
-                        </button>
-                        <div class="modal-dialog ">
-                            <h1>Login</h1>
-                            <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
-                                {{ login_user_form.hidden_tag() }}
-                                {{ render_field_with_errors(login_user_form.email, placeholder="이메일", class="form-control") }}
-                                {{ render_field_with_errors(login_user_form.password, placeholder="비밀번호", class="form-control") }}
-                                {{ render_field_with_errors(login_user_form.remember) }}
-                                {{ render_field(login_user_form.next) }}
-                                {{ render_field(login_user_form.submit, class="btn btn-primary btn-cons m-t-10") }}
-                            </form>
-                            <!-- /.modal-content -->
+                </div>
+                <a href="{{ url_for('social.login', provider='Facebook') }}" class="social-facebook btn btn-primary btn-lg"><i class="fa fa-2x fa-facebook-square"></i></a>
+                <a href="{{ url_for('social.login', provider='Google') }}" class="social-google btn btn-primary btn-lg"><i class="fa fa-2x fa-google-plus"></i></a>
+                <a href="{{ url_for('social.login', provider='Github') }}" class="social-github btn btn-primary btn-lg"><i class="fa fa-2x fa-github"></i></a>
+                <a href="{{ url_for('social.login', provider='Twitter') }}" class="social-twitter btn btn-primary btn-lg"><i class="fa fa-2x fa-twitter"></i></a>
+
+                <div class="modal fade slide-up disable-scroll ng-scope in" id="modalFillIn2" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                        <div class="modal-content-wrapper">
+                            <div class="modal-content">
+                                <div class="modal-header clearfix text-left">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body" >
+                                    {{ login_user_form.hidden_tag() }}
+                                    {{ render_field_with_errors(login_user_form.email, placeholder="e-mail", class="form-control") }}
+                                    {{ render_field_with_errors(login_user_form.password, placeholder="password", class="form-control") }}
+                                    <br>
+                                    {{ render_field_with_errors(login_user_form.remember) }} <div class="pull-right"><a href="{{ url_for_security('forgot_password') }}">비밀번호 찾기</a></div>
+                                    {{ render_field(login_user_form.next) }}
+
+                                    <div class="row">{{ render_field(login_user_form.submit, class="btn btn-primary btn-cons m-t-20 pull-right") }}</div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.modal-dialog -->
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
+</div>
 {% endblock %}
 
