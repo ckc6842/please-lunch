@@ -17,6 +17,7 @@ class AuthViewMin(FlaskView):
 
 class AuthView(AuthViewMin):
     def profile(self):
+	print current_user.get_facebook_connections()
         return render_template('main/profile.html')
 
 

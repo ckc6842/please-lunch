@@ -89,6 +89,9 @@ class User(db.Model, UserMixin):
 
     def social_connections(self):
         return Connection.query.filter(Connection.user_id == self.id).all()
+    
+    def get_facebook_connections(self):
+	return Connection.query.filter(Connection.provider == 'Facebook', Connection.user_id == self.id).all()
 
 
 class Connection(db.Model):
