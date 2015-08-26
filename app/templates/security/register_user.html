@@ -4,7 +4,6 @@
 
 <div class="full-height ng-scope" ui-view=""><!-- uiView:  --><div class="full-height ng-scope" ui-view="">
     <div class="login-wrapper  ng-scope">
-    {% include "module/_messages.html" %}
         <div class="bg-pic">
 
             <img src="{{ url_for('static', filename='assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg') }}"
@@ -31,9 +30,8 @@
                     {% endif %}
                     {{ render_field(register_user_form.submit, class="btn btn-primary btn-cons m-t-10") }}
                 </form>
-
-
             </div>
+
         </div>
     </div>
 </div>
