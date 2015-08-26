@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 /*------------------------------------------------------------------
 Pages v1.1.0
 Theme : Default
@@ -1758,7 +1759,7 @@ h4,
 h5,
 h6 {
   margin: 10px 0;
-  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", "Nanum Gothic", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -2424,7 +2425,7 @@ hr.dotted {
 [Buttons Base Styles]
 */
 .btn {
-  font-family: Arial, sans-serif;
+  font-family: Arial, "Nanum Gothic", sans-serif;
   font-size: 14px;
   font-weight: normal;
   letter-spacing: 0.01em;
