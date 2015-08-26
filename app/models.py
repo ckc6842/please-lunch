@@ -129,6 +129,7 @@ class Connection(db.Model):
     @classmethod
     def from_profile(cls, user, profile):
         if not user or user.is_anonymous():
+            print profile
             email = profile.data.get("email")
             if not email:
                 msg = "Cannot create new user, authentication provider did not provide email"
