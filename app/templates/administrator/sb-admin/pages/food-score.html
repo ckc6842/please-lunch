@@ -5,49 +5,56 @@
 {% block body %}
 
 
-<div class="col-lg-4">
-    <div class="panel-body">
+<div class="col-lg-6">
 
-        <form>
-            <div class="col-md-4">
-                <div ng-repeat="item in cook_tabledata">
-                    <div>
-                        <label>
-                            {{ item.cookName | angular}}
-                            <input id="{{item.cookName | angular}}" type="checkbox" value="{{ item.cookName |angular}}"
-                                   ng-checked="select_cook.indexOf(item.cookName) > -1" ng-click="toggleSelection(select_cook, item.cookName)" />
-                        </label>
-                    </div>
-                </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                &nbsp
             </div>
+            <div class="panel-body">
 
-            <div class="col-md-4">
-                <div ng-repeat="item in nation_tabledata">
-                    <div>
-                        <label>
-                            {{ item.nationName | angular }}
-                            <input id="{{item.nationName | angular}}" type="checkbox" value="{{ item.nationName |angular }}"
-                                   ng-checked="select_nation.indexOf(item.nationName) > -1" ng-click="toggleSelection(select_nation, item.nationName)"/>
-                        </label>
+                <form>
+                    <div class="col-md-4">
+                        <div ng-repeat="item in cook_tabledata">
+                            <div>
+                                <label>
+                                    {{ item.cookName | angular}}
+                                    <input id="{{item.cookName | angular}}" type="checkbox" value="{{ item.cookName |angular}}"
+                                           ng-checked="select_cook.indexOf(item.cookName) > -1" ng-click="toggleSelection(select_cook, item.cookName)" />
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div style="margin-bottom: 50px" class="col-md-4">
-                <div ng-repeat="item in taste_tabledata">
-                    <div>
-                        <div class="col-md-6">{{ item.tasteName | angular }}</div> <div class="col-md-6" ng-init="item.score = 3">{{ item.score | angular }}</div>
-                        <input type="range" max="5" min="1" step="1" value="3" ng-model="item.score"/>
+                    <div class="col-md-4">
+                        <div ng-repeat="item in nation_tabledata">
+                            <div>
+                                <label>
+                                    {{ item.nationName | angular }}
+                                    <input id="{{item.nationName | angular}}" type="checkbox" value="{{ item.nationName |angular }}"
+                                           ng-checked="select_nation.indexOf(item.nationName) > -1" ng-click="toggleSelection(select_nation, item.nationName)"/>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                    <div style="margin-bottom: 50px" class="col-md-4">
+                        <div ng-repeat="item in taste_tabledata">
+                            <div>
+                                <div class="col-md-6">{{ item.tasteName | angular }}</div> <div class="col-md-6" ng-init="item.score = 3">{{ item.score | angular }}</div>
+                                <input type="range" max="5" min="1" step="1" value="3" ng-model="item.score"/>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-lg btn-block" ng-click="submitScore()">Submit</button>
+
+                </form>
+
+
             </div>
-            <button class="btn btn-primary btn-lg btn-block" ng-click="submitScore()">Submit</button>
-
-        </form>
-
-
-    </div>
+        </div>
 </div>
+
 
 
 {% endblock %}
