@@ -35,14 +35,16 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    {{ register_user_form.hidden_tag() }}
-                                    {{ render_field_with_errors(register_user_form.email, placeholder="e-mail", class="form-control") }}
-                                    {{ render_field_with_errors(register_user_form.password, placeholder="Minimum of 6 Charactors", class="form-control") }}
+                                    <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
+                                        {{ register_user_form.hidden_tag() }}
+                                        {{ render_field_with_errors(register_user_form.email, placeholder="e-mail", class="form-control") }}
+                                        {{ render_field_with_errors(register_user_form.password, placeholder="Minimum of 6 Charactors", class="form-control") }}
 
-                                    {% if register_user_form.password_confirm %}
-                                    {{ render_field_with_errors(register_user_form.password_confirm, placeholder="Retype your password", class="form-control") }}
-                                    {% endif %}
-                                    <div class="row">{{ render_field(register_user_form.submit, class="btn btn-primary btn-cons m-t-20 pull-right") }}</div>
+                                        {% if register_user_form.password_confirm %}
+                                        {{ render_field_with_errors(register_user_form.password_confirm, placeholder="Retype your password", class="form-control") }}
+                                        {% endif %}
+                                        <div class="row">{{ render_field(register_user_form.submit, class="btn btn-primary btn-cons m-t-20 pull-right") }}</div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -63,20 +65,22 @@
                                     </button>
                                 </div>
                                 <div class="modal-body" >
-                                    {{ login_user_form.hidden_tag() }}
-                                    {{ render_field_with_errors(login_user_form.email, placeholder="e-mail", class="form-control") }}
-                                    {{ render_field_with_errors(login_user_form.password, placeholder="password", class="form-control") }}
-                                    <br>
-                                    {{ render_field_with_errors(login_user_form.remember) }} <div class="pull-right"><a href="{{ url_for_security('forgot_password') }}">비밀번호 찾기</a></div>
-                                    {{ render_field(login_user_form.next) }}
-
-                                    <div class="row">{{ render_field(login_user_form.submit, class="btn btn-primary btn-cons m-t-20 pull-right") }}</div>
+                                    <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+                                        {{ login_user_form.hidden_tag() }}
+                                        {{ render_field_with_errors(login_user_form.email, placeholder="e-mail", class="form-control") }}
+                                        {{ render_field_with_errors(login_user_form.password, placeholder="password", class="form-control") }}
+                                        <br>
+                                        {{ render_field_with_errors(login_user_form.remember) }} <div class="pull-right"><a href="{{ url_for_security('forgot_password') }}">비밀번호 찾기</a></div>
+                                        {{ render_field(login_user_form.next) }}
+                                        <div class="row">{{ render_field(login_user_form.submit, class="btn btn-primary btn-cons m-t-20 pull-right") }}</div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
+
             </div>
         </div>
     </div>
