@@ -13,9 +13,7 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
 
     $scope.toggleSelection = function toggleSelection(select, Name) {
     // Array 안에 있으면 지우고 없으면 넣음
-
      var idx = select.indexOf(Name);
-
      if (idx > -1) { select.splice(idx, 1);}
      else { select.push(Name); }
     };
@@ -37,6 +35,7 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
             $scope.nation_tabledata = response.nation;
             $scope.taste_tabledata = response.taste;
             $scope.user_tabledata = response.user;
+            $scope.time_tabledata = response.time;
         });
 
 
@@ -60,7 +59,6 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
     };
 
     $scope.submitScore = function(){
-
         $http.post($location.absUrl(),
             angular.fromJson({ cookName : $scope.select_cook,
                                 nationName : $scope.select_nation,
@@ -91,8 +89,10 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
     };
 
     $scope.submitFood = function(temp){
-
-        $http.post('http://127.0.0.1:8080/admin/food/add', angular.fromJson({ foodName : temp }));
+        if (temp == null){
+            return alert('공백있음');
+        }
+        $http.post('http://127.0.0.1:8080/admin/food/add/', angular.fromJson({ foodName : temp }));
         $scope.formData_add_food = '';
         $http.get('http://127.0.0.1:8080/admin/getdata')
             .success(
@@ -101,8 +101,10 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
     };
 
     $scope.deleteFood = function(temp){
-
-        $http.post('http://127.0.0.1:8080/admin/food/delete', angular.fromJson({ foodName : temp }));
+        if (temp == null){
+            return alert('공백있음');
+        }
+        $http.post('http://127.0.0.1:8080/admin/food/delete/', angular.fromJson({ foodName : temp }));
         $scope.formData_del_food = '';
         $http.get('http://127.0.0.1:8080/admin/getdata')
             .success(
@@ -111,8 +113,10 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
     };
 
     $scope.submitCook = function(temp){
-
-        $http.post('http://127.0.0.1:8080/admin/cook/add', angular.fromJson({ cookName : temp }));
+        if (temp == null){
+            return alert('공백있음');
+        }
+        $http.post('http://127.0.0.1:8080/admin/cook/add/', angular.fromJson({ cookName : temp }));
         $scope.formData_add_cook = '';
         $http.get('http://127.0.0.1:8080/admin/getdata')
             .success(
@@ -121,8 +125,10 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
     };
 
     $scope.deleteCook = function(temp){
-
-        $http.post('http://127.0.0.1:8080/admin/cook/delete', angular.fromJson({ cookName : temp }));
+        if (temp == null){
+            return alert('공백있음');
+        }
+        $http.post('http://127.0.0.1:8080/admin/cook/delete/', angular.fromJson({ cookName : temp }));
         $scope.formData_del_cook = '';
         $http.get('http://127.0.0.1:8080/admin/getdata')
             .success(
@@ -131,8 +137,10 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
     };
 
     $scope.submitNation = function(temp){
-
-        $http.post('http://127.0.0.1:8080/admin/nation/add', angular.fromJson({ nationName : temp }));
+        if (temp == null){
+            return alert('공백있음');
+        }
+        $http.post('http://127.0.0.1:8080/admin/nation/add/', angular.fromJson({ nationName : temp }));
         $scope.formData_add_nation = '';
         $http.get('http://127.0.0.1:8080/admin/getdata')
             .success(
@@ -141,8 +149,10 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
     };
 
     $scope.deleteNation = function(temp){
-
-        $http.post('http://127.0.0.1:8080/admin/nation/delete', angular.fromJson({ nationName : temp }));
+        if (temp == null){
+            return alert('공백있음');
+        }
+        $http.post('http://127.0.0.1:8080/admin/nation/delete/', angular.fromJson({ nationName : temp }));
         $scope.formData_del_nation = '';
         $http.get('http://127.0.0.1:8080/admin/getdata')
             .success(
@@ -151,8 +161,10 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
     };
 
     $scope.submitTaste = function(temp){
-
-        $http.post('http://127.0.0.1:8080/admin/taste/add', angular.fromJson({ tasteName : temp }));
+        if (temp == null){
+            return alert('공백있음');
+        }
+        $http.post('http://127.0.0.1:8080/admin/taste/add/', angular.fromJson({ tasteName : temp }));
         $scope.formData_add_taste = '';
         $http.get('http://127.0.0.1:8080/admin/getdata')
             .success(
@@ -161,12 +173,40 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
     };
 
     $scope.deleteTaste = function(temp){
-
-        $http.post('http://127.0.0.1:8080/admin/taste/delete', angular.fromJson({ tasteName : temp }));
+        if (temp == null){
+            return alert('공백있음');
+        }
+        $http.post('http://127.0.0.1:8080/admin/taste/delete/', angular.fromJson({ tasteName : temp }));
         $scope.formData_del_taste = '';
         $http.get('http://127.0.0.1:8080/admin/getdata')
             .success(
             function(response){ $scope.taste_tabledata = response.taste }
+            )
+    };
+
+    $scope.submitTime = function(timeName, startTime){
+        if (timeName == null || startTime == null){
+            return alert('공백있음');
+        }
+        $http.post('http://127.0.0.1:8080/admin/time/add/', angular.fromJson({ timeName : timeName, startTime : startTime }));
+        $scope.formData_add_time.timeName = '';
+        $scope.formData_add_time.startTime = '';
+        $http.get('http://127.0.0.1:8080/admin/getdata')
+            .success(
+            function(response){ $scope.time_tabledata = response.time }
+            )
+    };
+
+    $scope.deleteTime = function(timeName){
+        if (timeName == null){
+            return alert('공백있음');
+        }
+        $http.post('http://127.0.0.1:8080/admin/time/delete/', angular.fromJson({ timeName : timeName }));
+        $scope.formData_del_time.timeName = '';
+        $scope.formData_del_time.startTime = '';
+        $http.get('http://127.0.0.1:8080/admin/getdata')
+            .success(
+            function(response){ $scope.time_tabledata = response.time }
             )
     };
 
