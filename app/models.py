@@ -125,7 +125,6 @@ class Connection(db.Model):
 
     @classmethod
     def from_profile(cls, user, profile):
-	print profile.data
         if not user or user.is_anonymous():
             email = profile.data.get("email")
             if not email:
