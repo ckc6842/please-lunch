@@ -7,7 +7,8 @@ from flask_mail import Mail
 from flask_babel import Babel
 from flask.ext.login import LoginManager
 from flask.ext.security import AnonymousUser
-
+from celery import Celery
+import re
 
 # Define the WSGI application object
 app = Flask(__name__)
@@ -41,16 +42,43 @@ login_manager.user_loader(load_user)
 login_manager.anonymous_user = AnonymousUser
 login_manager.login_view = "/login"
 
+# config celery with flask
+def make_celery(app):
+    celery = Celery(app.import_name, broker=app.config['CELERY_BROKER_URL'])
+    celery.conf.update(app.config)
+    TaskBase = celery.Task
+    class ContextTask(TaskBase):
+        abstract = True
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return TaskBase.__call__(self, *args, **kwargs)
+    celery.Task = ContextTask
+    return celery
 
 # Sample HTTP error handling
 @app.errorhandler(404)
 def not_found(error):
     return render_template('error/404.html'), 404
 
-
 @app.errorhandler(500)
 def internal_error(error):
     return render_template('error/500.html'), 500
+
+# can print template's filename in HTML title tag
+@app.template_filter('quoted')
+def quoted(s):
+    l = re.findall('\'([^\']*)\'', str(s))
+    if l:
+        return l[0]
+    return None
+
+# 샐러리 초기화
+celery = make_celery(app)
+
+# 샐러리 연습용 코드
+@celery.task()
+def add_together(a, b):
+	return a + b
 
 # Import a module
 from app.views.main import MainView

@@ -14,6 +14,12 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 # SQLite for this example
 
 SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:1234@localhost/please-lunch'
+# celery db config
+CELERY_BROKER_URL = 'sqla+' + SQLALCHEMY_DATABASE_URI
+CELERY_RESULT_BACKEND = 'db+mysql+pymysql://root:1234@localhost/please-lunch'
+
+
+
 
 DATABASE_CONNECT_OPTIONS = {}
 

@@ -3,15 +3,7 @@
 __author__ = 'maxto'
 # Run a test server.
 from app import app
-import re
-
-
-@app.template_filter('quoted')
-def quoted(s):
-    l = re.findall('\'([^\']*)\'', str(s))
-    if l:
-        return l[0]
-    return None
+from celery import Celery
 
 # 'app.run' is different by os.
 import sys
