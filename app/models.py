@@ -42,6 +42,11 @@ class User(db.Model, UserMixin):
     date_created  = db.Column(db.DateTime,  default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime,  default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
+    # for foreign key
+    user_score = db.relationship("UserScore", backref=db.backref('user'))
+    user_food = db.relationship("UserFood", backref=db.backref('user'))
+
+
     # User Name
     first_name = db.Column(db.String(120))
     last_name = db.Column(db.String(120))
@@ -182,6 +187,7 @@ class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     foodName = db.Column(db.String(128))
     foodscore = db.relationship("FoodScore", backref=db.backref('food'))
+    user_food = db.relationship("UserFood", backref=db.backref('food'))
 
     def __init__(self, foodName):
         self.foodName = foodName
@@ -227,6 +233,7 @@ class Time(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timeName = db.Column(db.String(128))
     startTime = db.Column(db.Integer)
+    user_food = db.relationship("UserFood", backref=db.backref('time'))
 
     def __init__(self, timeName, startTime):
         self.timeName = timeName
@@ -251,7 +258,34 @@ class FoodScore(db.Model):
         self.score = score
 
     def __repr__(self):
-        return '<score %r>' % self.score
+        return '<FoodScore %r>' % self.score
+
+
+class UserScore(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    EnumSet = ['Cook', 'Taste', 'Nation']
+    targetEnum = db.Column(db.Enum(*EnumSet))
+    targetId = db.Column(db.Integer)
+    score = db.Column(db.Integer)
+
+    def __init__(self, targetEnum, targetId, score):
+        self.targetEnum = targetEnum
+        self.targetId = targetId
+        self.score = score
+
+    def __repr__(self):
+        return '<UserScore %r>' % self.score
+
+
+class UserFood(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    food_id = db.Column(db.Integer, db.ForeignKey('food.id'))
+    time_id = db.Column(db.Integer, db.ForeignKey('time.id'))
+
+    def __repr__(self):
+        return '<UserFood %r>' % self.id
 
 
 def load_user(user_id):

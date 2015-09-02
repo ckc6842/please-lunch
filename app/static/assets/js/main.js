@@ -4,7 +4,7 @@
  * ============================================================ */
 
 angular.module('app')
-    .controller('AppCtrl', ['$scope', '$rootScope', '$state', function($scope, $rootScope, $state) {
+    .controller('AppCtrl', ['$scope','$http', '$rootScope', '$state', function($scope, $http, $rootScope, $state) {
         // App globals
         $scope.app = {
             name: 'please-lunch',
@@ -32,12 +32,7 @@ angular.module('app')
                 show: true
             })
         }
-        $scope.foodlist = [{'id': 1, 'foodName' : 'apple', 'image':'http://salubriousrd.com/wp-content/uploads/2015/05/apple.jpg'},
-                            {'id' : 2, 'foodName' : 'banana', 'image':'http://www.technoplastindustries.com/wp-content/uploads/2014/10/Banana-1.jpg'}];
 
-        $scope.sendrating = function(rating, foodName, userId){
-            alert(foodName + " is " +rating +"점 " + userId);
-        }
 
     }]);
 
