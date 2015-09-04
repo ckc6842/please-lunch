@@ -10,7 +10,6 @@ class StartView(FlaskView):
     decorators = [login_required]
     route_base = '/start/'
 
-    @route('/index/', methods=['GET'])
     def index(self):
         if current_user.is_evaluate:
             return redirect(url_for('MainView:recommend'))
@@ -25,7 +24,6 @@ class StartView(FlaskView):
         else:
             flash('You are already evaluated')
             return redirect(url_for('MainView:recommend'))
-
 
     def evaluate(self):
         flash('Your information successfully evaluated!')
