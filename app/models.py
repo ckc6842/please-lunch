@@ -45,6 +45,7 @@ class User(db.Model, UserMixin):
     # for foreign key
     user_score = db.relationship("UserScore", backref=db.backref('user'))
     user_food = db.relationship("UserFood", backref=db.backref('user'))
+    user_food_score = db.relationship("UserFoodScore", backref=db.backref('user'))
 
 
     # User Name
@@ -188,6 +189,7 @@ class Food(db.Model):
     foodName = db.Column(db.String(128))
     foodscore = db.relationship("FoodScore", backref=db.backref('food'))
     user_food = db.relationship("UserFood", backref=db.backref('food'))
+    user_food_score = db.relationship("UserFoodScore", backref=db.backref('food'))
 
     def __init__(self, foodName):
         self.foodName = foodName
@@ -269,7 +271,8 @@ class UserScore(db.Model):
     targetId = db.Column(db.Integer)
     score = db.Column(db.Integer)
 
-    def __init__(self, targetEnum, targetId, score):
+    def __init__(self, user_id, targetEnum, targetId, score):
+        self.user_id = user_id
         self.targetEnum = targetEnum
         self.targetId = targetId
         self.score = score
@@ -284,8 +287,27 @@ class UserFood(db.Model):
     food_id = db.Column(db.Integer, db.ForeignKey('food.id'))
     time_id = db.Column(db.Integer, db.ForeignKey('time.id'))
 
+    def __init__(self, user_id, food_id, time_id):
+        self.user_id = user_id
+        self.food_id = food_id
+        self.time_id = time_id
+
     def __repr__(self):
-        return '<UserFood %r>' % self.id
+        return '<UserFood user_id : %r food_id : %r time_id : %r>' % (self.user_id, self.food_id, self.time)
+
+class UserFoodScore(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    food_id = db.Column(db.Integer, db.ForeignKey('food.id'))
+    score = db.Column(db.Integer)
+
+    def __init__(self, user_id, food_id, score):
+        self.user_id = user_id
+        self.food_id = food_id
+        self.score = score
+
+    def __repr__(self):
+        return '<UserFoodScore user_id : %r food_id : %r score : %r>' % (self.user_id, self.food_id, self.score)
 
 
 def load_user(user_id):

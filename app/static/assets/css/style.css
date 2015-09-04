@@ -30,3 +30,13 @@
 .card.col1{
     margin: 0 10px 10px 0;
 }
+
+.main-right{
+    margin-top: 30%;
+    padding: 50px;
+}
+
+.main-right h1{
+    text-align: center;
+    margin: 40px;
+}

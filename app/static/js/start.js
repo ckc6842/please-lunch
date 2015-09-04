@@ -7,6 +7,7 @@ angular.module('app')
         });
 
         $scope.sendrating = function(rating, foodName, userId){
+            $http.post('http://127.0.0.1:8080/start/getfoodlist/', angular.fromJson({userId : userId, foodName : foodName, rating : rating}))
             alert(foodName + " is " +rating +"점 " + userId);
         }
 

@@ -7922,6 +7922,7 @@ input.list-view-search {
 ------------------------------------
 */
 .card {
+    overflow: hidden;
     padding-bottom: 0;
     margin-bottom: 0;
     background: #FFF;
@@ -8044,8 +8045,8 @@ input.list-view-search {
     height: 200px;
 }
 .card.share .card-description img{
-    margin:0 auto;
-    display:block;
+    margin: 0 auto;
+    display: block;
 }
 
 .card.share .card-description p {
@@ -9189,7 +9190,8 @@ Responsive Util
 }
 .login-wrapper .login-container {
     width: 496px;
-    display: block;
+    display: table-cell;
+    vertical-align: middle;
     position: relative;
     float: right;
 }
