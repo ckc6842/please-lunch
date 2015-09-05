@@ -3,7 +3,7 @@
 * Override Pages default styles or create your own styles here
 
 */
-.rating{
+.rating {
     color: #a9a9a9;
     font-size: 30px;
     padding: 0;
@@ -27,16 +27,34 @@
     background: #cee5F5; padding: 0.5em;
     border: 1px solid #aacbe2;
 }
-.card.col1{
-    margin: 0 10px 10px 0;
+.card.col1 {
+    margin: 5px;
 }
 
-.main-right{
+.main-right {
     margin-top: 30%;
     padding: 50px;
 }
 
-.main-right h1{
+.main-right h1 {
     text-align: center;
     margin: 40px;
+}
+
+.center-position {
+    position: absolute;
+    margin-left: -140px;
+    left: 50%;
+
+}
+.lock-icon button{
+    -moz-transition:-moz-transform 0.2s ease-in;
+-webkit-transition:-webkit-transform 0.2s ease-in;
+-o-transition:-o-transform 0.2s ease-in;
+}
+
+.lock-icon button:hover{
+    -moz-transform:scale(1.2);
+    -webkit-transform:scale(1.2);
+    -o-transform:scale(1.2);
 }

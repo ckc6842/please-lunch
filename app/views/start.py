@@ -10,7 +10,6 @@ class StartView(FlaskView):
     decorators = [login_required]
     route_base = '/start/'
 
-    @route('/index/', methods=['GET'])
     def index(self):
         if current_user.is_evaluate:
             return redirect(url_for('MainView:recommend'))
