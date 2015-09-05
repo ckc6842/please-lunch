@@ -75,11 +75,6 @@ def quoted(s):
 # 샐러리 초기화
 celery = make_celery(app)
 
-# 샐러리 연습용 코드
-@celery.task()
-def add_together(a, b):
-	return a + b
-
 # Import a module
 from app.views.main import MainView
 from app.views.start import StartView

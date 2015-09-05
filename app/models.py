@@ -295,6 +295,7 @@ class UserFood(db.Model):
     def __repr__(self):
         return '<UserFood user_id : %r food_id : %r time_id : %r>' % (self.user_id, self.food_id, self.time)
 
+
 class UserFoodScore(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

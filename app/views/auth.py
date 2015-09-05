@@ -5,7 +5,6 @@ from flask import render_template, redirect, url_for, flash
 from flask_classy import FlaskView
 from flask.ext.login import login_required, current_user, logout_user
 from flask_security.utils import verify_and_update_password
-
 from app.models import user_datastore
 from app.forms import UserLeaveForm
 from app import db
@@ -17,7 +16,6 @@ class AuthViewMin(FlaskView):
 
 class AuthView(AuthViewMin):
     def profile(self):
-	print current_user.get_facebook_connections()
         return render_template('main/profile.html')
 
 
