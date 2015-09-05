@@ -15,9 +15,12 @@ pip install flask-classy
 https://pythonhosted.org/Flask-Classy/
 
 1. View
+
+```python  
 from flask_classy import FlaskView
 class FooView(FlaskView):
     pass
+```
 
 2. init
 FooView.register(app)

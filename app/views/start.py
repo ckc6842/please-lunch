@@ -25,7 +25,6 @@ class StartView(FlaskView):
             flash('You are already evaluated')
             return redirect(url_for('MainView:recommend'))
 
-
     def evaluate(self):
         flash('Your information successfully evaluated!')
         return redirect(url_for('MainView:recommend'))
