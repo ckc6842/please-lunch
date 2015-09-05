@@ -137,12 +137,12 @@ body.dashboard .page-container {
 .header {
     position: relative;
     display: block;
-    height: 60px;
+    height: 70px;
     width: 100%;
-    padding: 0 20px 0 0;
+    padding: 0 20px;
     z-index: 800;
-    background-color: #fff;
-    border-bottom: 1px solid rgba(230, 230, 230, 0.7);
+    background-color: #ffc000;
+    border-bottom: 5px solid #e0a800;
 }
 .header a {
     color: #3b4751;
@@ -154,7 +154,7 @@ body.dashboard .page-container {
     color: #eaeef1;
 }
 .header .header-inner {
-    height: 60px;
+    height: 70px;
     width: 100%;
     vertical-align: middle;
     display: table-cell;
