@@ -38,32 +38,32 @@
                         메인페이지</a>
                     </li>
                     {% if not current_user.is_authenticated() %}
-                    {% if security.registerable %}
-                    <li><a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">회원가입</a><br/></li>
-                    {% endif %}
+                        {% if security.registerable %}
+                            <li><a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">회원가입</a><br/></li>
+                        {% endif %}
                     {% else %} <!-- 로그인 중-->
-                    <li><a href="{{ url_for('AuthView:profile') }}
+                        <li><a href="{{ url_for('AuthView:profile') }}
                         {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
-                        프로필</a>
-                    </li>
-                    <li><a href="{{ url_for('LeaveView:get') }}
+                            프로필</a>
+                        </li>
+                        <li><a href="{{ url_for('LeaveView:get') }}
                         {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
-                        회원탈퇴</a>
-                    </li>
-                    <li><a href="{{ url_for_security('change_password') }}
+                            회원탈퇴</a>
+                        </li>
+                        <li><a href="{{ url_for_security('change_password') }}
                         {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">비밀번호 바꾸기</a>
-                    </li>
-                    <!-- 관리자일때 -->
-                    {% if current_user.has_role('admin') %}
-                    <li><a href="{{ url_for('AdminView:index') }}
+                        </li>
+                        <!-- 관리자일때 -->
+                        {% if current_user.has_role('admin') %}
+                            <li><a href="{{ url_for('AdminView:index') }}
                             {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}"><i class="pg-settings_small"></i>관리자</a></li>
-                    {% endif %}
-                    <!-- 관리자 끝 -->
-                    <li class="bg-master-lighter">
-                        <a href="{{ url_for('LogoutView:index') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}" class="clearfix">
-                            <i class="pg-power"></i> 로그아웃
-                        </a>
-                    </li>
+                        {% endif %}
+                        <!-- 관리자 끝 -->
+                        <li class="bg-master-lighter">
+                            <a href="{{ url_for('LogoutView:index') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}" class="clearfix">
+                                <i class="pg-power"></i> 로그아웃
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

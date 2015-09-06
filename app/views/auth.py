@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, redirect, url_for, \
     flash, request, after_this_request
-from flask_classy import FlaskView
+from flask_classy import FlaskView, route
 from flask.ext.login import current_user
 from flask_security.utils import verify_and_update_password, logout_user, login_user, \
-    get_post_login_redirect
+    get_post_login_redirect, url_for_security
 from flask_security.decorators import anonymous_user_required, login_required
 from werkzeug.datastructures import MultiDict
 
@@ -61,7 +61,7 @@ class LoginView(AuthViewMin):
 
 class LogoutView(AuthViewMin):
     route_base = '/logout/'
-    decorators = [login_required]
+    #decorators = [login_required]
 
     def index(self):
         if current_user.is_authenticated():
