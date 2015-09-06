@@ -7,6 +7,7 @@ from flask_mail import Mail
 from flask_babel import Babel
 from flask.ext.login import LoginManager
 from flask.ext.security import AnonymousUser
+from flask_jsglue import JSGlue
 from celery import Celery
 import re
 
@@ -34,6 +35,7 @@ from app.models import *
 Triangle(app)
 mail = Mail(app)
 babel = Babel(app)
+jsglue = JSGlue(app)
 
 # Setup flask-login
 login_manager = LoginManager()
