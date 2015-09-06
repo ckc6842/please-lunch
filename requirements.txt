@@ -5,7 +5,7 @@ Babel==2.0
 billiard==3.3.0.20
 blinker==1.4
 celery==3.1.18
-facebook-sdk==1.0.0a0
+http://github.com/pythonforfacebook/facebook-sdk/tarball/master
 Flask==0.10.1
 Flask-Babel==0.9
 Flask-Classy==0.6.10
