@@ -29,10 +29,12 @@ class LoginView(AuthViewMin):
 
     def index(self):
         form = self.form_class()
+        print "login index"
 
         return render_template('security/login_user.html', login_user_form=form)
 
     def post(self):
+        print "post"
         if request.json:
             login_form = self.form_class(MultiDict(request.json))
         else:
@@ -48,10 +50,13 @@ class LoginView(AuthViewMin):
             if request.json:
                 return _render_json(login_form, include_auth_token=True)
 
-        if current_user.is_authenticated():
-            return redirect('MainView:index')
+            return redirect(url_for('MainView:index'))
         else:
-            return redirect('LoginView:index')
+            for field in login_form:
+                if field.errors:
+                    for error in field.errors:
+                        print error
+            return render_template('temperror.html', login_form=login_form)
 
 
 class LogoutView(AuthViewMin):
