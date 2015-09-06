@@ -1,6 +1,6 @@
 angular.module('app')
     .controller('startCtrl', ['$scope','$http', '$rootScope', '$state', function($scope, $http, $rootScope, $state) {
-        var url = Flask.url_for("StartView:getfoodlist");
+        var url = "http://pleaselunch.tk"+Flask.url_for("StartView:getfoodlist");
 
         $http.get(url)
         .success(function(response){
