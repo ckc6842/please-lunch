@@ -47,7 +47,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body" >
-                                        <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+                                        <form action="{{ url_for('LoginView:index') }}" method="POST" name="login_user_form">
                                             {{ login_user_form.hidden_tag() }}
                                             {{ render_field_with_errors(login_user_form.email, placeholder="e-mail", class="form-control") }}
                                             {{ render_field_with_errors(login_user_form.password, placeholder="password", class="form-control") }}
@@ -85,11 +85,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--
-                <a href="{{ url_for('social.login', provider='Google') }}" class="social-google btn btn-primary btn-lg"style="width: 86px"><i class="fa fa-2x fa-google-plus"></i></a>
-                <a href="{{ url_for('social.login', provider='Github') }}" class="social-github btn btn-primary btn-lg"style="width: 86px"><i class="fa fa-2x fa-github"></i></a>
-                <a href="{{ url_for('social.login', provider='Twitter') }}" class="social-twitter btn btn-primary btn-lg"style="width: 86px"><i class="fa fa-2x fa-twitter"></i></a>
-                -->
                 </div>
             </div>
         </div>

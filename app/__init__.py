@@ -80,7 +80,7 @@ celery = make_celery(app)
 # Import a module
 from app.views.main import MainView
 from app.views.start import StartView
-from app.views.auth import AuthView, LeaveView, DeleteUserView
+from app.views.auth import *
 from app.views.admin import AdminView
 
 MainView.register(app)
@@ -88,6 +88,8 @@ StartView.register(app)
 AuthView.register(app)
 AdminView.register(app)
 LeaveView.register(app)
+LoginView.register(app)
+LogoutView.register(app)
 DeleteUserView.register(app)
 
 # Build the database:

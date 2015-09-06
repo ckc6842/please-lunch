@@ -44,6 +44,7 @@ CSRF_SESSION_KEY = "d41d8cd98f00b204e9800998ecf8427e"
 
 # Secret key for signing cookies
 SECRET_KEY = "super-secret"
+
 SECURITY_REGISTERABLE =  True
 SECURITY_CONFIRMABLE = False
 SECURITY_TRACKABLE = True
