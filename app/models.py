@@ -109,20 +109,17 @@ class Connection(db.Model):
     user = db.relationship("User", foreign_keys=user_id, backref=db.backref('connections', order_by=id))
     provider = db.Column(db.String(255))
     profile_id = db.Column(db.String(255))
-    username = db.Column(db.String(255))
-    full_name = db.Column(db.String(255))
     email = db.Column(db.String(255))
-    access_token = db.Column(db.String(255))
-    secret = db.Column(db.String(255))
     first_name = db.Column(db.String(255))
     last_name = db.Column(db.String(255))
+
+    username = db.Column(db.String(255))
+    full_name = db.Column(db.String(255))
+    access_token = db.Column(db.String(255))
+    secret = db.Column(db.String(255))
     cn = db.Column(db.String(255))
     profile_url = db.Column(db.String(512))
     image_url = db.Column(db.String(512))
-    provider_id = db.Column(db.String(255))
-    provider_user_id = db.Column(db.String(255))
-    display_name = db.Column(db.String(255))
-    rank = db.Column(db.Integer)
 
     def get_user(self):
         return self.user
