@@ -13,10 +13,10 @@
             </a>
         </div>
     </div>
-    <div class=" pull-left sm-table">
+    <div class="pull-left sm-table center-position">
         <div class="header-inner">
             <div class="brand inline">
-                <img src="{{ url_for('static', filename='assets/img/logo.png') }}" alt="logo" data-src="{{ url_for('static', filename='assets/img/logo.png') }}" ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/logo.png') }}" width="150" height="31">
+                <img src="{{ url_for('static', filename='assets/img/logo_white.png') }}" alt="logo" data-src="{{ url_for('static', filename='assets/img/logo_white.png') }}" ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/logo_white.png') }}">
             </div>
         </div>
     </div>
@@ -24,13 +24,20 @@
     <div class=" pull-right">
         <div class="visible-lg visible-md m-t-10">
             <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
-                <span class="semi-bold">{{ current_user.email }}</span>
-            </div>
-            <div class="dropdown pull-right">
-                <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="thumbnail-wrapper d32 circular inline m-t-5">
+                <span class="thumbnail-wrapper d32 circular inline m-t-5">
                     <img src="{{ current_user.get_facebook_connections()[0].image_url }}}" alt="" data-src="{{ current_user.get_facebook_connections()[0].image_url }}" ui-jq="unveil" data-src-retina="{{ current_user.get_facebook_connections()[0].image_url }}" width="32" height="32">
-                    </span>
+                </span>
+                <span class="semi-bold">
+                    {% if current_user.last_name and current_user.first_name %}
+                        <p class="small hint-text m-t-5">
+                            {{ current_user.last_name+current_user.first_name }}</p></span>
+                    {% endif %}
+            </div>
+            <div class="dropdown pull-right lock-icon">
+                <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <img src="{{ url_for('static', filename='assets/img/lock_icon.png') }}"
+                         alt="" data-src="{{ url_for('static', filename='assets/img/lock_icon.png')  }}"
+                         ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/lock_icon.png') }}">
                 </button>
                 <ul class="dropdown-menu profile-dropdown" role="menu">
                     <li><a href="{{ url_for('MainView:index') }}
@@ -38,32 +45,32 @@
                         메인페이지</a>
                     </li>
                     {% if not current_user.is_authenticated() %}
-                    {% if security.registerable %}
-                    <li><a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">회원가입</a><br/></li>
-                    {% endif %}
+                        {% if security.registerable %}
+                            <li><a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">회원가입</a><br/></li>
+                        {% endif %}
                     {% else %} <!-- 로그인 중-->
-                    <li><a href="{{ url_for('AuthView:profile') }}
+                        <li><a href="{{ url_for('AuthView:profile') }}
                         {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
-                        프로필</a>
-                    </li>
-                    <li><a href="{{ url_for('LeaveView:get') }}
+                            프로필</a>
+                        </li>
+                        <li><a href="{{ url_for('LeaveView:get') }}
                         {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
-                        회원탈퇴</a>
-                    </li>
-                    <li><a href="{{ url_for_security('change_password') }}
+                            회원탈퇴</a>
+                        </li>
+                        <li><a href="{{ url_for_security('change_password') }}
                         {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">비밀번호 바꾸기</a>
-                    </li>
-                    <!-- 관리자일때 -->
-                    {% if current_user.has_role('admin') %}
-                    <li><a href="{{ url_for('AdminView:index') }}
+                        </li>
+                        <!-- 관리자일때 -->
+                        {% if current_user.has_role('admin') %}
+                            <li><a href="{{ url_for('AdminView:index') }}
                             {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}"><i class="pg-settings_small"></i>관리자</a></li>
-                    {% endif %}
-                    <!-- 관리자 끝 -->
-                    <li class="bg-master-lighter">
-                        <a href="{{ url_for_security('logout') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}" class="clearfix">
-                            <i class="pg-power"></i> 로그아웃
-                        </a>
-                    </li>
+                        {% endif %}
+                        <!-- 관리자 끝 -->
+                        <li class="bg-master-lighter">
+                            <a href="{{ url_for('LogoutView:index') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}" class="clearfix">
+                                <i class="pg-power"></i> 로그아웃
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

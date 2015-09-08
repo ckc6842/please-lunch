@@ -7,6 +7,7 @@ from flask_mail import Mail
 from flask_babel import Babel
 from flask.ext.login import LoginManager
 from flask.ext.security import AnonymousUser
+from flask_jsglue import JSGlue
 from celery import Celery
 import re
 
@@ -34,6 +35,7 @@ from app.models import *
 Triangle(app)
 mail = Mail(app)
 babel = Babel(app)
+jsglue = JSGlue(app)
 
 # Setup flask-login
 login_manager = LoginManager()
@@ -75,15 +77,10 @@ def quoted(s):
 # 샐러리 초기화
 celery = make_celery(app)
 
-# 샐러리 연습용 코드
-@celery.task()
-def add_together(a, b):
-	return a + b
-
 # Import a module
 from app.views.main import MainView
 from app.views.start import StartView
-from app.views.auth import AuthView, LeaveView, DeleteUserView
+from app.views.auth import *
 from app.views.admin import AdminView
 
 MainView.register(app)
@@ -91,6 +88,8 @@ StartView.register(app)
 AuthView.register(app)
 AdminView.register(app)
 LeaveView.register(app)
+LoginView.register(app)
+LogoutView.register(app)
 DeleteUserView.register(app)
 
 # Build the database:

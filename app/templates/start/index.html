@@ -1,37 +1,30 @@
 {% extends "base.html" %}
 {% include 'module/_upper_bar.html' %}
 {% block body %}
-<div class="page-container">
-    <div class="page-content-wrapper">
-        <div class="content">
-            <div ng-controller="RatingCtrl">
-                <div ng-repeat="i in foodlist">
-                    <div class="card share col1" data-social="item" style="margin: 0 20px">
+    <div class="page-container" ng-controller="startCtrl">
+        <div class="page-content-wrapper">
+            <div class="content">
+                <div ng-controller="RatingCtrl">
+                    <div ng-repeat="i in foodlist">
+                        <div class="card share col1" data-social="item">
 
-                        <div class="card-description">
-                            <img src="{{i.image | angular}}" style="width:250px;height:250px"/>
-                        </div>
-                        <div class="card-header clearfix">
-                            {{i.foodName | angular}}
-                            <div ng-init="rating = star.rating + 1; i.rating = rating"></div>
-
+                            <div class="card-description">
+                                <img src="{{i.image | angular}}" style="width:230px;border-radius: 3px; vertical-align: middle"/>
+                            </div>
+                            <div class="card-header clearfix">
+                                {{i.foodName | angular}}
+                                <div ng-init="rating = star.rating + 1; i.rating = rating"></div>
                                 <div class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="i.rating = rating" ng-click="sendrating(rating, i.foodName, '{{ current_user.id }}')"></div>
-                                {{ i.rating | angular}}
-
+                            </div>
                         </div>
                     </div>
                 </div>
+                <form action="{{ url_for('StartView:post') }}" method="POST">
+                    <button type="submit" class="btn btn-primary btn-large">음식 평가하기</button>
+                </form>
             </div>
-
-             <form action="{{ url_for('StartView:post') }}" method="POST">
-                <button type="submit" class="btn btn-primary btn-large">음식 평가하기</button>
-            </form>
-
         </div>
     </div>
-
-</div>
-
 {% endblock %}
 
 

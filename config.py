@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Statement for enabling the development environment
 DEBUG = True
 WTF_CSRF_ENABLED = True
@@ -13,13 +14,16 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 # Define the database - we are working with
 # SQLite for this example
 
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:1234@localhost/please-lunch'
-# celery db config
-CELERY_BROKER_URL = 'sqla+' + SQLALCHEMY_DATABASE_URI
-CELERY_RESULT_BACKEND = 'db+mysql+pymysql://root:1234@localhost/please-lunch'
-
-
-
+if sys.platform == 'win32':
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:1234@localhost/please-lunch'
+    # celery db config
+    CELERY_BROKER_URL = 'sqla+' + SQLALCHEMY_DATABASE_URI
+    CELERY_RESULT_BACKEND = 'db+mysql+pymysql://root:1234@localhost/please-lunch'
+else:
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:n6!cfe5!73@localhost/please-lunch'
+    # celery db config
+    CELERY_BROKER_URL = 'sqla+' + SQLALCHEMY_DATABASE_URI
+    CELERY_RESULT_BACKEND = 'db+mysql+pymysql://root:n6!cfe5!73@localhost/please-lunch'
 
 DATABASE_CONNECT_OPTIONS = {}
 
@@ -41,6 +45,7 @@ CSRF_SESSION_KEY = "d41d8cd98f00b204e9800998ecf8427e"
 
 # Secret key for signing cookies
 SECRET_KEY = "super-secret"
+
 SECURITY_REGISTERABLE =  True
 SECURITY_CONFIRMABLE = False
 SECURITY_TRACKABLE = True
@@ -50,8 +55,9 @@ SECURITY_SEND_REGISTER_EMAIL = False
 SECURITY_PASSWORD_HASH = 'bcrypt'
 SECURITY_PASSWORD_SALT = 'X2LGFS1AI39VRWYCYMXG3L5F4GS8EE35WUB0YSVPX7SUFWP70ETI1G2ZV2LLQGJ8'
 SECURITY_URL_PREFIX = ''
-SECURITY_POST_LOGIN_VIEW = '/start/'
-SECURITY_POST_REGISTER_VIEW = '/start/'
+SECURITY_POST_LOGIN_VIEW = '/'
+SECURITY_POST_REGISTER_VIEW = '/'
+SECURITY_MSG_EMAIL_NOT_PROVIDED =('이메일을 입력해주세요.', 'error')
 
 
 # for flask-social
