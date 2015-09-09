@@ -24,11 +24,20 @@
     <div class=" pull-right">
         <div class="visible-lg visible-md m-t-10">
             <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
-                <span class="semi-bold">{{ current_user.email }}</span>
+                <span class="thumbnail-wrapper d32 circular inline m-t-5">
+                    <img src="{{ current_user.get_facebook_connections()[0].image_url }}}" alt="" data-src="{{ current_user.get_facebook_connections()[0].image_url }}" ui-jq="unveil" data-src-retina="{{ current_user.get_facebook_connections()[0].image_url }}" width="32" height="32">
+                </span>
+                <span class="semi-bold">
+                    {% if current_user.last_name and current_user.first_name %}
+                        <p class="small hint-text m-t-5">
+                            {{ current_user.last_name+current_user.first_name }}</p></span>
+                    {% endif %}
             </div>
             <div class="dropdown pull-right lock-icon">
                 <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <img src="{{ url_for('static', filename='assets/img/lock_icon.png') }}" alt="" data-src="{{ url_for('static', filename='assets/img/lock_icon.png')  }}" ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/lock_icon.png') }}">
+                    <img src="{{ url_for('static', filename='assets/img/lock_icon.png') }}"
+                         alt="" data-src="{{ url_for('static', filename='assets/img/lock_icon.png')  }}"
+                         ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/lock_icon.png') }}">
                 </button>
                 <ul class="dropdown-menu profile-dropdown" role="menu">
                     <li><a href="{{ url_for('MainView:index') }}

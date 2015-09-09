@@ -14,7 +14,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 # Define the database - we are working with
 # SQLite for this example
 
-if sys.platform == 'win32' or sys.platform == 'darwin':
+if sys.platform == 'win32':
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:1234@localhost/please-lunch'
     # celery db config
     CELERY_BROKER_URL = 'sqla+' + SQLALCHEMY_DATABASE_URI

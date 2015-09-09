@@ -29,12 +29,10 @@ class LoginView(AuthViewMin):
 
     def index(self):
         form = self.form_class()
-        print "login index"
 
         return render_template('security/login_user.html', login_user_form=form)
 
     def post(self):
-        print "post"
         if request.json:
             login_form = self.form_class(MultiDict(request.json))
         else:
@@ -52,6 +50,7 @@ class LoginView(AuthViewMin):
 
             return redirect(url_for('MainView:index'))
         else:
+            print "no"
             for field in login_form:
                 if field.errors:
                     for error in field.errors:
