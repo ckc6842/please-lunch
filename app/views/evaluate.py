@@ -6,13 +6,13 @@ from operator import itemgetter
 
 
 # Dummy Data
-zajangmyun = {"짠맛" : 1, "단맛" : 2, "매운맛" : 1, "name" : "zajangmyun"}
-ramyun = {"짠맛" : 1, "단맛" : 1, "매운맛" : 3, "name" : "ramyun"}
-dduk = {"짠맛" : 1, "단맛" : 1, "매운맛" : 1, "name" : "dduk"}
+zajangmyun = {"짠맛" : 1, "단맛" : 5, "매운맛" : 1, "name" : "짜장면"}
+ramyun = {"짠맛" : 1, "단맛" : 1, "매운맛" : 3, "name" : "라면"}
+dduk = {"짠맛" : 5, "단맛" : 1, "매운맛" : 1, "name" : "떡"}
 
 user_zajangmyun= {"star" : 1}
 user_ramyun = {"star" : 5}
-user_dduk = {"star" : 1}
+user_dduk = {"star" : 5}
 
 food_list = [zajangmyun, ramyun, dduk]
 
@@ -21,7 +21,7 @@ max_star = 5
 max_score = float(max_rating * max_star * 3)
 
 
-#유저가 평가한 모든 음식의 맛 평균값을 저장하게된다. 현재는 단맛, 짠맛, 매운맛 밖에 없으니 3개의 변수가 있다.
+# 유저가 평가한 모든 음식의 맛 평균값을 저장하게된다. 현재는 단맛, 짠맛, 매운맛 밖에 없으니 3개의 변수가 있다.
 user_salty = (((zajangmyun['짠맛'] * user_zajangmyun['star']) +
                (ramyun['짠맛']* user_ramyun['star']) +
                (dduk['짠맛']* user_dduk['star'])) / max_score)*4+1
@@ -43,6 +43,7 @@ score_list = {}
 def get_res(dVals):
     res = defaultdict(list)
     for k, v in dVals.items():
+        print k,v
         res[v].append(k)
     return min(res.items(), key=itemgetter(0))[1]
 
@@ -51,7 +52,6 @@ def get_res(dVals):
 for temp in food_list :
    score_list[temp["name"]] = abs(temp['짠맛']-user_salty) + abs(temp['단맛']-user_sweety) + abs(temp['매운맛']-user_spicy)
 
-print score_list.values() # 현재 score_list에 있는 음식은 총 3개로 자장면, 떡, 라면 순으로 리스트에 넣어지는 것 같다.
-
 print get_res(score_list) # get_res라는 함수를 이용하여 score_list에 들어있는 가장 최소값의 value값을 가진  Key값을 출력한다.
 
+print min(score_list, key= score_list.get)
