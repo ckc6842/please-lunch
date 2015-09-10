@@ -59,7 +59,6 @@ SECURITY_POST_LOGIN_VIEW = '/'
 SECURITY_POST_REGISTER_VIEW = '/'
 SECURITY_MSG_EMAIL_NOT_PROVIDED =('이메일을 입력해주세요.', 'error')
 
-
 # for flask-social
 SOCIAL_FACEBOOK = {
     'consumer_key': '684002831732805',
