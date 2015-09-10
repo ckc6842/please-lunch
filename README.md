@@ -14,18 +14,23 @@ pip install flask-classy
 ## flask-classy 사용법
 https://pythonhosted.org/Flask-Classy/
 
-1. View
-
+1. View class 만들기
 ```python  
 from flask_classy import FlaskView
 class FooView(FlaskView):
     pass
 ```
 
-2. init
+2. View 등록하기
+```python
+# at __init__.py
 FooView.register(app)
+```
 
-3. url_for(뷰클래스이름:메서드이름) 
+3. url_for 사용법
+```python
+url_for(FooView:post)
+```
 
 4. class의 get method 가 get요청 post method가 각각 post 요청.
 
