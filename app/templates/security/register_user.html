@@ -30,6 +30,14 @@
                         {% endif %}
                         {{ render_field(register_user_form.submit, class="btn btn-primary btn-cons m-t-10") }}
                     </form>
+                    <a href="{{ url_for_security('login')}}">
+                        <button class="btn btn-block btn-success" type="button">
+                        <span class="pull-left">
+                                    </span>
+                            <span class="bold">로그인</span>
+                        </button>
+                    </a>
+                    <br>
                     <a href="{{ url_for('social.login', provider='Facebook') }}">
                         <button class="btn btn-block btn-complete " type="button">
                     <span class="pull-left"><i class="fa fa-facebook"></i>
@@ -44,9 +52,8 @@
                             <span class="bold">Login with Google+</span>
                         </button>
                     </a>
+
                 </div>
-
-
             </div>
         </div>
     </div>
