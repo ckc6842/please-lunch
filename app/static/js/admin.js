@@ -70,7 +70,7 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
     };
 
     $scope.delete_foodscore = function(current_foodName, current_targetEnum, current_targetId, current_score) {
-        $http.post('http://127.0.0.1:8080/admin/foodscore/delete',
+        $http.post('http://127.0.0.1:8080/admin/foodscore/delete/',
             angular.fromJson({
                 foodName: current_foodName,
                 targetEnum: current_targetEnum,

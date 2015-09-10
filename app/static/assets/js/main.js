@@ -33,7 +33,16 @@ angular.module('app')
             })
         }
 
+        window.onload = function() {
+            var temp = document.getElementById('login_form');
+            temp.onclick = function() {
+                $http.post('http://127.0.0.1:8080/', angular.fromJson({ test : "test" }))
+                    .success(function(response){
+                        alert(response)
+                    })
+            }
 
+        }
     }]);
 
 

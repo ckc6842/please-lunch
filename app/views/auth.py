@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from flask import Flask
 from flask import render_template, redirect, url_for, \
     flash, request, after_this_request
 from flask_classy import FlaskView, route
@@ -7,6 +8,7 @@ from flask_security.utils import verify_and_update_password, logout_user, login_
     get_post_login_redirect, url_for_security
 from flask_security.decorators import anonymous_user_required, login_required
 from werkzeug.datastructures import MultiDict
+from flask.ext.bcrypt import generate_password_hash, check_password_hash
 
 from flask_security.forms import LoginForm
 
@@ -22,8 +24,8 @@ class AuthViewMin(FlaskView):
     route_prefix = '/auth/'
 
 
-class LoginView(AuthViewMin):
-    route_base = '/login/'
+class LoginView(FlaskView):
+    route_base = '/'
     decorators = [anonymous_user_required]
     form_class = security.login_form
 
@@ -50,7 +52,11 @@ class LoginView(AuthViewMin):
 
             return redirect(url_for('MainView:index'))
         else:
-            print "no"
+
+            pw_hash = generate_password_hash('secret', 10)
+            print pw_hash
+            print check_password_hash(pw_hash, 'secret')
+
             for field in login_form:
                 if field.errors:
                     for error in field.errors:

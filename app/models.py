@@ -132,7 +132,7 @@ class Connection(db.Model):
     @classmethod
     def from_profile(cls, user, profile):
         provider = profile.data["provider"]
-	
+
         if not user or user.is_anonymous():
             # twiiter does not provide email
             if not provider == 'Twitter':
