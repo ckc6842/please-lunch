@@ -23,9 +23,15 @@ class FooView(FlaskView):
 ```
 
 2. init
+'''python
+# at __init__.py
 FooView.register(app)
+'''
 
-3. url_for(뷰클래스이름:메서드이름) 
+3. 
+'''python
+url_for(FooView:post)
+'''
 
 4. class의 get method 가 get요청 post method가 각각 post 요청.
 
