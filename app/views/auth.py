@@ -8,7 +8,6 @@ from flask_security.utils import verify_and_update_password, logout_user, login_
     get_post_login_redirect, url_for_security
 from flask_security.decorators import anonymous_user_required, login_required
 from werkzeug.datastructures import MultiDict
-from flask.ext.bcrypt import generate_password_hash, check_password_hash
 
 from flask_security.forms import LoginForm
 
@@ -51,17 +50,6 @@ class LoginView(FlaskView):
                 return _render_json(login_form, include_auth_token=True)
 
             return redirect(url_for('MainView:index'))
-        else:
-
-            pw_hash = generate_password_hash('secret', 10)
-            print pw_hash
-            print check_password_hash(pw_hash, 'secret')
-
-            for field in login_form:
-                if field.errors:
-                    for error in field.errors:
-                        print error
-            return render_template('temperror.html', login_form=login_form)
 
 
 class LogoutView(AuthViewMin):
