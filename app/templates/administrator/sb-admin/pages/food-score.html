@@ -20,7 +20,7 @@
                                 <label>
                                     {{ item.cookName | angular}}
                                     <input id="{{item.cookName | angular}}" type="checkbox" value="{{ item.cookName |angular}}"
-                                           ng-checked="select_cook.indexOf(item.cookName) > -1" ng-click="toggleSelection(select_cook, item.cookName)" />
+                                           ng-checked="select_cook.indexOf(item.cookName) > -1" ng-click="toggleSelection(select_cook, item.cookName)"/>
                                 </label>
                             </div>
                         </div>
@@ -41,12 +41,12 @@
                     <div style="margin-bottom: 50px" class="col-md-4">
                         <div ng-repeat="item in taste_tabledata">
                             <div>
-                                <div class="col-md-6">{{ item.tasteName | angular }}</div> <div class="col-md-6" ng-init="item.score = 3">{{ item.score | angular }}</div>
-                                <input type="range" max="5" min="1" step="1" value="3" ng-model="item.score"/>
+                                <div class="col-md-6">{{ item.tasteName | angular }}</div>
+                                <input type="text" value="3" ng-model="item.score"/>
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-lg btn-block" ng-click="submitScore()">Submit</button>
+                    <input type="submit" class="btn btn-primary btn-lg btn-block" ng-click="submitScore()">Submit</input>
 
                 </form>
 
