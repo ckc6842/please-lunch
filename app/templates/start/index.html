@@ -4,7 +4,12 @@
     <div class="page-container" ng-controller="startCtrl">
         <div class="page-content-wrapper">
             <div class="content">
-                <p> 음식 평가한 수 / 음식 수 : {{ foodEvalCount }} / {{ foodSize }}</p>
+                <div class="start-center" style="text-align: center"> {{ UserEvalCount | angular}}개 평가하셨습니다! {{ UserLeftCount | angular}} 개 더 평가 해주세요!</div><br>
+                <div ng-if="UserEvalCount > 9" style="margin: 0 auto; width: 120px">
+                    <form action="{{ url_for('StartView:post') }}" method="POST">
+                        <button type="submit" class="btn btn-primary btn-large">다음단계로</button>
+                    </form>
+                </div>
                 <div ng-controller="RatingCtrl">
                     <div ng-repeat="i in foodlist">
                         <div class="card share col1" data-social="item">
@@ -20,11 +25,7 @@
                     </div>
                 </div>
 
-                {% if foodEvalCount == foodSize %}
-                    <form action="{{ url_for('StartView:post') }}" method="POST">
-                        <button type="submit" class="btn btn-primary btn-large">음식 평가하기</button>
-                    </form>
-                {% endif %}
+
             </div>
         </div>
     </div>
