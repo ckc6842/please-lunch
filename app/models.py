@@ -181,6 +181,7 @@ class Role(db.Model, RoleMixin):
 
 class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    img = db.Column(db.String(200))
     foodName = db.Column(db.String(128))
     foodscore = db.relationship("FoodScore", backref=db.backref('food'))
     user_food = db.relationship("UserFood", backref=db.backref('food'))
@@ -246,7 +247,7 @@ class FoodScore(db.Model):
     EnumSet = ['Cook', 'Taste', 'Nation']
     targetEnum = db.Column(db.Enum(*EnumSet))
     targetId = db.Column(db.Integer)
-    score = db.Column(db.Integer)
+    score = db.Column(db.Float)
 
     def __init__(self, food, targetEnum, targetId, score):
         self.food = food
@@ -264,7 +265,7 @@ class UserScore(db.Model):
     EnumSet = ['Cook', 'Taste', 'Nation']
     targetEnum = db.Column(db.Enum(*EnumSet))
     targetId = db.Column(db.Integer)
-    score = db.Column(db.Integer)
+    score = db.Column(db.Float)
 
     def __init__(self, user_id, targetEnum, targetId, score):
         self.user_id = user_id
@@ -295,7 +296,7 @@ class UserFoodScore(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     food_id = db.Column(db.Integer, db.ForeignKey('food.id'))
-    score = db.Column(db.Integer)
+    score = db.Column(db.Float)
 
     def __init__(self, user_id, food_id, score):
         self.user_id = user_id
