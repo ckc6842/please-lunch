@@ -88,8 +88,6 @@ StartView.register(app)
 AuthView.register(app)
 AdminView.register(app)
 LeaveView.register(app)
-LoginView.register(app)
-LogoutView.register(app)
 DeleteUserView.register(app)
 
 # Build the database:
