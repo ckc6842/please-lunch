@@ -1,6 +1,6 @@
 angular.module('app')
     .controller('startCtrl', ['$scope','$http', '$rootScope', '$state', function($scope, $http, $rootScope, $state) {
-        $http.get(Flask.url_for('StartView:getfoodlist'))
+        $http.get(Flask.url_for('StartView:getFoodList'))
         .success(function(response){
             $scope.foodlist = response.foodlist;
         });
