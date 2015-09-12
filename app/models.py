@@ -181,6 +181,7 @@ class Role(db.Model, RoleMixin):
 
 class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    img = db.Column(db.String(200))
     foodName = db.Column(db.String(128))
     foodscore = db.relationship("FoodScore", backref=db.backref('food'))
     user_food = db.relationship("UserFood", backref=db.backref('food'))

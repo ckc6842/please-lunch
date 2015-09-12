@@ -24,14 +24,18 @@
     <div class=" pull-right">
         <div class="visible-lg visible-md m-t-10">
             <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
+            <!-- 페이스북 프사
                 <span class="thumbnail-wrapper d32 circular inline m-t-5">
                     <img src="{{ current_user.get_facebook_connections()[0].image_url }}}" alt="" data-src="{{ current_user.get_facebook_connections()[0].image_url }}" ui-jq="unveil" data-src-retina="{{ current_user.get_facebook_connections()[0].image_url }}" width="32" height="32">
-                </span>
+                </span>-->
                 <span class="semi-bold">
                     {% if current_user.last_name and current_user.first_name %}
                         <p class="small hint-text m-t-5">
                             {{ current_user.last_name+current_user.first_name }}</p></span>
+                    {% else %}
+                        <p class="small hint-text m-t-5">{{ current_user.email }}</p>
                     {% endif %}
+
             </div>
             <div class="dropdown pull-right lock-icon">
                 <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
