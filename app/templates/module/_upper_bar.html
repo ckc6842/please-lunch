@@ -71,7 +71,7 @@
                         {% endif %}
                         <!-- 관리자 끝 -->
                         <li class="bg-master-lighter">
-                            <a href="{{ url_for('LogoutView:index') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}" class="clearfix">
+                            <a href="{{ url_for_security('logout') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}" class="clearfix">
                                 <i class="pg-power"></i> 로그아웃
                             </a>
                         </li>
