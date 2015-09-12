@@ -5,7 +5,7 @@ from flask import render_template, redirect, url_for
 from flask_classy import FlaskView
 from flask.ext.login import login_required, current_user
 from flask_security.forms import LoginForm, RegisterForm
-from app.views.evaluate import recommend_food
+from app.views.recommend_food import recommend_food
 
 from app.models import Food
 import random
@@ -36,7 +36,11 @@ class MainView(FlaskView):
 
     @login_required
     def recommend(self):
-        # foods = Food.query.all()
-        # food = random.choice(foods)
+        foods = Food.query.all()
 
-        return render_template('main/recommend.html', food=recommend_food(current_user))
+        try:
+            food_name = recommend_food(current_user)
+        except:
+            food_name = random.choice(foods).foodName
+
+        return render_template('main/recommend.html', foodName=food_name)
