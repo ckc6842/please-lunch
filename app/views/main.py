@@ -14,14 +14,14 @@ import random
 # 로그인 렌더링 할때 dict으로 넘기면 추가적으로 매개변수를 줄수 있음
 @security.login_context_processor
 def security_login_context_processor():
-    return dict(register_user_form=RegisterForm())
+    return dict(register_user_form=RegisterForm(), loginModalShow=True)
 
 
 # 회원가입 렌더링 할때 dict으로 넘기면 추가적으로 매개변수를 줄수 있음
 # 렌더링 할 때 모달을 어떻게 띄우지??
 @security.register_context_processor
 def security_register_context_processor():
-    return dict(login_user_form=LoginForm())
+    return dict(login_user_form=LoginForm(), registerModalShow=True)
 
 
 class MainView(FlaskView):

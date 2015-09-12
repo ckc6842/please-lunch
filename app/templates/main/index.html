@@ -8,6 +8,15 @@
                      data-src="{{ url_for('static', filename='assets/img/demo/main.jpg') }}"
                      ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/demo/main.jpg') }}" alt="" class="lazy">
             </div>
+            {% if registerModalShow %}
+                <script>
+                    $('#modalFillIn1').modal('show');
+                </script>
+            {% elif loginModalShow %}
+                <script>
+                    $('#modalFillIn2').modal('show');
+                </script>
+            {% endif %}
 
             <div class="login-container bg-white">
                 <div class="main-right">
