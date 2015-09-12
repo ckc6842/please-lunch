@@ -18,7 +18,6 @@ def security_login_context_processor():
 
 
 # 회원가입 렌더링 할때 dict으로 넘기면 추가적으로 매개변수를 줄수 있음
-# 렌더링 할 때 모달을 어떻게 띄우지??
 @security.register_context_processor
 def security_register_context_processor():
     return dict(login_user_form=LoginForm(), registerModalShow=True)
@@ -50,7 +49,7 @@ class MainView(FlaskView):
     @login_required
     def recommend(self):
         foods = Food.query.all()
-
+        # recommend_food 가 작동하지 않을 경우 그냥 random으로 foodName을 가져온다.
         try:
             food_name = recommend_food(current_user)
         except:
