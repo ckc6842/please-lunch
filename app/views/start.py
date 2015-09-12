@@ -17,6 +17,7 @@ class StartView(FlaskView):
             return render_template('start/index.html')
 
     def post(self):
+        print 'post'
         if not current_user.is_evaluate:
             if request.method == 'POST':
                 food_id = Food.query.filter_by(foodName=request.json['foodName']).one().id
@@ -43,10 +44,13 @@ class StartView(FlaskView):
             flash('You are already evaluated')
             return redirect(url_for('MainView:recommend'))
 
+    def evaluate(self):
+        return redirect(url_for('MainView:recommend'))
+
     @route('/getfoodlist/', methods=['GET', 'POST'])
     def getfoodlist(self):
-        return jsonify({'foodlist' : [      # 어떤 음식을 평가하게할지?
-            {'id' : 1, 'foodName' : '짜장면', 'image' : 'http://korcan50years.files.wordpress.com/2014/02/ed9884eb8c80-eca79cec9ea5eba9b4.jpg'},
-            {'id' : 2, 'foodName' : '떡', 'image' : 'http://cfile239.uf.daum.net/image/1502AA3A4E5DD5EB151A4C'},
-            {'id' : 3, 'foodName' : '라면', 'image' : 'http://dimg.tagstory.com/dailypod/article/488.jpg'},
-        ]})
+        foodqueried =  Food.query.all()
+
+        foodlist = {'foodlist': [{'id': food.id, 'foodName': food.foodName, 'image': food.img} for food in foodqueried]}
+
+        return jsonify(foodlist)
