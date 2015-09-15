@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 __author__ = 'bagmyeongho'
 
+#추가해야할 사항들
+#샐러리를 이용하여 3일마다 한번씩 유저 짠맛,단맛,매운맛을 갱신하므로 3일마다 한번씩 User_score를 지워야됨
+#알고리즘 ㅅㅂ
+
+
+
 import random
 from app.models import FoodScore, UserFoodScore, UserScore, User
 from app import db
