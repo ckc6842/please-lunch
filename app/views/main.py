@@ -51,8 +51,8 @@ class MainView(FlaskView):
         foods = Food.query.all()
         # recommend_food 가 작동하지 않을 경우 그냥 random으로 foodName을 가져온다.
         try:
-            food_name = recommend_food(current_user)
+            food = recommend_food(current_user)
         except:
-            food_name = random.choice(foods).foodName
+            food = random.choice(foods)
 
-        return render_template('main/recommend.html', foodName=food_name)
+        return render_template('main/recommend.html', food=food)
