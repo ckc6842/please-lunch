@@ -17,6 +17,7 @@ def evaluate_user_score(user):
     max_rating = 5
     max_star = 5
 
+    #맛
     sum_salty = []
     sum_sweety = []
     sum_spicy = []
@@ -29,6 +30,7 @@ def evaluate_user_score(user):
     sum_crunky = [] #바삭한 맛
     sum_ruber = [] #졸깃한 맛
 
+    #조리법
     sum_boil = [] #끓이기
     sum_hard_boil = [] #졸이기
     sum_steam = [] #찌기
@@ -38,6 +40,15 @@ def evaluate_user_score(user):
     sum_water = [] #삶기
     sum_spoiled = [] #삭히기
     sum_little_watter = [] #데치기
+
+    #국가
+    sum_kr = []
+    sum_chi = []
+    sum_jp = []
+    sum_eu = []
+    sum_india = []
+    sum_junk = [] #분식
+
 
     #쿼리 선언
     # temp에 접속해 있는 유저가 평가한 음식의 점수를 모두 불러온다 user_id에는 나중에 현재 접속한 유저의 값이 들어오도록 수정
@@ -300,6 +311,90 @@ def evaluate_user_score(user):
     object_temp = UserScore(user.id, "Cook", 9, round(user_little_water, 2))  # 데치기 targetId = 9
     db.session.add(object_temp)
 
+    #나라에 대한 필터링
+    # 한식
+    for v in user_food_score_by_id:
+        try:
+            user_kr_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
+                                .filter_by(targetId = 1).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        except:
+            user_kr_temp = 0
+
+        sum_kr.append(user_kr_temp)
+
+    user_kr = (sum(sum_kr) / (max_star * float(len(sum_kr))))
+    object_temp = UserScore(user.id, "Nation", 1, round(user_kr, 2))  # 한식 targetId = 1
+    db.session.add(object_temp)
+
+    # 중식
+    for v in user_food_score_by_id:
+        try:
+            user_chi_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
+                                .filter_by(targetId = 2).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        except:
+            user_chi_temp = 0
+
+        sum_chi.append(user_chi_temp)
+
+    user_chi = (sum(sum_chi) / (max_star * float(len(sum_chi))))
+    object_temp = UserScore(user.id, "Nation", 2, round(user_chi, 2))  # 중식 targetId = 2
+    db.session.add(object_temp)
+
+    # 일식
+    for v in user_food_score_by_id:
+        try:
+            user_jp_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
+                                .filter_by(targetId = 3).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        except:
+            user_jp_temp = 0
+
+        sum_jp.append(user_jp_temp)
+
+    user_jp = (sum(sum_jp) / (max_star * float(len(sum_jp))))
+    object_temp = UserScore(user.id, "Nation", 3, round(user_jp, 2))  # 일식 targetId = 3
+    db.session.add(object_temp)
+
+    # 양식
+    for v in user_food_score_by_id:
+        try:
+            user_eu_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
+                                .filter_by(targetId = 4).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        except:
+            user_eu_temp = 0
+
+        sum_eu.append(user_eu_temp)
+
+    user_eu = (sum(sum_eu) / (max_star * float(len(sum_eu))))
+    object_temp = UserScore(user.id, "Nation", 4, round(user_eu, 2))  # 양식 targetId = 4
+    db.session.add(object_temp)
+
+    # 동남아
+    for v in user_food_score_by_id:
+        try:
+            user_india_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
+                                .filter_by(targetId = 5).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        except:
+            user_india_temp = 0
+
+        sum_india.append(user_india_temp)
+
+    user_india = (sum(sum_india) / (max_star * float(len(sum_india))))
+    object_temp = UserScore(user.id, "Nation", 5, round(user_india, 2))  # 동남아식 targetId = 5
+    db.session.add(object_temp)
+
+    # 분식
+    for v in user_food_score_by_id:
+        try:
+            user_junk_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
+                                .filter_by(targetId = 6).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        except:
+            user_junk_temp = 0
+
+        sum_junk.append(user_junk_temp)
+
+    user_junk = (sum(sum_junk) / (max_star * float(len(sum_junk))))
+    object_temp = UserScore(user.id, "Nation", 6, round(user_junk, 2))  # 동남아식 targetId = 5
+    db.session.add(object_temp)
     # score_list엔 각각의 음식의 맛 점수와 유저가 가지고있는 맛의 점수를 비교하여 차이가 가장 적은 것을 선택해주는 알고리즘을 이용중이다.
 
     temp_dic = {}
