@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% include 'module/_upper_bar.html' %}
 {% block body %}
-    <h1> 오늘은 {{ food.foodName }}이(가) 먹고 싶으신가요? </h1>
-    {% if food.img %}
-        <img src="{{ food.img }}" width="400" height="300">
-    {% endif %}
+    <p> 오늘은 {{ foodName }}이(가) 먹고 싶으신가요? </p>
+    <!--<img src="{{ food.img }}" width="400" height="300">-->
 {% endblock %}
