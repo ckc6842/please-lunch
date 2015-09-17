@@ -53,6 +53,6 @@ class MainView(FlaskView):
         try:
             food_name = evaluate_user_score(current_user)
         except:
-            food_name = random.choice(foods).foodName
+            food = random.choice(foods)
 
-        return render_template('main/recommend.html', foodName=food_name)
+        return render_template('main/recommend.html', food=food_name)

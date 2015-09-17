@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>{{ self | quoted }} - Admin</title>
+    <title>점심을 부탁해 - 관리자</title>
     {% include 'module/_images.html' %}
     <!-- Bootstrap Core CSS -->
     <link href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -66,7 +66,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('AdminView:index') }}">Administrator Page</a>
+            <a class="navbar-brand" href="{{ url_for('MainView:index') }}">메인페이지로 돌아가기</a>
         </div>
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
