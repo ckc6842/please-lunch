@@ -24,10 +24,12 @@
     <div class=" pull-right">
         <div class="visible-lg visible-md m-t-10">
             <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
-            <!-- 페이스북 프사
+                {% if current_user.is_authenticated() %}
+                    <!-- 페이스북 프사
                 <span class="thumbnail-wrapper d32 circular inline m-t-5">
                     <img src="{{ current_user.get_facebook_connections()[0].image_url }}}" alt="" data-src="{{ current_user.get_facebook_connections()[0].image_url }}" ui-jq="unveil" data-src-retina="{{ current_user.get_facebook_connections()[0].image_url }}" width="32" height="32">
                 </span>-->
+                {% endif %}
                 <span class="semi-bold">
                     {% if current_user.last_name and current_user.first_name %}
                         <p class="small hint-text m-t-5">
@@ -44,15 +46,29 @@
                          ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/lock_icon.png') }}">
                 </button>
                 <ul class="dropdown-menu profile-dropdown" role="menu">
-                    <li><a href="{{ url_for('MainView:index') }}
-                        {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
-                        메인페이지</a>
-                    </li>
+
                     {% if not current_user.is_authenticated() %}
                         {% if security.registerable %}
-                            <li><a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">회원가입</a><br/></li>
+                            <li><a href="{{ url_for_security('register') }}
+                            {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}
+                            {% endif %}">회원가입</a></li>
+                        {% endif %}
+                            <li><a href="{{ url_for_security('login') }}
+                            {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}
+                            {% endif %}">로그인</a></li>
+                            <li><a href="{{ url_for_security('forgot_password') }}
+                            {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}
+                            {% endif %}">비밀번호 찾기</a></li>
+                        {% if security.confirmable %}
+                            <li><a href="{{ url_for_security('send_confirmation') }}
+                            {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}
+                            {% endif %}">메일 다시 보내기</a></li>
                         {% endif %}
                     {% else %} <!-- 로그인 중-->
+                        <li><a href="{{ url_for('MainView:recommend') }}
+                        {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
+                        추천받기</a>
+                        </li>
                         <li><a href="{{ url_for('AuthView:profile') }}
                         {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
                             프로필</a>
