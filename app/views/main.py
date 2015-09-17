@@ -5,7 +5,7 @@ from flask import render_template, redirect, url_for
 from flask_classy import FlaskView
 from flask.ext.login import login_required, current_user
 from flask_security.forms import LoginForm, RegisterForm
-from app.views.recommend_food import recommend_food
+from app.views.evaluate_user_score import evaluate_user_score
 
 from app.models import Food, security
 import random
@@ -51,7 +51,7 @@ class MainView(FlaskView):
         foods = Food.query.all()
         # recommend_food 가 작동하지 않을 경우 그냥 random으로 foodName을 가져온다.
         try:
-            food_name = recommend_food(current_user)
+            food_name = evaluate_user_score(current_user)
         except:
             food_name = random.choice(foods).foodName
 
