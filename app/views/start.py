@@ -10,12 +10,17 @@ class StartView(FlaskView):
     decorators = [login_required]
     route_base = '/start/'
     foods = Food.query.all()
+    user = current_user
 
     def index(self):
-        if current_user.is_evaluate:
+        if self.user.is_evaluate:
             return redirect(url_for('MainView:recommend'))
         else:
-            return render_template('start/index.html',foodSize=len(self.foods),foodEvalCount=UserFoodScore.query.filter_by(user_id=current_user.id).count())
+            return render_template('start/index.html',foodSize=len(self.foods),foodEvalCount=UserFoodScore.query.filter_by(user_id=self.user.id).count())
+
+    def evalcount(self):
+        return jsonify({"UserEvalCount": UserFoodScore.query.filter_by(user_id=self.user.id).count()})
+
 
     def post(self):
         if not current_user.is_evaluate:
