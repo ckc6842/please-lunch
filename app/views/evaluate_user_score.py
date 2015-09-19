@@ -3,16 +3,15 @@ __author__ = 'bagmyeongho'
 
 #추가해야할 사항들
 #샐러리를 이용하여 3일마다 한번씩 유저 짠맛,단맛,매운맛을 갱신하므로 3일마다 한번씩 User_score를 지워야됨
-#알고리즘 ㅅㅂ
-
+# 기능별로 2개의 파일로 나누었음
 
 
 import random
-from app.models import FoodScore, UserFoodScore, UserScore, User
+from app.models import FoodScore, UserFoodScore, UserScore
 from app import db
 
 
-def evaluate_user_score(user):
+def evaluate_taste_score(user):
     #변수선언
     max_rating = 5
     max_star = 5
@@ -54,14 +53,11 @@ def evaluate_user_score(user):
     # temp에 접속해 있는 유저가 평가한 음식의 점수를 모두 불러온다 user_id에는 나중에 현재 접속한 유저의 값이 들어오도록 수정
     user_food_score_by_id = UserFoodScore.query.filter_by(user_id = user.id).all()
 
-    # 푸드스코어 쿼리
-    food_score_by_taste = FoodScore.query.filter_by(targetEnum = 'Taste').all()
-    food_score_by_cook = FoodScore.query.filter_by(targetEnum = 'Cook').all()
 
     # 유저의 개인이 평가한 맛의 평균을 구하는 식
     # 짠맛
     for v in user_food_score_by_id:
-        usersalt_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste")\
+        usersalt_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste") \
                             .filter_by(targetId = 1).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
 
         sum_salty.append(usersalt_temp)
@@ -74,7 +70,7 @@ def evaluate_user_score(user):
 
     # 단맛
     for v in user_food_score_by_id:
-        usersweety_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste")\
+        usersweety_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste") \
                               .filter_by(targetId = 2).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         sum_sweety.append(usersweety_temp)
 
@@ -86,7 +82,7 @@ def evaluate_user_score(user):
 
     #매운맛
     for v in user_food_score_by_id:
-        userspicy_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste")\
+        userspicy_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste") \
                              .filter_by(targetId = 3).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         sum_spicy.append(userspicy_temp)
 
@@ -98,7 +94,7 @@ def evaluate_user_score(user):
 
     # 신맛
     for v in user_food_score_by_id:
-        usersour_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste")\
+        usersour_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste") \
                             .filter_by(targetId = 4).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
 
         sum_sour.append(usersour_temp)
@@ -109,8 +105,8 @@ def evaluate_user_score(user):
 
     # 쓴맛
     for v in user_food_score_by_id:
-        userbitter_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste")\
-                            .filter_by(targetId = 5).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        userbitter_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste") \
+                              .filter_by(targetId = 5).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
 
         sum_bitter.append(userbitter_temp)
 
@@ -120,8 +116,8 @@ def evaluate_user_score(user):
 
     # 고소한 맛
     for v in user_food_score_by_id:
-        user_roast_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste")\
-                            .filter_by(targetId = 6).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        user_roast_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste") \
+                              .filter_by(targetId = 6).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
 
         sum_roast_aromatic.append(user_roast_temp)
 
@@ -131,7 +127,7 @@ def evaluate_user_score(user):
 
     # 시원한 맛
     for v in user_food_score_by_id:
-        usercool_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste")\
+        usercool_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste") \
                             .filter_by(targetId = 7).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
 
         sum_cool.append(usercool_temp)
@@ -142,8 +138,8 @@ def evaluate_user_score(user):
 
     # 느끼한 맛
     for v in user_food_score_by_id:
-        user_greasy_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste")\
-                            .filter_by(targetId = 8).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        user_greasy_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste") \
+                               .filter_by(targetId = 8).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
 
         sum_greasy.append(user_greasy_temp)
 
@@ -153,8 +149,8 @@ def evaluate_user_score(user):
 
     # 개운한 맛
     for v in user_food_score_by_id:
-        userfresh_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste")\
-                            .filter_by(targetId = 9).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        userfresh_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste") \
+                             .filter_by(targetId = 9).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
 
         sum_fresh.append(userfresh_temp)
 
@@ -164,8 +160,8 @@ def evaluate_user_score(user):
 
     # 바삭한 맛
     for v in user_food_score_by_id:
-        usercrunky_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste")\
-                            .filter_by(targetId = 10).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        usercrunky_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste") \
+                              .filter_by(targetId = 10).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
 
         sum_crunky.append(usercrunky_temp)
 
@@ -175,8 +171,8 @@ def evaluate_user_score(user):
 
     # 쫄깃한 맛
     for v in user_food_score_by_id:
-        user_rubber_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste")\
-                            .filter_by(targetId = 11).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+        user_rubber_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Taste") \
+                               .filter_by(targetId = 11).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
 
         sum_ruber.append(user_rubber_temp)
 
@@ -188,7 +184,7 @@ def evaluate_user_score(user):
     # 끓이기
     for v in user_food_score_by_id:
         try:
-            userboil_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook")\
+            userboil_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook") \
                                 .filter_by(targetId = 1).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             userboil_temp = 0
@@ -202,8 +198,8 @@ def evaluate_user_score(user):
     # 졸이기
     for v in user_food_score_by_id:
         try:
-            user_hard_boil_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook")\
-                                .filter_by(targetId = 2).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+            user_hard_boil_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook") \
+                                      .filter_by(targetId = 2).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             user_hard_boil_temp = 0
 
@@ -216,8 +212,8 @@ def evaluate_user_score(user):
     # 찌기
     for v in user_food_score_by_id:
         try:
-            usersteam_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook")\
-                                .filter_by(targetId = 3).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+            usersteam_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook") \
+                                 .filter_by(targetId = 3).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             usersteam_temp = 0
 
@@ -230,7 +226,7 @@ def evaluate_user_score(user):
     # 볶기
     for v in user_food_score_by_id:
         try:
-            userfire_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook")\
+            userfire_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook") \
                                 .filter_by(targetId = 4).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             userfire_temp = 0
@@ -244,8 +240,8 @@ def evaluate_user_score(user):
     # 튀기기
     for v in user_food_score_by_id:
         try:
-            userfried_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook")\
-                                .filter_by(targetId = 5).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+            userfried_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook") \
+                                 .filter_by(targetId = 5).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             userfried_temp = 0
 
@@ -258,7 +254,7 @@ def evaluate_user_score(user):
     # 굽기
     for v in user_food_score_by_id:
         try:
-            userbake_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook")\
+            userbake_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook") \
                                 .filter_by(targetId = 6).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             userbake_temp = 0
@@ -272,8 +268,8 @@ def evaluate_user_score(user):
     # 삶기
     for v in user_food_score_by_id:
         try:
-            userwater_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook")\
-                                .filter_by(targetId = 7).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+            userwater_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook") \
+                                 .filter_by(targetId = 7).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             userwater_temp = 0
 
@@ -286,8 +282,8 @@ def evaluate_user_score(user):
     # 삭히기
     for v in user_food_score_by_id:
         try:
-            userspoil_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook")\
-                                .filter_by(targetId = 8).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+            userspoil_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook") \
+                                 .filter_by(targetId = 8).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             userspoil_temp = 0
 
@@ -300,8 +296,8 @@ def evaluate_user_score(user):
     # 데치기
     for v in user_food_score_by_id:
         try:
-            user_little_water_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook")\
-                                .filter_by(targetId = 9).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+            user_little_water_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Cook") \
+                                         .filter_by(targetId = 9).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             user_little_water_temp = 0
 
@@ -315,8 +311,8 @@ def evaluate_user_score(user):
     # 한식
     for v in user_food_score_by_id:
         try:
-            user_kr_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
-                                .filter_by(targetId = 1).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+            user_kr_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation") \
+                               .filter_by(targetId = 1).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             user_kr_temp = 0
 
@@ -329,7 +325,7 @@ def evaluate_user_score(user):
     # 중식
     for v in user_food_score_by_id:
         try:
-            user_chi_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
+            user_chi_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation") \
                                 .filter_by(targetId = 2).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             user_chi_temp = 0
@@ -343,8 +339,8 @@ def evaluate_user_score(user):
     # 일식
     for v in user_food_score_by_id:
         try:
-            user_jp_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
-                                .filter_by(targetId = 3).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+            user_jp_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation") \
+                               .filter_by(targetId = 3).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             user_jp_temp = 0
 
@@ -357,8 +353,8 @@ def evaluate_user_score(user):
     # 양식
     for v in user_food_score_by_id:
         try:
-            user_eu_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
-                                .filter_by(targetId = 4).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+            user_eu_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation") \
+                               .filter_by(targetId = 4).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             user_eu_temp = 0
 
@@ -371,8 +367,8 @@ def evaluate_user_score(user):
     # 동남아
     for v in user_food_score_by_id:
         try:
-            user_india_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
-                                .filter_by(targetId = 5).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+            user_india_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation") \
+                                  .filter_by(targetId = 5).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             user_india_temp = 0
 
@@ -385,8 +381,8 @@ def evaluate_user_score(user):
     # 분식
     for v in user_food_score_by_id:
         try:
-            user_junk_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation")\
-                                .filter_by(targetId = 6).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
+            user_junk_temp = FoodScore.query.filter_by(food_id = v.food_id).filter_by(targetEnum = "Nation") \
+                                 .filter_by(targetId = 6).one().score * v.score # temp가 UserFoodScore의 쿼리를 이미 받아옴
         except:
             user_junk_temp = 0
 
@@ -395,72 +391,6 @@ def evaluate_user_score(user):
     user_junk = (sum(sum_junk) / (max_star * float(len(sum_junk))))
     object_temp = UserScore(user.id, "Nation", 6, round(user_junk, 2))  # 동남아식 targetId = 5
     db.session.add(object_temp)
-    # score_list엔 각각의 음식의 맛 점수와 유저가 가지고있는 맛의 점수를 비교하여 차이가 가장 적은 것을 선택해주는 알고리즘을 이용중이다.
-
-    temp_dic = {}
-
-    # 유사도 공식 = abs(temp['짠맛']-user_salty) + abs(temp['단맛']-user_sweety) + abs(temp['매운맛']-user_spicy)
-    # 아래 식은 딕셔너리의 키값을 검사하여 키값이 있으면 유사도를 더하고, 없으면 키값을 추가하여 유사도를 더하는 알고리즘
-    for v in food_score_by_taste:
-        temp_name = v.food.foodName
-        sim = 0
-        if temp_name in temp_dic:
-            if v.targetId == 1:
-                sim = abs(v.score - user_salty)
-            elif v.targetId == 2:
-                sim = abs(v.score - user_sweety)
-            elif v.targetId == 3:
-                sim = abs(v.score - user_spicy)
-            elif v.targetId == 4:
-                sim = abs(v.score - user_sour)
-            elif v.targetId == 5:
-                sim = abs(v.score - user_bitter)
-            elif v.targetId == 6:
-                sim = abs(v.score - user_roast)
-            elif v.targetId == 7:
-                sim = abs(v.score - user_cool)
-            elif v.targetId == 8:
-                sim = abs(v.score - user_greasy)
-            elif v.targetId == 9:
-                sim = abs(v.score - user_fresh)
-            elif v.targetId == 10:
-                sim = abs(v.score - user_crunky)
-            elif v.targetId == 11:
-                sim = abs(v.score - user_rubber)
-            temp_dic[temp_name] += round(sim, 2)
-        else :
-            if v.targetId == 1:
-                sim = abs(v.score - user_salty)
-            elif v.targetId == 2:
-                sim = abs(v.score - user_sweety)
-            elif v.targetId == 3:
-                sim = abs(v.score - user_spicy)
-            elif v.targetId == 4:
-                sim = abs(v.score - user_sour)
-            elif v.targetId == 5:
-                sim = abs(v.score - user_bitter)
-            elif v.targetId == 6:
-                sim = abs(v.score - user_roast)
-            elif v.targetId == 7:
-                sim = abs(v.score - user_cool)
-            elif v.targetId == 8:
-                sim = abs(v.score - user_greasy)
-            elif v.targetId == 9:
-                sim = abs(v.score - user_fresh)
-            elif v.targetId == 10:
-                sim = abs(v.score - user_crunky)
-            elif v.targetId == 11:
-                sim = abs(v.score - user_rubber)
-            temp_dic[temp_name] = round(sim, 2)
-
-    #final_list엔 최종적으로 맛의 유사도가 높은 것들 10개를 선정하여 저장한다.
-    random_list= []
-
-    #temp_dic에 있는 모든 음식과 그 음식의 유사도에서 value값이 최소인 것들을 차례대로 pop하여 final_list에 넣는다.
-    for v in range(0, 10):
-        random_list.append(min(temp_dic, key=temp_dic.get))
-        temp_dic.pop(min(temp_dic, key=temp_dic.get), None)
-
     db.session.commit()
-    #일단 DB에 넣는 과정은 생략함
-    return random_list[random.randrange(0,10)]
+
+    return max_rating
