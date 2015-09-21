@@ -51,12 +51,18 @@ class MainView(FlaskView):
     @login_required
     def recommend(self):
         foods = Food.query.all()
-        # recommend_food 가 작동하지 않을 경우 그냥 random으로 foodName을 가져온다.
-        # 샐러리로 evaluate_user_score와 add_food_list를 3일마다 한번 실행시켜줘야함
-        # evaluate_user_score는 user_score Table에 user의 각종 데이터를 넣는 알고리즘
-        # add_food_list는 user_score를 가지고 음식10개를 최종 선발해주는 알고리즘
-        # choice_food는 add_food_list에서 뽑힌 10개의 음식리스트(user_food)에서 랜덤으로 하나 리턴해줌
-        # add_food_list 지금 버전에서는 시간대는 고려되지 않기때문에 Time Table에 Dummy Data를 넣어야 작동함
+        """
+        recommend_food 가 작동하지 않을 경우 그냥 random으로 foodName을 가져온다.
+        샐러리로 evaluate_user_score와 add_food_list를 3일마다 한번 실행시켜줘야함
+        evaluate_user_score는 user_score Table에 user의 각종 데이터를 넣는 알고리즘
+        add_food_list는 user_score를 가지고 음식10개를 최종 선발해주는 알고리즘
+        choice_food는 add_food_list에서 뽑힌 10개의 음식리스트(user_food)에서 랜덤으로 하나 리턴해줌
+        add_food_list 지금 버전에서는 시간대는 고려되지 않기때문에 Time Table에 Dummy Data를 넣어야 작동함
+        """
+        # food_name2 = evaluate_taste_score(current_user)
+        # food_score = add_food_list(current_user)
+        # food_name = random.choice(foods)
+
         try:
             food_name = choice_food(current_user)
         except:
