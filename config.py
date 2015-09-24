@@ -71,9 +71,9 @@ SOCIAL_BLUEPRINT = {
     # https://developers.facebook.com/apps/
     "flask_social_blueprint.providers.Facebook": {
         # App ID
-        'consumer_key': '684002831732805',
+        'consumer_key': '705027926296962',
         # App Secret
-        'consumer_secret': '51d173f01a0290682be0af5db48550a6'
+        'consumer_secret': '17dce6b2f16facdc6f88dff167938c1a'
     },
     # https://apps.twitter.com/app/new
     "flask_social_blueprint.providers.Twitter": {

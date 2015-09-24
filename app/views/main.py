@@ -7,7 +7,7 @@ from flask.ext.login import login_required, current_user
 from flask_security.forms import LoginForm, RegisterForm
 from app.views.evaluate_user_score import evaluate_taste_score
 from app.views.add_food_list import add_food_list
-from app.views.choice_food import choice_food
+from app.views.Choice_food import choice_food
 
 from app.models import Food, security
 import random

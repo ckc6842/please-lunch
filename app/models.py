@@ -143,7 +143,8 @@ class Connection(db.Model):
                     raise Exception(_(msg))
 
                 conflict = User.query.filter(User.email == email).first()
-                # User already registered with email.s
+                # User already registered with email
+
                 if conflict:
                     login_user(conflict)
                     connection = cls(user_id=conflict.id, **profile.data)
