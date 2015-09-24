@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
 # Import flask dependencies
+import random
+
 from flask import render_template, redirect, url_for, jsonify
 from flask_classy import FlaskView
 from flask.ext.login import login_required, current_user
 from flask_security.forms import LoginForm, RegisterForm
-from app.views.evaluate_user_score import evaluate_taste_score
-from app.views.add_food_list import add_food_list
-from app.views.Choice_food import choice_food
 
+from app.views.Choice_food import choice_food
 from app.models import Food, security
-import random
 
 
 # 로그인 렌더링 할때 dict으로 넘기면 추가적으로 매개변수를 줄수 있음
@@ -70,6 +69,5 @@ class MainView(FlaskView):
             food = choice_food(current_user)
         except:
             food = random.choice(foods)
-
 
         return jsonify({'foodName' : food.foodName})
