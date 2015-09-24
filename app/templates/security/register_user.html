@@ -12,6 +12,10 @@
         {% if register_user_form.password_confirm %}
             {{ render_field_with_errors(register_user_form.password_confirm, placeholder="Retype your password", class="form-control") }}
         {% endif %}
-        {{ render_field(register_user_form.submit, class="btn btn-primary btn-cons m-t-10") }}
+
+        {{ render_field(register_user_form.submit, class="btn btn-primary col-md-6 pull-right mg-top") }}
+
+
     </form>
+
 {% endblock %}

@@ -46,9 +46,8 @@ html {
 ------------------------------------------------------------------
 */
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    margin: auto;
+    padding: auto;
     background-color: #fafafa;
 }
 body.fixed-header .header {
@@ -2435,22 +2434,20 @@ hr.dotted {
     -ms-text-size-adjust: 100%;
     -webkit-font-feature-settings: "kern" 1;
     -moz-font-feature-settings: "kern" 1;
-    margin-bottom: 0;
     border: 1px solid #f0f0f0;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
     border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
     background-image: none !important;
-    color: #626262;
+    color: #000;
     background-color: #ffffff;
     text-shadow: none;
     box-shadow: none;
     line-height: 21px;
-    padding-left: 17px;
-    padding-right: 17px;
+    margin: 5px 0px;
     position: relative;
     transition: color 0.1s linear 0s, background-color 0.1s linear 0s, opacity 0.2s linear 0s !important;
 }
@@ -2590,8 +2587,8 @@ fieldset[disabled] .btn-success.active {
 .btn-complete,
 .btn-complete:focus {
     color: #ffffff;
-    background-color: #48b0f7;
-    border-color: #48b0f7;
+    background-color: #4969F0;
+    border-color: #4969F0;
 }
 .btn-complete.active,
 .btn-complete:active,
@@ -2606,8 +2603,8 @@ fieldset[disabled] .btn-success.active {
 .btn-complete.hover,
 .btn-complete:hover,
 .open .dropdown-toggle.btn-complete {
-    background-color: #6dc0f9;
-    border-color: #6dc0f9;
+    background-color: #5d84f0;
+    border-color: #5d84f0;
     color: #ffffff;
 }
 .btn-complete.active:hover {
@@ -9181,19 +9178,19 @@ Responsive Util
     height: 100%;
 }
 .login-wrapper .bg-pic {
-    position: absolute;
     width: 100%;
     overflow: hidden;
 }
 .login-wrapper .bg-pic > img {
     height: 100%;
+    position: absolute;
 }
 .login-wrapper .login-container {
     width: 496px;
-    display: table-cell;
     vertical-align: middle;
     position: relative;
-    float: right;
+    margin: 0 auto;
+
 }
 .login-wrapper .bg-caption {
     width: 500px;
