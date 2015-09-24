@@ -5,7 +5,9 @@
     <div class="main">
         <div class="content">
             <div class="content-header">
-                <img src="{{ url_for('static', filename='assets/img/main.png') }}"/>
+                <a href="{{ url_for('MainView:index') }}">
+                    <img src="{{ url_for('static', filename='assets/img/main.png') }}"/>
+                </a>
             </div>
             <div class="content-wrap">
                 <div class="col-md-12">
