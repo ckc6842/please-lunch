@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import flask dependencies
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, jsonify
 from flask_classy import FlaskView
 from flask.ext.login import login_required, current_user
 from flask_security.forms import LoginForm, RegisterForm
@@ -48,6 +48,9 @@ class MainView(FlaskView):
 
     @login_required
     def recommend(self):
+        return render_template('main/recommend.html')
+
+    def recommend_food(self):
         foods = Food.query.all()
         # recommend_food 가 작동하지 않을 경우 그냥 random으로 foodName을 가져온다.
         try:
@@ -55,4 +58,6 @@ class MainView(FlaskView):
         except:
             food = random.choice(foods)
 
-        return render_template('main/recommend.html', food=food)
+
+        return jsonify({'foodName' : food.foodName})
+
