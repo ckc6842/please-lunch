@@ -3,6 +3,10 @@
 * Override Pages default styles or create your own styles here
 
 */
+body {
+    font-family: 'Nanum Gothic';
+}
+
 .rating {
     color: #a9a9a9;
     font-size: 30px;
@@ -10,7 +14,7 @@
 }
 
 .flash          { background: #cee5F5; padding: 0.5em;
-                  border: 1px solid #aacbe2; }
+    border: 1px solid #aacbe2; }
 
 .rating li {
     list-style-type: none;
@@ -33,15 +37,17 @@
     margin: 5px;
 }
 
-.main-right {
-    margin-top: 30%;
+.main {
+    /*background-image: url(../img/demo/background2.jpg);*/
+    /*background-size: 100%;*/
+    background-color: rgba(255,255,255,0.3);
+    position: relative;
+    width: 500px;
+    margin: 13% auto;
     padding: 50px;
+    border-radius: 10px;
 }
 
-.main-right h1 {
-    text-align: center;
-    margin: 40px;
-}
 
 .center-position {
     position: absolute;
@@ -51,8 +57,8 @@
 }
 .lock-icon button{
     -moz-transition:-moz-transform 0.2s ease-in;
--webkit-transition:-webkit-transform 0.2s ease-in;
--o-transition:-o-transform 0.2s ease-in;
+    -webkit-transition:-webkit-transform 0.2s ease-in;
+    -o-transition:-o-transform 0.2s ease-in;
 }
 
 .lock-icon button:hover{
@@ -61,6 +67,94 @@
     -o-transform:scale(1.2);
 }
 
-.start-center{
+.card-description {
+    position: relative;
+    width: 232px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 4px;
+}
 
+.card-description img {
+    position: absolute;
+    max-width: 180%;
+    max-height: 180%;
+    top: -100%;
+    bottom: -100%;
+    left: -100%;
+    right: -100%;
+    margin: auto;
+}
+
+.container-star-rating {
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 10px);
+    text-align: center;
+    font-size: 15px;
+    color: #dddddd;
+    background-color: rgba(1, 1, 1, 0.4);
+    padding: 5px 0 3px 0;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.card.share .card-description img {
+    margin: auto;
+}
+
+.card img {
+    width: auto;
+    max-width: 180%;
+}
+
+body > .wrap{
+    background-image: url(../img/demo/background_re.jpg);
+    background-size: 100%;
+    min-height: 100%;
+    min-width: 1920px;
+    width: 105%;
+    height: 105%;
+    position: fixed;
+    left: -1%;
+    top: -1%;
+
+}
+
+.btn-block{
+    height: 50px;
+
+}
+
+.content-wrap{
+    position: relative;
+    height: 100px;
+}
+
+.content-header > img{
+    display: block;
+    width: 370px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.content{
+    margin-top: 5%;
+}
+
+.main-footer{
+    float: right;
+    color: #ff3321;
+}
+
+.main-footer:hover{
+    color: #ff4c3d;
+}
+
+label{
+    color: #222222;
+}
+
+.mg-top{
+    margin-top: 30px;
 }

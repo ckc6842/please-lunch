@@ -1,8 +1,21 @@
 {% extends "base.html" %}
 {% include 'module/_upper_bar.html' %}
 {% block body %}
-    <h1> 오늘은 {{ food.foodName }}이(가) 먹고 싶으신가요? </h1>
-    {% if food.img %}
-        <img src="{{ food.img }}" width="400" height="300">
-    {% endif %}
+
+<div ng-controller="recommendCtrl">
+    <div class="recommend_header" style="height: 100px">
+    </div>
+    <div class="recommend_wrapper" style="width:1000px; margin: 0 auto" ng-init="recommend_check = false;">
+
+        <button class="btn btn-primary" style="display:block; width:200px; margin: 0 auto" ng-click="check_func()">
+            <span class="bold">{{re | angular}}추천받기</span>
+        </button>
+
+        <div ng-show="recommend_check">
+            <h1 style="text-align: center"> 오늘은 {{recommend_food | angular}}이(가) 먹고 싶으신가요? </h1>
+        </div>
+    </div>
+
+</div>
+
 {% endblock %}

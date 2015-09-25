@@ -7,11 +7,15 @@
     <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
         {{ register_user_form.hidden_tag() }}
         {{ render_field_with_errors(register_user_form.email, placeholder="이메일", class="form-control") }}
-        {{ render_field_with_errors(register_user_form.password, placeholder="Minimum of 6 Charactors", class="form-control") }}
+        {{ render_field_with_errors(register_user_form.password, placeholder="최소 6글자", class="form-control") }}
 
         {% if register_user_form.password_confirm %}
-            {{ render_field_with_errors(register_user_form.password_confirm, placeholder="Retype your password", class="form-control") }}
+            {{ render_field_with_errors(register_user_form.password_confirm, placeholder="비밀번호를 다시 입력하세요.", class="form-control") }}
         {% endif %}
-        {{ render_field(register_user_form.submit, class="btn btn-primary btn-cons m-t-10") }}
+
+        {{ render_field(register_user_form.submit, class="btn btn-primary col-md-6 pull-right mg-top") }}
+
+
     </form>
+
 {% endblock %}

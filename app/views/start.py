@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, redirect, url_for, flash, jsonify, request
-from flask_classy import FlaskView, route
+from flask_classy import FlaskView
 from flask_security import login_required, current_user
-from app.models import Food, User, UserFoodScore
+
+from app.models import Food, UserFoodScore
 from app import db
 
 

@@ -1,4 +1,5 @@
 from app import db, app
+from flask.ext.security.utils import login_user
 from flask.ext.security import UserMixin, RoleMixin
 from flask_babel import gettext as _
 from flask_security import Security, SQLAlchemyUserDatastore
@@ -133,26 +134,31 @@ class Connection(db.Model):
         provider = profile.data["provider"]
 
         if not user or user.is_anonymous():
-            # twiiter does not provide email
+            # Twiiter does not provide email
             if not provider == 'Twitter':
                 email = profile.data.get("email")
                 if not email:
                     msg = "Cannot create new user, authentication provider did not provide email"
                     logging.warning(msg)
                     raise Exception(_(msg))
+
                 conflict = User.query.filter(User.email == email).first()
+                # User already registered with email
+
                 if conflict:
-                    msg = "Cannot create new user, email {} is already used. Login and then connect external profile."
-                    msg = _(msg).format(email)
-                    logging.warning(msg)
-                    raise Exception(msg)
+                    login_user(conflict)
+                    connection = cls(user_id=conflict.id, **profile.data)
+                    db.session.add(connection)
+                    db.session.commit()
+                    return connection
             else:
                 username = profile.data.get("username")
+                email = username + "@fox.net"
 
             now = datetime.datetime.now()
             password = password_generator(16)
             user = User(
-                email= username + "@" + "fox.net",
+                email=email,
                 password=encrypt_password(password),
                 first_name=profile.data.get("first_name"),
                 last_name=profile.data.get("last_name"),
