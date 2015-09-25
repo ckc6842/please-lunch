@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, flash, jsonify, request
 from flask_classy import FlaskView
 from flask_security import login_required, current_user
 
-from app.models import Food, UserFoodScore
+from app.models import Food, UserFoodScore, user_datastore
 from app import db
 
 
@@ -17,6 +17,9 @@ class StartView(FlaskView):
         if self.user.is_evaluate:
             return redirect(url_for('MainView:recommend'))
         else:
+	   # user_datastore.create_role(name='admin',description='admin')
+           # user_datastore.add_role_to_user(current_user, 'admin')
+           # db.session.commit()
             return render_template('start/index.html',foodSize=len(self.foods),foodEvalCount=UserFoodScore.query.filter_by(user_id=self.user.id).count())
 
     def evalcount(self):

@@ -20,10 +20,10 @@ if sys.platform == 'win32':
     CELERY_BROKER_URL = 'sqla+' + SQLALCHEMY_DATABASE_URI
     CELERY_RESULT_BACKEND = 'db+mysql+pymysql://root:1234@localhost/please-lunch'
 else:
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:1234@localhost/please-lunch'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:n6!cfe5!73@localhost/please_lunch'
     # celery db config
     CELERY_BROKER_URL = 'sqla+' + SQLALCHEMY_DATABASE_URI
-    CELERY_RESULT_BACKEND = 'db+mysql+pymysql://root:1234@localhost/please-lunch'
+    CELERY_RESULT_BACKEND = 'db+mysql+pymysql://root:n6!cfe5!73@localhost/please_lunch'
 
 DATABASE_CONNECT_OPTIONS = {}
 
@@ -100,9 +100,14 @@ SOCIAL_BLUEPRINT = {
     # https://developers.facebook.com/apps/
     "flask_social_blueprint.providers.Facebook": {
         # App ID
-        'consumer_key': '705027926296962',
-        # App Secret
-        'consumer_secret': '17dce6b2f16facdc6f88dff167938c1a'
+	# localhost testing  App ID
+        #'consumer_key': '705027926296962',
+	# Server 용 App ID
+	'consumer_key': '684002831732805',
+        # localhost testing App Secret
+	# 'consumer_secret': '17dce6b2f16facdc6f88dff167938c1a'
+	# server App secret
+	'consumer_secret':'51d173f01a0290682be0af5db48550a6'
     },
     # https://apps.twitter.com/app/new
     "flask_social_blueprint.providers.Twitter": {
