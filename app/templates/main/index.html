@@ -5,7 +5,9 @@
     <div class="main">
         <div class="content">
             <div class="content-header">
-                <img src="{{ url_for('static', filename='assets/img/main.png') }}"/>
+                <a href="{{ url_for('MainView:index') }}">
+                    <img src="{{ url_for('static', filename='assets/img/main.png') }}"/>
+                </a>
             </div>
             <div class="content-wrap">
                 <div class="col-md-12">
@@ -44,9 +46,9 @@
 
             </div>
         </div>
-        <a href="{{ url_for_security('forgot_password') }}"><div class="main-footer col-md-6 text-right"> <span class="bold">비밀번호 찾기</span></div></a>
+        <a href="{{ url_for_security('forgot_password') }}">
+            <div class="main-footer col-md-6 text-right"> <span class="bold">비밀번호 찾기</span></div></a>
     </div>
 
 </div>
-
 {% endblock %}
