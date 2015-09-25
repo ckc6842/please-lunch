@@ -140,8 +140,7 @@ body.dashboard .page-container {
     width: 100%;
     padding: 0 20px;
     z-index: 800;
-    background-color: #ffc000;
-    border-bottom: 5px solid #e0a800;
+    background-color: rgba(255,255,255,0.15);
 }
 .header a {
     color: #3b4751;
@@ -167,7 +166,6 @@ body.dashboard .page-container {
 .header .brand {
     vertical-align: middle;
     width: 280px;
-    text-align: center;
 }
 .header .bubble {
     border-radius: 100%;
