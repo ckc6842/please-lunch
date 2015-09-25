@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% from "module/_macros.html" import render_field_with_errors, render_field, social_register, social_login %}
 {% block body %}
+
     <div class="wrap">
         <div class="main">
             {% block logo %}
@@ -9,6 +10,7 @@
                         <img src="{{ url_for('static', filename='assets/img/main.png') }}"/>
                     </a>
                 </div>
+
             {% endblock %}
             <div class="content">
                 {% block form %}
