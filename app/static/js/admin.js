@@ -18,8 +18,7 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
      else { select.push(Name); }
     };
 
-
-    $http.get('http://127.0.0.1:8080/admin/foodscore/getdata')
+    $http.get(Flask.url_for('AdminView:get_foodscore'))
         .success(function(response){
             $scope.foodscore_cook_table = response.foodscore_cook;
             $scope.foodscore_taste_table = response.foodscore_taste;
@@ -27,7 +26,7 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
         });
 
 
-    $http.get('http://127.0.0.1:8080/admin/getdata')
+    $http.get(Flask.url_for('AdminView:getdata'))
         .success(
         function(response){
             $scope.food_tabledata = response.food;
@@ -41,14 +40,14 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
 
     $scope.open_foodscore = function(temp){
         current_foodName = temp;
-        $http.get('http://127.0.0.1:8080/admin/foodscore/'+ current_foodName)
+        $http.get(Flask.url_for('AdminView:foodcore', )
             .success(function(response){
-                $window.location.href = 'http://127.0.0.1:8080/admin/foodscore/' + current_foodName;
+                $window.location.href = Flask.url_for('AdminView:foodcore', {"foodName" :current_foodName});
             });
     };
 
     $scope.update_foodscore = function(current_foodName, current_targetEnum, current_targetId, current_score){
-        $http.post('http://127.0.0.1:8080/admin/foodscore/',
+        $http.post(Flask.url_for('AdminView:foodscore_index'),
             angular.fromJson({ foodName : current_foodName,
                                targetEnum : current_targetEnum,
                                targetId : current_targetId,
@@ -66,21 +65,22 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
             .success(function(response){
                 alert("submit");
             });
-        $window.location.href = 'http://127.0.0.1:8080/admin/food'
+        $window.location.href = Flask.url_for('AdminView:food_index');
     };
 
     $scope.delete_foodscore = function(current_foodName, current_targetEnum, current_targetId, current_score) {
-        $http.post('http://127.0.0.1:8080/admin/foodscore/delete/',
+        $http.post(Flask.url_for('AdminView:foodscore_delete'));
             angular.fromJson({
                 foodName: current_foodName,
                 targetEnum: current_targetEnum,
                 targetId: current_targetId,
                 score: current_score
-            }))
+            })
             .success(function (response) {
                 alert('delete')
             });
-        $http.get('http://127.0.0.1:8080/admin/foodscore/getdata')
+
+        $http.get(Flask.url_for('AdminView:get_foodscore'))
         .success(function(response){
             $scope.foodscore_cook_table = response.foodscore_cook;
             $scope.foodscore_taste_table = response.foodscore_taste;
@@ -92,21 +92,22 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
         if (temp == null){
             return alert('공백있음');
         }
-        $http.post('http://127.0.0.1:8080/admin/food/add/', angular.fromJson({ foodName : temp }));
+
+        $http.post(Flask.url_for('AdminView:addfood'), angular.fromJson({ foodName : temp }));
         $scope.formData_add_food = '';
-        $http.get('http://127.0.0.1:8080/admin/getdata')
+        $http.get(Flask.url_for('AdminView:getdata'))
             .success(
             function(response){ $scope.food_tabledata = response.food }
             )
     };
 
     $scope.deleteFood = function(temp){
-        if (temp == null){
+        if (temp == null) {
             return alert('공백있음');
         }
-        $http.post('http://127.0.0.1:8080/admin/food/delete/', angular.fromJson({ foodName : temp }));
+        $http.post(Flask.url_for('AdminView:deletefood'), angular.fromJson({ foodName : temp }));
         $scope.formData_del_food = '';
-        $http.get('http://127.0.0.1:8080/admin/getdata')
+        $http.get(Flask.url_for('AdminView:getdata'))
             .success(
             function(response){ $scope.food_tabledata = response.food }
             )
@@ -116,9 +117,9 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
         if (temp == null){
             return alert('공백있음');
         }
-        $http.post('http://127.0.0.1:8080/admin/cook/add/', angular.fromJson({ cookName : temp }));
+        $http.post(Flask.url_for('AdminView:addcook'), angular.fromJson({ cookName : temp }));
         $scope.formData_add_cook = '';
-        $http.get('http://127.0.0.1:8080/admin/getdata')
+        $http.get(Flask.url_for('AdminView:getdata'))
             .success(
             function(response){ $scope.cook_tabledata = response.cook }
             )
@@ -128,9 +129,9 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
         if (temp == null){
             return alert('공백있음');
         }
-        $http.post('http://127.0.0.1:8080/admin/cook/delete/', angular.fromJson({ cookName : temp }));
+        $http.post(Flask.url_for('AdminView:deletecook'), angular.fromJson({ cookName : temp }));
         $scope.formData_del_cook = '';
-        $http.get('http://127.0.0.1:8080/admin/getdata')
+        $http.get(Flask.url_for('AdminView:getdata'))
             .success(
             function(response){ $scope.cook_tabledata = response.cook }
             )
@@ -140,9 +141,9 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
         if (temp == null){
             return alert('공백있음');
         }
-        $http.post('http://127.0.0.1:8080/admin/nation/add/', angular.fromJson({ nationName : temp }));
+        $http.post(Flask.url_for('AdminView:addnation'), angular.fromJson({ nationName : temp }));
         $scope.formData_add_nation = '';
-        $http.get('http://127.0.0.1:8080/admin/getdata')
+        $http.get(Flask.url_for('AdminView:getdata'))
             .success(
             function(response){ $scope.nation_tabledata = response.nation }
             )
@@ -152,9 +153,9 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
         if (temp == null){
             return alert('공백있음');
         }
-        $http.post('http://127.0.0.1:8080/admin/nation/delete/', angular.fromJson({ nationName : temp }));
+        $http.post(Flask.url_for('AdminView:deletenation'), angular.fromJson({ nationName : temp }));
         $scope.formData_del_nation = '';
-        $http.get('http://127.0.0.1:8080/admin/getdata')
+        $http.get(Flask.url_for('AdminView:getdata'))
             .success(
             function(response){ $scope.nation_tabledata = response.nation }
             )
@@ -164,7 +165,7 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
         if (temp == null){
             return alert('공백있음');
         }
-        $http.post('http://127.0.0.1:8080/admin/taste/add/', angular.fromJson({ tasteName : temp }));
+        $http.post(Flask.url_for('AdminView:addtaste'), angular.fromJson({ tasteName : temp }));
         $scope.formData_add_taste = '';
         $http.get('http://127.0.0.1:8080/admin/getdata')
             .success(
@@ -176,9 +177,9 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
         if (temp == null){
             return alert('공백있음');
         }
-        $http.post('http://127.0.0.1:8080/admin/taste/delete/', angular.fromJson({ tasteName : temp }));
+        $http.post(Flask.url_for('AdminView:deletefood'), angular.fromJson({ tasteName : temp }));
         $scope.formData_del_taste = '';
-        $http.get('http://127.0.0.1:8080/admin/getdata')
+        $http.get(Flask.url_for('AdminView:getdata'))
             .success(
             function(response){ $scope.taste_tabledata = response.taste }
             )
@@ -188,10 +189,10 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
         if (timeName == null || startTime == null){
             return alert('공백있음');
         }
-        $http.post('http://127.0.0.1:8080/admin/time/add/', angular.fromJson({ timeName : timeName, startTime : startTime }));
+        $http.post(Flask.url_for('AdminView:addtime'), angular.fromJson({ timeName : timeName, startTime : startTime }));
         $scope.formData_add_time.timeName = '';
         $scope.formData_add_time.startTime = '';
-        $http.get('http://127.0.0.1:8080/admin/getdata')
+        $http.get(Flask.url_for('AdminView:getdata'))
             .success(
             function(response){ $scope.time_tabledata = response.time }
             )
@@ -201,10 +202,10 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
         if (timeName == null){
             return alert('공백있음');
         }
-        $http.post('http://127.0.0.1:8080/admin/time/delete/', angular.fromJson({ timeName : timeName }));
+        $http.post(Flask.url_for('AdminView:deletetime'), angular.fromJson({ timeName : timeName }));
         $scope.formData_del_time.timeName = '';
         $scope.formData_del_time.startTime = '';
-        $http.get('http://127.0.0.1:8080/admin/getdata')
+        $http.get(Flask.url_for('AdminView:getdata'))
             .success(
             function(response){ $scope.time_tabledata = response.time }
             )
