@@ -20,10 +20,10 @@ if sys.platform == 'win32':
     CELERY_BROKER_URL = 'sqla+' + SQLALCHEMY_DATABASE_URI
     CELERY_RESULT_BACKEND = 'db+mysql+pymysql://root:1234@localhost/please-lunch'
 else:
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:n6!cfe5!73@localhost/please_lunch'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:n6!cfe5!73@128.199.154.140/please_lunch'
     # celery db config
     CELERY_BROKER_URL = 'sqla+' + SQLALCHEMY_DATABASE_URI
-    CELERY_RESULT_BACKEND = 'db+mysql+pymysql://root:n6!cfe5!73@localhost/please_lunch'
+    CELERY_RESULT_BACKEND = 'db+' + SQLALCHEMY_DATABASE_URI
 
 DATABASE_CONNECT_OPTIONS = {}
 
