@@ -40,7 +40,7 @@ app.controller("mainCtrl", ['$scope', '$http','$location','$window',function($sc
 
     $scope.open_foodscore = function(temp){
         current_foodName = temp;
-        $http.get(Flask.url_for('AdminView:foodcore', )
+        $http.get(Flask.url_for('AdminView:foodcore', {"foodName" :current_foodName}))
             .success(function(response){
                 $window.location.href = Flask.url_for('AdminView:foodcore', {"foodName" :current_foodName});
             });
