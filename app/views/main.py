@@ -70,4 +70,4 @@ class MainView(FlaskView):
         except:
             food = random.choice(foods)
 
-        return jsonify({'foodName' : food})
+        return jsonify({'foodName': food.foodName})

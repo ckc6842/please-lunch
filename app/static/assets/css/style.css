@@ -119,21 +119,7 @@ body > .wrap{
 
 }
 
-.content-wrap{
-    position: relative;
-    height: 100px;
-}
 
-.content-header > img{
-    display: block;
-    width: 370px;
-    margin: 0 auto;
-    margin-bottom: 30px;
-}
-
-.content{
-    margin-top: 5%;
-}
 
 .main-footer{
     float: right;
@@ -153,18 +139,70 @@ label{
 }
 
 .recommend_wrap{
-    background-image: url(../img/demo/background4.jpg);
+    background-color: #E4E4E4;
     background-size: 100%;
     min-height: 100%;
     min-width: 1920px;
     width: 105%;
     height: 105%;
     position: fixed;
-    left: -1%;
-    top: -1%;
 
 }
 
 .brand > img{
     height: 50px;
+}
+
+#index-logo{
+    width: 100%;
+    margin-bottom: 20px;
+
+}
+
+.btn-register{
+
+    padding: 0;
+    width: 100%;
+
+}
+
+.btn-login{
+    float: left;
+    padding: 0;
+    width: 49%;
+
+}
+
+.btn-social{
+    float: right;
+    padding: 0;
+    width: 49%;
+
+}
+
+.index-wrap{
+    position: relative;
+    height: 120px;
+}
+
+.index-header > img{
+    display: block;
+    width: 370px;
+}
+
+.index-footer{
+    float: left;
+    height: 20px;
+    position: relative;
+}
+
+.index-button{
+    float: left;
+    width: 100%;
+
+}
+
+.index-header{
+    position: relative;
+
 }
