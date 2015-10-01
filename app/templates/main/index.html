@@ -3,31 +3,37 @@
 {% from "module/_macros.html" import render_field_with_errors, render_field, social_login %}
 <div class="wrap">
     <div class="main">
-        <div class="content">
-            <div class="content-header">
+        <div class="index">
+            <div class="index-header">
                 <a href="{{ url_for('MainView:index') }}">
-                    <img src="{{ url_for('static', filename='assets/img/main.png') }}"/>
+                    <img id="index-logo" src="{{ url_for('static', filename='assets/img/main.png') }}"/>
                 </a>
             </div>
-            <div class="content-wrap">
-                <div class="col-md-12">
-                    <a href="{{ url_for_security('register') }}">
-                        <button class="btn btn-block btn-primary">
-                            <span class="bold">회원가입</span>
-                        </button></a>
-                </div>
-                <div class="col-md-6">
-                    <a href="{{ url_for_security('login') }}">
-                        <button class="btn btn-block btn-success">
-                            <span class="bold">로그인</span>
-                        </button></a>
-                </div>
-                <div class="col-md-6">
-                    <a href="{{ url_for('social.login', provider='Facebook') }}">
-                        <button class="btn btn-block btn-complete" type="button">
-                            <img src="{{url_for('static', filename='assets/img/facebook.png')}}"/>
-                            <span class="bold">페이스북 로그인</span>
-                        </button></a>
+
+            <div class="index-wrap">
+                <div class="index-button">
+                    <div class="btn-register">
+                        <a href="{{ url_for_security('register') }}">
+                            <button class="btn btn-block btn-primary">
+                                <span class="bold">회원가입</span>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="btn-login">
+                        <a href="{{ url_for_security('login') }}">
+                            <button class="btn btn-block btn-success">
+                                <span class="bold">로그인</span>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="btn-social">
+                        <a href="{{ url_for('social.login', provider='Facebook') }}">
+                            <button class="btn btn-block btn-complete" type="button">
+                                <img src="{{url_for('static', filename='assets/img/facebook.png')}}"/>
+                                <span class="bold">페이스북 로그인</span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
 
                 <!--구글로 로그인-->
@@ -45,9 +51,11 @@
 
 
             </div>
+            <div class="index-footer">
+                <a href="{{ url_for_security('forgot_password') }}">비밀번호 찾기</a>
+            </div>
+
         </div>
-        <a href="{{ url_for_security('forgot_password') }}">
-            <div class="main-footer col-md-6 text-right"> <span class="bold">비밀번호 찾기</span></div></a>
     </div>
 
 </div>

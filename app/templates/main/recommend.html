@@ -1,13 +1,14 @@
 {% extends "base.html" %}
-{% include 'module/_upper_bar.html' %}
 {% block body %}
+{% include 'module/_upper_bar.html' %}
+
 <div class="recommend_wrap">
     <div ng-controller="recommendCtrl">
     <div class="recommend_header" style="height: 100px">
     </div>
-    <div class="recommend_wrapper" style="width:1000px; margin: 0 auto" ng-init="recommend_check = false;">
+    <div class="recommend_wrapper" ng-init="recommend_check = false;">
 
-        <button class="btn btn-primary" style="display:block; width:200px; margin: 0 auto" ng-click="check_func()">
+        <button class="btn btn-primary" ng-click="check_func()">
             <span class="bold">{{re | angular}}추천받기</span>
         </button>
 
@@ -19,6 +20,5 @@
 </div>
 
 </div>
-
 
 {% endblock %}

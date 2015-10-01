@@ -140,7 +140,6 @@ body.dashboard .page-container {
     width: 100%;
     padding: 0 20px;
     z-index: 800;
-    background-color: rgba(255,255,255,0.15);
 }
 .header a {
     color: #3b4751;
