@@ -14,7 +14,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 # Define the database - we are working with
 # SQLite for this example
 
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:n6!cfe5!73@localhost/please_lunch'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:n6!cfe5!73@128.199.154.140/please_lunch'
 # celery db config
 CELERY_BROKER_URL = 'sqla+' + SQLALCHEMY_DATABASE_URI
 CELERY_RESULT_BACKEND = 'db+' + SQLALCHEMY_DATABASE_URI
@@ -64,13 +64,15 @@ SECURITY_MSG_PASSWORD_MISMATCH = ('비밀번호가 서로 일치하지 않습니
 SECURITY_MSG_RETYPE_PASSWORD_MISMATCH = ('비밀번호가 서로 일치하지 않습니다.', 'error')
 SECURITY_MSG_INVALID_REDIRECT = ('도메인 바깥으로의 이동은 금지되었습니다.', 'error')
 SECURITY_MSG_PASSWORD_RESET_REQUEST = ('비밀번호 초기화에 대한 안내가 %(email)로 보내졌습니다', 'info')
-SECURITY_MSG_PASSWORD_RESET_EXPIRED = ('%(within) 내에 비밀번호를 교체하지 않으셔서, 새로운 안내가 %(email)로 보내졌습니다..', 'error')
+SECURITY_MSG_PASSWORD_RESET_EXPIRED = ('%(within) 내에 비밀번호를 교체하지 않으셔서, '
+                                       '새로운 안내가 %(email)로 보내졌습니다..', 'error')
 SECURITY_MSG_INVALID_RESET_PASSWORD_TOKEN = ('잘못된 비밀번호 초기화 토큰입니다..', 'error')
 SECURITY_MSG_CONFIRMATION_REQUIRED = ('이메일 인증이 필요합니다.', 'error')
 SECURITY_MSG_CONFIRMATION_REQUEST = ('감사합니다. 인증 절차에 관한 안내가 %(email)로 보내졌습니다.', 'info')
 SECURITY_MSG_CONFIRMATION_EXPIRED = ('%(within) 시간 내에 이메일은 인증하지 않으셨습니다. 당신의 이메일을 인증하기 위한 '
                                      '새로운 안내가 %(email)로 보내졌습니다', 'error')
-SECURITY_MSG_LOGIN_EXPIRED = ('%(within) 동안 로그인하지 않으셨습니다. 로그인을 위한 새로운 안내사항이 %(email)로 보내졌습니다.', 'error')
+SECURITY_MSG_LOGIN_EXPIRED = ('%(within) 동안 로그인하지 않으셨습니다. 로그인을 위한 새로운 안내사항이 '
+                              '%(email)로 보내졌습니다.', 'error')
 SECURITY_MSG_LOGIN_EMAIL_SENT = ('로그인을 위한 안내가 %(email)로 보내졌습니다.', 'success')
 SECURITY_MSG_INVALID_LOGIN_TOKEN = ('잘못된 로그인 토큰입니다.', 'error')
 SECURITY_MSG_DISABLED_ACCOUNT = ('사용할 수 없는 계정입니다.', 'error')
@@ -86,7 +88,6 @@ SECURITY_MSG_PASSWORD_IS_THE_SAME = ('당신의 새 비밀번호는 옛날 비�
 SECURITY_MSG_PASSWORD_CHANGE = ('비밀번호를 성공적으로 바꾸셨습니다.', 'success')
 SECURITY_MSG_LOGIN = ('이 페이지에 접근하시려면 로그인 해주세요.', 'info')
 SECURITY_MSG_REFRESH = ('페이지에 접근하기 위해서 재인증해주세요.', 'info')
-
 
 # Flask-SocialBlueprint social apps ID
 # https://github.com/wooyek/flask-social-blueprint
