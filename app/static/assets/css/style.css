@@ -217,13 +217,13 @@ label{
 }
 
 body {
-	margin-top: 50px;
-	margin-bottom: 50px;
+	/*margin-top: 50px;*/
+	/*margin-bottom: 50px;*/
 	background: none;
 }
 
 .full {
-  background: url(/app/static/assets/img/main.png) no-repeat center center fixed;
+  background: url(../img/background_re.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
