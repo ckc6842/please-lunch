@@ -7,6 +7,16 @@
         {{ render_field_with_errors(login_user_form.password, placeholder="비밀번호", class="form-control") }}
         {{ render_field_with_errors(login_user_form.remember) }}
         {{ render_field(login_user_form.next) }}
-        {{ render_field(login_user_form.submit, class="btn btn-primary col-md-6 pull-right") }}
+        {{ render_field(login_user_form.submit, class="btn btn-primary col-md-6") }}
     </form>
+    <br>
+
+    <a href="{{ url_for('social.login', provider='Facebook') }}">
+        <button class="btn btn-block btn-complete" type="button">
+            <img src="{{url_for('static', filename='assets/img/facebook.png')}}"/>
+            <span class="bold">페이스북 로그인해서 시작하기</span>
+        </button>
+    </a>
+
+
 {% endblock %}

@@ -115,6 +115,7 @@ body > .wrap{
 }
 
 .btn-block{
+    width:50%;
     height: 50px;
 
 }
@@ -205,4 +206,26 @@ label{
 .index-header{
     position: relative;
 
+}
+
+.facebook {
+    background-color:#4969F0;
+}
+
+.navbar-nav li.facebook > a {
+    color: white;
+}
+
+body {
+	/*margin-top: 50px;*/
+	/*margin-bottom: 50px;*/
+	background: none;
+}
+
+.full {
+  background: url(../img/background_re.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }

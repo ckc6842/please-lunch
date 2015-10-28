@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="app" ng-controller="AppCtrl">
+<html class="full" lang="ko" data-ng-app="app" ng-controller="AppCtrl">
 <head>
     <title>점심을 부탁해</title>
     <!-- js에서 flask 구문을 쓸 수 있음 -->
@@ -20,12 +20,13 @@
 'menu-pin' : app.layout.menuPin,
 'menu-behind' : app.layout.menuBehind
  }">
-
+{% include 'module/_upper_bar.html' %}
+<div class="container">
+    {% block body %}
+    {% endblock %}
+</div>
 {% for flash in get_flashed_messages() %}
-<script>alert("{{ flash }}");</script>
+    <script>alert("{{ flash }}");</script>
 {% endfor %}
-
-{% block body %}
-{% endblock %}
 </body>
 </html>

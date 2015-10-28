@@ -1,31 +1,16 @@
 {% extends "base.html" %}
 {% from "module/_macros.html" import render_field_with_errors, render_field, social_register, social_login %}
 {% block body %}
+    {% block logo %}
 
-<div class="wrap">
-    <div class="main">
-        <div class="index">
-            {% block logo %}
-            <div class="index-header">
-                <a href="{{ url_for('MainView:index') }}">
-                    <img id="index-logo" src="{{ url_for('static', filename='assets/img/main.png') }}"/>
-                </a>
-            </div>
-
-            {% endblock %}
-
-            {% block form %}
-            {% endblock %}
-            <!--<div class="content-header">-->
-            <!--</div>-->
-            <!--<div class="content-wrap">-->
-            <!--</div>-->
+        <a href="{{ url_for('MainView:index') }}">
+            <img src="{{ url_for('static', filename='assets/img/main.png') }}" class="img-responsive"/>
+        </a>
 
 
-        </div>
-        <a href="{{ url_for_security('forgot_password') }}">비밀번호 찾기</a>
+    {% endblock %}
 
-    </div>
+    {% block form %}
+    {% endblock %}
 
-</div>
 {% endblock %}

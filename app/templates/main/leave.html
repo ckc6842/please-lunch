@@ -1,17 +1,16 @@
-{% extends "base.html" %}
-{% include 'module/_upper_bar.html' %}
+{% extends "security/security_base.html" %}
 {% block body %}
-    <h2>If you want leave this site?</h2>
-    <h2>Please type your password again.</h2>
-<form method="POST" action="{{ url_for('LeaveView:post') }}">
-    {{ form.csrf_token }}
-    {{ form.password }}
-    <input type="submit" value="submit">
-</form>
+    <h2>회원 탈퇴를 위해 비밀번호를 입력하세요</h2>
+    <form method="POST" action="{{ url_for('LeaveView:post') }}">
+        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
+        {{ render_field_with_errors(form.password, placeholder="비밀번호", class="form-control") }}
+         {{ render_field(form.submit, class="btn btn-primary col-md-6", value="비밀번호") }}
+    </form>
 
     {% if is_pw_correct %}
         <form action="{{ url_for('DeleteUserView:post') }}" method="POST">
-         <button type="submit" class="btn btn-primary btn-large">정말 회원 탈퇴하실건가요?</button>
+            <button type="submit" class="btn btn-primary btn-large">정말 회원 탈퇴하실건가요?</button>
         </form>
     {% endif %}
 {% endblock %}
