@@ -206,3 +206,8 @@ label{
     position: relative;
 
 }
+
+.btn-block
+{
+    width:50%;
+}
