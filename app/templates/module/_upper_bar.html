@@ -1,99 +1,87 @@
-<div class="header  ng-scope" ng-class="{'transparent': is('app.maps.vector') || is('app.maps.google') }">
-    <div class="pull-left full-height visible-sm visible-xs">
-        <div class="sm-action-bar">
-            <a href="" class="btn-link toggle-sidebar" data-toggle="sidebar">
-                <span class="icon-set menu-hambuger"></span>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for("MainView:index") }}">
+                점심을 부탁해
             </a>
         </div>
-    </div>
-    <div class="pull-right full-height visible-sm visible-xs">
-        <div class="sm-action-bar">
-            <a href="" class="btn-link" data-toggle="quickview" data-toggle-element="#quickview">
-                <span class="icon-set menu-hambuger-plus"></span>
-            </a>
-        </div>
-    </div>
-    <div class="pull-left sm-table center-position">
-        <div class="header-inner">
-            <div class="brand inline">
-                <img src="{{ url_for('static', filename='assets/img/logo_orange.png') }}" alt="logo" data-src="{{ url_for('static', filename='assets/img/logo_orange.png') }}" ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/logo_orange.png') }}">
-            </div>
-        </div>
-    </div>
-
-    <div class=" pull-right">
-        <div class="visible-lg visible-md m-t-10">
-            <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
-                {% if current_user.is_authenticated() %}
-                    <!-- 페이스북 프사
-                <span class="thumbnail-wrapper d32 circular inline m-t-5">
-                    <img src="{{ current_user.get_facebook_connections()[0].image_url }}}" alt="" data-src="{{ current_user.get_facebook_connections()[0].image_url }}" ui-jq="unveil" data-src-retina="{{ current_user.get_facebook_connections()[0].image_url }}" width="32" height="32">
-                </span>-->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                {% if not current_user.is_authenticated() %}
+                    <li><a href="{{ url_for_security('forgot_password') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">비밀번호 찾기</a></li>
+                {% else %}
+                    <li><a href="{{ url_for_security('change_password') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">비밀번호 바꾸기</a></li>
                 {% endif %}
-                <span class="semi-bold">
-                    {% if current_user.last_name and current_user.first_name %}
-                        <p class="small hint-text m-t-5">
-                            {{ current_user.last_name+current_user.first_name }}</p></span>
-                    {% else %}
-                        <p class="small hint-text m-t-5">{{ current_user.email }}</p>
-                    {% endif %}
-
-            </div>
-            <div class="dropdown pull-right lock-icon">
-                <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <img src="{{ url_for('static', filename='assets/img/lock_icon.png') }}"
-                         alt="" data-src="{{ url_for('static', filename='assets/img/lock_icon.png')  }}"
-                         ui-jq="unveil" data-src-retina="{{ url_for('static', filename='assets/img/lock_icon.png') }}">
-                </button>
-                <ul class="dropdown-menu profile-dropdown" role="menu">
-
-                    {% if not current_user.is_authenticated() %}
-                        {% if security.registerable %}
-                            <li><a href="{{ url_for_security('register') }}
+            </ul>
+            <!-- Right Nav -->
+            <ul class="nav navbar-nav navbar-right">
+                {% if not current_user.is_authenticated() %}
+                    <li class="active"><a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
+                        회원가입<span class="sr-only">(current)</span>
+                    </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ url_for_security('login') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
+                            로그인<span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="facebook"><a href="{{ url_for('social.login', provider='Facebook') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
+                        <img src="/static/assets/img/facebook.png">
+                        페이스북 로그인<span class="sr-only">(current)</span>
+                    </a>
+                    </li>
+                    {% if security.confirmable %}#}
+                        <li><a href="{{ url_for_security('send_confirmation') }}
                             {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}
-                            {% endif %}">회원가입</a></li>
-                        {% endif %}
-                            <li><a href="{{ url_for_security('login') }}
-                            {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}
-                            {% endif %}">로그인</a></li>
-                            <li><a href="{{ url_for_security('forgot_password') }}
-                            {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}
-                            {% endif %}">비밀번호 찾기</a></li>
-                        {% if security.confirmable %}
-                            <li><a href="{{ url_for_security('send_confirmation') }}
-                            {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}
-                            {% endif %}">메일 다시 보내기</a></li>
-                        {% endif %}
-                    {% else %} <!-- 로그인 중-->
-                        <li><a href="{{ url_for('MainView:recommend') }}
-                        {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
-                        추천받기</a>
-                        </li>
-                        <li><a href="{{ url_for('AuthView:profile') }}
-                        {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
-                            프로필</a>
-                        </li>
-                        <li><a href="{{ url_for('LeaveView:get') }}
-                        {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
-                            회원탈퇴</a>
-                        </li>
-                        <li><a href="{{ url_for_security('change_password') }}
-                        {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">비밀번호 바꾸기</a>
-                        </li>
-                        <!-- 관리자일때 -->
-                        {% if current_user.has_role('admin') %}
-                            <li><a href="{{ url_for('AdminView:index') }}
-                            {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}"><i class="pg-settings_small"></i>관리자</a></li>
-                        {% endif %}
-                        <!-- 관리자 끝 -->
-                        <li class="bg-master-lighter">
-                            <a href="{{ url_for_security('logout') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}" class="clearfix">
-                                <i class="pg-power"></i> 로그아웃
-                            </a>
+                            {% endif %}">메일 다시 보내기
+                        </a>
                         </li>
                     {% endif %}
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+                {% else %} <!-- 로그인 중-->
+                    <li class="active">
+                        <a href="{{ url_for('AuthView:profile')}}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
+                            {% if current_user.last_name and current_user.first_name %}
+                                {{ current_user.last_name+current_user.first_name }}
+                            {% else %}
+                                {{ current_user.email }}
+                            {% endif %}
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ url_for('MainView:recommend')}} {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}}">
+                            추천받기<span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="active">
+                        <a href="{{ url_for('LeaveView:get') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
+                            회원탈퇴<span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    {% if current_user.has_role('admin') %}
+                        <li><a href="{{ url_for('AdminView:index') }}
+                           {% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}"><i class="pg-settings_small"></i>
+                            관리자
+                        </a>
+                        </li>
+                    {% endif %}
+                    <li class="active">
+                        <a href="{{ url_for_security('logout') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">
+                            로그아웃<span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

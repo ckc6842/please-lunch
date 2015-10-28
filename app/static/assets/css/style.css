@@ -115,6 +115,7 @@ body > .wrap{
 }
 
 .btn-block{
+    width:50%;
     height: 50px;
 
 }
@@ -207,7 +208,10 @@ label{
 
 }
 
-.btn-block
-{
-    width:50%;
+.facebook {
+    background-color:#4969F0;
+}
+
+.navbar-nav li.facebook > a {
+    color: white;
 }
