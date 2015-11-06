@@ -229,3 +229,13 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
+
+body {
+  overflow-y:hidden;
+}
+
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+    margin-left : 0;
+    margin-right : 0;
+
+}
